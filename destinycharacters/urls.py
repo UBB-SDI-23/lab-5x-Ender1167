@@ -16,10 +16,21 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from .views import player_list, player_detail
+from .views import player_list_no_weapons, player_detail, location_list, location_detail, location_filter,weapon_list
+from .views import weapon_detail, Player_Weapons, location_weapon_list, report1
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('players/', player_list),
-    path('players/<int:pk>', player_detail)
+    path('players/', player_list_no_weapons),
+    path('weapons/', weapon_list),
+    path('weapons/<int:pk>', Player_Weapons.as_view()),
+    path('players/<int:pk>', player_detail),
+    path('location/', location_list),
+    path('location/<int:pk>', location_detail),
+    path('location/filter/<int:val>', location_filter),
+    path('weapon_location/', location_weapon_list),
+    path('report/', report1),
+
+
+
 ]
