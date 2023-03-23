@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from django.db.models import Count, Max
+from django.db.models import Count, Max, Avg
 
 from .models import Player, Weapon, Location, Location_Weapon
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, WeaponSerializer_Detail
-from .serializers import Location_WeaponSerializer, PlayerMaxReport
+from .serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSerializer_No_Eq
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
@@ -31,10 +31,12 @@ def player_list(request):
 
     #create 1
     if request.method == 'POST':
-        serializer = PlayerSerializer(data=request.data)
+        serializer = PlayerSerializer_No_Eq(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print(serializer.errors)
 
 @api_view(['GET', 'POST'])
 def player_list_no_weapons(request):
@@ -100,18 +102,20 @@ def location_weapon_list(request):
 def weapon_detail(request, pk):
 
     try:
-        weapon = Weapon.objects.get(id=pk)
+        weapon = Weapon.objects.filter(id=pk)
 
     except Weapon.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     #read 1
     if request.method == 'GET':
-        serializer = WeaponSerializer_Detail(weapon, many=True)
+        weapon = Weapon.objects.filter(id=pk)
+        serializer = WeaponSerializer(weapon, many=True)
         return Response(serializer.data)
 
     #update
     if request.method == 'PUT':
+        weapon = Weapon.objects.get(id=pk)
         serializer = WeaponSerializer(weapon, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -120,6 +124,7 @@ def weapon_detail(request, pk):
 
     #delete
     if request.method == 'DELETE':
+        weapon = Weapon.objects.get(id=pk)
         weapon.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -179,6 +184,34 @@ def player_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+@api_view(['GET', 'PUT', 'DELETE'])
+def location_weapon_detail(request, pk):
+
+    try:
+        location_weapon = Location_Weapon.objects.get(id=pk)
+    except Location_Weapon.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    #read 1
+    if request.method == 'GET':
+        serializer = Location_WeaponSerializer(location_weapon)
+        return Response(serializer.data)
+
+    #update
+    if request.method == 'PUT':
+        serializer = Location_WeaponSerializer(location_weapon, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    #delete
+    if request.method == 'DELETE':
+        location_weapon.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
 @api_view(['GET'])
 def location_filter(request, val):
 
@@ -186,23 +219,13 @@ def location_filter(request, val):
         locations_filtered = Location.objects.all().filter(min_level__gt=val)
         serializer = LocationSerializer(locations_filtered, many=True)
         return Response(serializer.data)
-
-
-
-
-
-@dataclass
-class ReportEntry:
-    max1: int
-    player: Player
+    
 
 @api_view(['GET'])
 def report1(request):
 
     if request.method == 'GET':
-        queryset = Player.objects.all().annotate(num_weapons=Count('weapon')).order_by('-num_weapons')
-        max_nr_weapons = queryset[0].num_weapons
-
-        serializer = PlayerMaxReport(queryset, many=True, context={'max_nr_weapons': max_nr_weapons})
+        queryset = Player.objects.all().annotate(avg_weapon_dmg=Avg('weapon__weapon_damage')).order_by('-avg_weapon_dmg')
+        serializer = PlayerMaxReport(queryset, many=True)
         return Response(serializer.data)
 

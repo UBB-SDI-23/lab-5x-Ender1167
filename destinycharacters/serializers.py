@@ -4,6 +4,7 @@ from .models import Weapon
 from .models import Location
 from .models import Location_Weapon
 
+
 class WeaponSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -16,7 +17,8 @@ class Location_WeaponSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location_Weapon
         fields = ['id', 'drop_rate', 'wep', 'loc']
-        depth = 1
+
+
 
 class WeaponSerializerIds(serializers.ModelSerializer):
 
@@ -33,6 +35,12 @@ class PlayerSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'class1', 'level', 'glimmer', 'shards', 'weapons']
 
 
+class PlayerSerializer_No_Eq(serializers.ModelSerializer):
+
+    class Meta:
+        model = Player
+        fields = ['id', 'name', 'class1', 'level', 'glimmer', 'shards']
+
 class WeaponSerializer_Detail(serializers.ModelSerializer):
 
     class Meta:
@@ -47,6 +55,7 @@ class PlayerSerializer_No_Wep(serializers.ModelSerializer):
         model = Player
         fields = ['id', 'name', 'class1', 'level', 'glimmer', 'shards', 'weapons']
 
+
 class LocationSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -56,15 +65,11 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class PlayerMaxReport(serializers.ModelSerializer):
-    max_nr_weapons = serializers.SerializerMethodField()
+    avg_weapon_dmg = serializers.FloatField()
 
     class Meta:
         model = Player
-        fields = ['max_nr_weapons', 'name', 'class1', 'level', 'glimmer', 'shards']
-
-    def get_max_nr_weapons(self, obj):
-        max_nr_wep = self.context.get("max_nr_weapons")
-        return max_nr_wep
+        fields = ['avg_weapon_dmg', 'name']
 
 
 
