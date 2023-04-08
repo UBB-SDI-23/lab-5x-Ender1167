@@ -44,7 +44,7 @@ class App extends Component {
 
   refreshList = () => {
     axios
-      .get("35.187.87.22/players/")
+      .get("players/")
       .then((res) => this.setState({ players: res.data }))
       .catch((err) => console.log(err));
   };
