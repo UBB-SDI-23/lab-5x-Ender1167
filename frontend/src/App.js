@@ -1,11 +1,9 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Modal from "./components/Modal";
 import React, { Component } from "react";
 import axios from "axios";
 import {
-  Button,
-  Form,
   FormGroup,
   Input,
   Label,
@@ -35,8 +33,9 @@ class App extends Component {
   
    handleChange = (e) => {
     let { name, value } = e.target;
-
-    this.state.filterValue = value;
+    console.log(name);
+	this.setState({filterValue: value});
+    //this.state.filterValue = value;
   };
   
   componentDidMount() {
@@ -69,7 +68,8 @@ class App extends Component {
   };
   
   getReport = () => {
-	this.state.viewCompleted = 3;
+	//this.state.viewCompleted = 3;
+	this.setState({viewCompleted: 3});
     axios
       .get("report/")
       .then((res) => this.setState({ reportPlayers: res.data }))
@@ -77,7 +77,8 @@ class App extends Component {
   };
   
   getFilter = (val) => {
-	this.state.viewCompleted = 4;
+	//this.state.viewCompleted = 4;
+	this.setState({viewCompleted: 4});
     axios
       .get(`location/filter/${val}`)
       .then((res) => this.setState({ filterPlayers: res.data }))
@@ -109,25 +110,25 @@ class App extends Component {
     return (
       <div className="nav nav-tabs">
         <span
-          className={this.state.viewCompleted == 1 ? "nav-link active" : "nav-link"}
+          className={this.state.viewCompleted === 1 ? "nav-link active" : "nav-link"}
           onClick={() => this.displayCompleted(1)}
         >
           Players
         </span>
         <span
-          className={this.state.viewCompleted == 2? "nav-link active" : "nav-link"}
+          className={this.state.viewCompleted === 2? "nav-link active" : "nav-link"}
           onClick={() => this.displayCompleted(2)}
         >
           Sorted Players
         </span>
 		<span
-          className={this.state.viewCompleted == 3? "nav-link active" : "nav-link"}
+          className={this.state.viewCompleted === 3? "nav-link active" : "nav-link"}
           onClick={() => this.getReport()}
         >
           Statistical Report
         </span>
 		<span
-          className={this.state.viewCompleted == 3? "nav-link active" : "nav-link"}
+          className={this.state.viewCompleted === 4? "nav-link active" : "nav-link"}
           onClick={() => this.getFilter(this.state.filterValue)}
         >
           Filter
@@ -139,22 +140,22 @@ class App extends Component {
   renderItems = () => {
     const { viewCompleted } = this.state;
 	let newItems = 0;
-	if(viewCompleted == 1)
+	if(viewCompleted === 1)
    // newItems = this.state.players.filter(
    //   (item) => item.name != "");
    newItems = this.state.players;
     
-	if(viewCompleted == 2)
+	if(viewCompleted === 2)
 		newItems = [...this.state.players].sort((a, b) => b.level - a.level);
 	
-	if(viewCompleted == 3){
+	if(viewCompleted === 3){
 		newItems = this.state.reportPlayers;
 	}
-	if(viewCompleted == 4){
+	if(viewCompleted === 4){
 		newItems = this.state.filterPlayers;
 	}
 	
-	if(viewCompleted != 3 && viewCompleted != 4){ 
+	if(viewCompleted !== 3 && viewCompleted !== 4){ 
     return newItems.map((item) => (
       <li
         key={item.id}
@@ -183,7 +184,7 @@ class App extends Component {
     ));
 	}
 	else{ 
-	if(viewCompleted == 3){ 
+	if(viewCompleted === 3){ 
 		 return newItems.map((item) => (
       <li
         key={item.id}
@@ -200,7 +201,7 @@ class App extends Component {
       </li>
     ));
 	}
-	if(viewCompleted == 4){
+	if(viewCompleted === 4){
 				 return newItems.map((item) => (
       <li
         key={item.id}
