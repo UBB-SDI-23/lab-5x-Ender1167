@@ -15,21 +15,44 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
-from .views import player_list_no_weapons, player_detail, location_list, location_detail, location_filter,weapon_list
-from .views import weapon_detail, Player_Weapons, location_weapon_list, report1, location_weapon_detail, player_list
+from django.urls import path, re_path
+from rest_framework import permissions
+
+from .views import player_list_no_weapons, player_detail, location_list,player_list, location_detail, location_filter, weapon_list
+from .views import weapon_detail, Player_Weapons, location_weapon_list, report1, location_weapon_detail, player_add_weapons
+
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Destiny Characters API",
+        default_version='v1',
+        description="API DOC",
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
+# ends here
 
 urlpatterns = [
+    re_path(r'^doc(?P<format>\.json|\.yaml)$',
+            schema_view.without_ui(cache_timeout=0), name='schema-json'),  # <-- Here
+    path('doc/', schema_view.with_ui('swagger', cache_timeout=0),
+         name='schema-swagger-ui'),  # <-- Here
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0),
+         name='schema-redoc'),  # <-- Here
     path('admin/', admin.site.urls),
     path('players/', player_list),
     path('weapons/', weapon_list),
     path('weapons/<int:pk>', weapon_detail),
     path('players/<int:pk>', player_detail),
-    path('location/', location_list),
+    path('players/<int:pk>/weapons', player_add_weapons),
+    path('location/', location_list, name='locations'),
     path('location/<int:pk>', location_detail),
-    path('location/filter/<int:val>', location_filter),
+    path('location/filter/<int:val>', location_filter, name='location_filter'),
     path('weapon_location/', location_weapon_list),
     path('weapon_location/<int:pk>', location_weapon_detail),
-    path('report/', report1),
+    path('report/', report1, name='report_player_avg_weapons'),
 
 ]

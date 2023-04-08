@@ -3,6 +3,7 @@ from .models import Player
 from .models import Weapon
 from .models import Location
 from .models import Location_Weapon
+from drf_writable_nested import WritableNestedModelSerializer
 
 
 class WeaponSerializer(serializers.ModelSerializer):
@@ -27,7 +28,7 @@ class WeaponSerializerIds(serializers.ModelSerializer):
         fields = ['id']
 
 
-class PlayerSerializer(serializers.ModelSerializer):
+class PlayerSerializer(WritableNestedModelSerializer, serializers.ModelSerializer):
     weapons = WeaponSerializer(source='weapon_set', many=True)
 
     class Meta:

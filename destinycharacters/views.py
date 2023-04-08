@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from django.db.models import Count, Max, Avg
+from django.db.models import Avg
 
 from .models import Player, Weapon, Location, Location_Weapon
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, WeaponSerializer_Detail
@@ -178,10 +178,29 @@ def player_detail(request, pk):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    #delete
+        #delete
     if request.method == 'DELETE':
         player.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def player_add_weapons(request, pk):
+
+    try:
+        player = Player.objects.get(id=pk)
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'POST':
+        serializer = PlayerSerializer(player, data=request.data)
+
+        if serializer.is_valid():
+            new_weapons = serializer.save()
+            player.weapons.add(*new_weapons)
+            return Response(serializer.data)
+
+
+
 
 
 @api_view(['GET', 'PUT', 'DELETE'])

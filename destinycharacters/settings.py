@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zbuqt#d23hg7s406q_b2eu((to6l082br8t#h6yis5*xx@($vd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -33,18 +33,23 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'rest_framework',
     'destinycharacters',
+    'destinycharacters.settings',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions'
+    'django_extensions',
+    'drf_yasg',
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -77,11 +82,17 @@ WSGI_APPLICATION = 'destinycharacters.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'dbdestinycharacters',
+       'USER': 'postgres',
+       'PASSWORD': 'dragos16',
+       'HOST': '127.0.0.1',
+       'PORT': '8000',
+   }
 }
+
+
 
 
 # Password validation
