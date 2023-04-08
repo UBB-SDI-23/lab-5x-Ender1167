@@ -44,7 +44,7 @@ class App extends Component {
 
   refreshList = () => {
     axios
-      .get("https://35.187.87.22/players/")
+      .get("/api/players/")
       .then((res) => this.setState({ players: res.data }))
       .catch((err) => console.log(err));
   };
@@ -58,12 +58,12 @@ class App extends Component {
 
     if (item.id) {
       axios
-        .put(`players/${item.id}`, item)
+        .put(`/api/players/${item.id}`, item)
         .then((res) => this.refreshList());
       return;
     }
     axios
-      .post("players/", item)
+      .post("/api/players/", item)
       .then((res) => this.refreshList());
   };
   
@@ -71,7 +71,7 @@ class App extends Component {
 	//this.state.viewCompleted = 3;
 	this.setState({viewCompleted: 3});
     axios
-      .get("report/")
+      .get("/api/report/")
       .then((res) => this.setState({ reportPlayers: res.data }))
       .catch((err) => console.log(err));
   };
@@ -80,14 +80,14 @@ class App extends Component {
 	//this.state.viewCompleted = 4;
 	this.setState({viewCompleted: 4});
     axios
-      .get(`location/filter/${val}`)
+      .get(`/api/location/filter/${val}`)
       .then((res) => this.setState({ filterPlayers: res.data }))
       .catch((err) => console.log(err));
   };
 
   handleDelete = (item) => {
     axios
-      .delete(`players/${item.id}`)
+      .delete(`/api/players/${item.id}`)
       .then((res) => this.refreshList());
   };
 
