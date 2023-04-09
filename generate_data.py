@@ -8,7 +8,7 @@ def createPlayers():
     allClasses = ['Hunter', 'Titan', 'Warlock']
 
     # generate fake data for players and create INSERT SQL statements
-    for j in range(1):
+    for j in range(1000):
         sql_insert = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES"
         for i in range(1000):
             name = fake.name()
@@ -17,7 +17,7 @@ def createPlayers():
             class1 = allClasses[random_class_id]
 
             level = random.randint(1, 50)
-            glimmer = random.randint(0, 1000000)
+            glimmer = random.randint(0, 250000)
             shards = random.randint(0, 1000000)
             #sql = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES ('{}', '{}', {}, {}, {})".format(
             #    name, class1, level, glimmer, shards)
