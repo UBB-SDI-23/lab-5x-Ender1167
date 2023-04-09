@@ -9,7 +9,7 @@ def createPlayers():
 
     # generate fake data for players and create INSERT SQL statements
     for j in range(1):
-        sql_insert = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) "
+        sql_insert = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES"
         for i in range(1000):
             name = fake.name()
 
@@ -21,7 +21,7 @@ def createPlayers():
             shards = random.randint(0, 1000000)
             #sql = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES ('{}', '{}', {}, {}, {})".format(
             #    name, class1, level, glimmer, shards)
-            sql_insert = sql_insert + "VALUES ('{}', '{}', {}, {}, {}), ".format(name, class1, level, glimmer, shards)
+            sql_insert = sql_insert + " ('{}', '{}', {}, {}, {}), ".format(name, class1, level, glimmer, shards)
         insert_size = len(sql_insert)
         sql_insert_modified = sql_insert[:insert_size - 2]
         sql_insert_modified = sql_insert_modified + ";"
