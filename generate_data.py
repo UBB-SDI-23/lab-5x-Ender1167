@@ -17,7 +17,7 @@ def main():
         level = random.randint(1, 50)
         glimmer = random.randint(0, 1000000)
         shards = random.randint(0, 1000000)
-        sql = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES ('{}', '{}', '{}', '{}', '{}')".format(name, class1, level, glimmer, shards)
+        sql = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES ('{}', '{}', {}, {}, {})".format(name, class1, level, glimmer, shards)
         sqls.append(sql)
 
     f = open('final_data.sql', 'w')
