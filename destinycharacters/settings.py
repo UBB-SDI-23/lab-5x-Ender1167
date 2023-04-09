@@ -85,10 +85,10 @@ DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
        'NAME': 'dbdestinycharacters',
-       'USER': 'postgres',
-       'PASSWORD': 'dragos16',
-       'HOST': '127.0.0.1',
-       'PORT': '8000',
+       'USER': 'admin',
+       'PASSWORD': 'admin',
+       'HOST': 'localhost',
+       'PORT': '',
    }
 }
 
