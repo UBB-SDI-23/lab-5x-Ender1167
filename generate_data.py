@@ -47,7 +47,7 @@ def createWeapons():
 
     # generate fake data for players and create INSERT SQL statements
     for j in range(1000):
-        sql_insert = "INSERT INTO destinycharacters_weapon (weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, player_weapon) VALUES"
+        sql_insert = "INSERT INTO destinycharacters_weapon (weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, player_weapon_id) VALUES"
         for i in range(1000):
             weapon_name = fake.word()
 
@@ -117,8 +117,8 @@ def createLocationWeapons():
     sqls = []
 
     # generate fake data for players and create INSERT SQL statements
-    for j in range(1):
-        sql_insert = "INSERT INTO destinycharacters_location_weapon (drop_rate, wep, loc) VALUES"
+    for j in range(10000):
+        sql_insert = "INSERT INTO destinycharacters_location_weapon (drop_rate, wep_id, loc_id) VALUES"
         for i in range(1000):
 
             drop_rate = random.randint(1, 100)
