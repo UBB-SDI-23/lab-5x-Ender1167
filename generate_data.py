@@ -8,7 +8,7 @@ def createPlayers():
     allClasses = ['Hunter', 'Titan', 'Warlock']
 
     # generate fake data for players and create INSERT SQL statements
-    for j in range(1):
+    for j in range(1000):
         sql_insert = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES"
         for i in range(1000):
             name = fake.name()
@@ -46,7 +46,7 @@ def createWeapons():
 
 
     # generate fake data for players and create INSERT SQL statements
-    for j in range(1):
+    for j in range(1000):
         sql_insert = "INSERT INTO destinycharacters_weapon (weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, player_weapon) VALUES"
         for i in range(1000):
             weapon_name = fake.word()
@@ -84,7 +84,7 @@ def createLocations():
 
 
     # generate fake data for players and create INSERT SQL statements
-    for j in range(1):
+    for j in range(10000):
         sql_insert = "INSERT INTO destinycharacters_location (location_name, enemy_type, min_level, nr_public_events, nr_lost_sectors) VALUES"
         for i in range(1000):
             location_name = fake.city()
