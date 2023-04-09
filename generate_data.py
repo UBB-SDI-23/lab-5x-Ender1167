@@ -21,9 +21,12 @@ def createPlayers():
             shards = random.randint(0, 1000000)
             #sql = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES ('{}', '{}', {}, {}, {})".format(
             #    name, class1, level, glimmer, shards)
-            sql_insert = sql_insert + "VALUES ('{}', '{}', {}, {}, {}) ".format(name, class1, level, glimmer, shards)
-        sql_insert = sql_insert + ";"
-        sqls.append(sql_insert)
+            sql_insert = sql_insert + "VALUES ('{}', '{}', {}, {}, {}), ".format(name, class1, level, glimmer, shards)
+        insert_size = len(sql_insert)
+        sql_insert_modified = sql_insert[:insert_size - 2]
+        sql_insert_modified = sql_insert_modified + ";"
+
+        sqls.append(sql_insert_modified)
 
 
     f = open('final_data.sql', 'w')
