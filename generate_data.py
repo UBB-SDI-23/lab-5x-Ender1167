@@ -46,9 +46,9 @@ def createWeapons():
 
 
     # generate fake data for players and create INSERT SQL statements
-    for j in range(1000):
-        sql_insert = "INSERT INTO destinycharacters_weapon (weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, player_weapon_id) VALUES"
-        for i in range(1000):
+    for j in range(1):
+        sql_insert = "INSERT INTO destinycharacters_weapon (weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, weapon_description, player_weapon_id) VALUES"
+        for i in range(10):
             weapon_name = fake.word()
 
             random_slot = random.randint(0, len(allSlots)-1)
@@ -57,13 +57,17 @@ def createWeapons():
             weapon_damage = random.randint(0, 450)
             player_weapon = random.randint(1, 1000000)
 
+            weapon_description = ""
+            for k in range(10):
+                weapon_description = weapon_description + fake.sentence(nb_words=10, variable_nb_words=False)
+
             weapon_slot = allSlots[random_slot]
             weapon_element = allElements[random_element]
             weapon_type = allTypes[random_type]
 
             #sql = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES ('{}', '{}', {}, {}, {})".format(
             #    name, class1, level, glimmer, shards)
-            sql_insert = sql_insert + " ('{}', '{}', '{}', '{}', {}, {}), ".format(weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, player_weapon)
+            sql_insert = sql_insert + " ('{}', '{}', '{}', '{}', {}, '{}' {}), ".format(weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, weapon_description,player_weapon)
         insert_size = len(sql_insert)
         sql_insert_modified = sql_insert[:insert_size - 2]
         sql_insert_modified = sql_insert_modified + ";"
@@ -143,10 +147,10 @@ def createLocationWeapons():
     f.close()
 
 def main():
-    createPlayers()
+    #createPlayers()
     createWeapons()
-    createLocations()
-    createLocationWeapons()
+    #createLocations()
+    #createLocationWeapons()
 
 if __name__ == '__main__':
     main()
