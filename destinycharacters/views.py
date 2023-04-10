@@ -235,7 +235,7 @@ def location_weapon_detail(request, pk):
 def location_filter(request, val):
 
     if request.method == 'GET':
-        locations_filtered = Location.objects.all().filter(min_level__gt=val)
+        locations_filtered = Location.objects.all()[:10:-1].filter(min_level__gt=val)
         serializer = LocationSerializer(locations_filtered, many=True)
         return Response(serializer.data)
     
