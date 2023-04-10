@@ -25,7 +25,7 @@ class Player_Weapons(ListAPIView):
 def player_list(request):
     #read all
     if request.method == 'GET':
-        players = Player.objects.all()[:10]
+        players = Player.objects.all()[:10:-1]
         serializer = PlayerSerializer(players, many=True)
         return Response(serializer.data)
 
