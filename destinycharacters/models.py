@@ -52,7 +52,7 @@ class Weapon(models.Model):
     weapon_element = models.CharField(max_length=200, choices=ELEMENT_CHOICES, default=Void)
     weapon_type = models.CharField(max_length=200)
     weapon_damage = models.IntegerField()
-    weapon_description = models.CharField(max_length=200, null=True)
+    weapon_description = models.CharField(max_length=200, blank=True, null=True)
     player_weapon = models.ForeignKey(Player, on_delete=models.CASCADE, default=None)
 
     def __unicode__(self):
