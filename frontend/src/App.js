@@ -113,6 +113,8 @@ class App extends Component {
 	  axios.get(url)
 	  .then((res)=>{this.setState({ players: res.data.results })  
 	  });
+  }catch(error){
+	  console.log(error);
   }
   }
 
