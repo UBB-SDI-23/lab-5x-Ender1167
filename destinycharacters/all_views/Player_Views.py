@@ -50,3 +50,46 @@ def player_list_no_weapons(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def player_detail(request, pk):
+
+    try:
+        player = Player.objects.get(id=pk)
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    #read 1
+    if request.method == 'GET':
+        serializer = PlayerSerializer(player)
+        return Response(serializer.data)
+
+    #update
+    if request.method == 'PUT':
+        serializer = PlayerSerializer(player, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        #delete
+    if request.method == 'DELETE':
+        player.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def player_add_weapons(request, pk):
+
+    try:
+        player = Player.objects.get(id=pk)
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'POST':
+        serializer = PlayerSerializer(player, data=request.data)
+
+        if serializer.is_valid():
+            new_weapons = serializer.save()
+            player.weapons.add(*new_weapons)
+            return Response(serializer.data)

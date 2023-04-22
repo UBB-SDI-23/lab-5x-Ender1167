@@ -200,9 +200,6 @@ def player_add_weapons(request, pk):
             return Response(serializer.data)
 
 
-
-
-
 @api_view(['GET', 'PUT', 'DELETE'])
 def location_weapon_detail(request, pk):
 
