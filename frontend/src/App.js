@@ -19,6 +19,8 @@ class App extends Component {
 	  reportPlayers: [],
 	  filterPlayers: [],
 	  filterValue: 0,
+	  nextUrl:"",
+	  previousUrl:"",
 	  modal: false,
       activeItem: {
         name: "",
@@ -45,7 +47,7 @@ class App extends Component {
   refreshList = () => {
     axios
       .get("/api/players/")
-      .then((res) => this.setState({ players: res.data.results }))
+      .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next }))
       .catch((err) => console.log(err));
   };
   
@@ -105,6 +107,14 @@ class App extends Component {
   displayCompleted = (status) => {
 	return this.setState({ viewCompleted: status });
   };
+  
+  const paginationHandler=(url)=>{ 
+  try{
+	  axios.get(url)
+	  .then((res)=>{this.setState({ players: res.data.results })  
+	  });
+  }
+  }
 
   renderTabList = () => {
     return (
@@ -250,21 +260,23 @@ class App extends Component {
               {this.renderTabList()}
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
-				
+				{this.previousUrl &&
 				<li><button
                   className="btn btn-primary"
-				  onClick={this.createItem}
+				  onClick={()=>paginationHandler(this.previousUrl)}
                 >
 				 Previous
                 </button>
+				}
 				
+				{this.nextUrl &&
 		        <button
                   className="btn btn-primary"
-				  onClick={this.createItem}
+				  onClick={()=>paginationHandler(this.nextUrl)}
                 >
 				 Next
                 </button></li>
-				
+				}
               </ul>
             </div>
           </div>
