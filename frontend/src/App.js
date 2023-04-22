@@ -256,9 +256,9 @@ class App extends Component {
 				  onClick={this.createItem}
                 >
 				 Previous
-                </button></li>
+                </button>
 				
-		        <li><button
+		        <button
                   className="btn btn-primary"
 				  onClick={this.createItem}
                 >
