@@ -108,7 +108,7 @@ class App extends Component {
 	return this.setState({ viewCompleted: status });
   };
   
-  const paginationHandler=(url)=>{ 
+  paginationHandler=(url)=>{ 
   try{
 	  axios.get(url)
 	  .then((res)=>{this.setState({ players: res.data.results })  
