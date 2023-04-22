@@ -251,19 +251,19 @@ class App extends Component {
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
 				
-				<button
+				<li><button
                   className="btn btn-primary"
 				  onClick={this.createItem}
                 >
 				 Previous
-                </button>
+                </button></li>
 				
-		        <button
+		        <li><button
                   className="btn btn-primary"
 				  onClick={this.createItem}
                 >
 				 Next
-                </button>
+                </button></li>
 				
               </ul>
             </div>
