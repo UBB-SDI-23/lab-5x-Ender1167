@@ -67,7 +67,7 @@ def createWeapons():
 
             #sql = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES ('{}', '{}', {}, {}, {})".format(
             #    name, class1, level, glimmer, shards)
-            sql_insert = sql_insert + " ('{}', '{}', '{}', '{}', {}, '{}' {}), ".format(weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, weapon_description,player_weapon)
+            sql_insert = sql_insert + " ('{}', '{}', '{}', '{}', {}, '{}', {}), ".format(weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, weapon_description,player_weapon)
         insert_size = len(sql_insert)
         sql_insert_modified = sql_insert[:insert_size - 2]
         sql_insert_modified = sql_insert_modified + ";"
