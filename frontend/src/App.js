@@ -262,23 +262,20 @@ class App extends Component {
               {this.renderTabList()}
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
-				{this.previousUrl &&
 				<li><button
                   className="btn btn-primary"
 				  onClick={()=>paginationHandler(this.previousUrl)}
                 >
 				 Previous
                 </button>
-				}
 				
-				{this.nextUrl &&
 		        <button
                   className="btn btn-primary"
 				  onClick={()=>paginationHandler(this.nextUrl)}
                 >
 				 Next
                 </button></li>
-				}
+				
               </ul>
             </div>
           </div>
