@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework import status
+from .paginators import StandardResultsSetPagination
 from django.views.generic import ListView
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -29,8 +30,12 @@ def player_list(request):
     #read all
     if request.method == 'GET':
         players = Player.objects.all()
-        serializer = PlayerSerializer(players, many=True)
-        return Response(serializer.data)
+
+        paginator = StandardResultsSetPagination()
+        paginated_players = paginator.paginate_queryset(players, request)
+        serializer = PlayerSerializer(paginated_players, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
 
     #create 1
     if request.method == 'POST':

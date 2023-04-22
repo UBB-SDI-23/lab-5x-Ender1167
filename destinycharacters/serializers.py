@@ -7,13 +7,6 @@ from .models import Location
 from .models import Location_Weapon
 from drf_writable_nested import WritableNestedModelSerializer
 
-
-class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'
-    max_page_size = 10
-
-
 class WeaponSerializer(serializers.ModelSerializer):
 
     class Meta:
