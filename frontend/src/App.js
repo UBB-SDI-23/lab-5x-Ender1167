@@ -250,6 +250,21 @@ class App extends Component {
               {this.renderTabList()}
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
+				
+				<button
+                  className="btn btn-primary"
+				  onClick={this.createItem}
+                >
+				 Previous
+                </button>
+				
+		        <button
+                  className="btn btn-primary"
+				  onClick={this.createItem}
+                >
+				 Next
+                </button>
+				
               </ul>
             </div>
           </div>
