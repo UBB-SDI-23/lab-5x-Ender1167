@@ -11,6 +11,9 @@ from rest_framework.generics import ListAPIView
 from rest_framework import status
 from django.views.generic import ListView
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+
 class Player_Weapons(ListAPIView):
     queryset = Weapon.objects.all()
     serializer_class = WeaponSerializer_Detail
@@ -25,9 +28,27 @@ class Player_Weapons(ListAPIView):
 def player_list(request):
     #read all
     if request.method == 'GET':
-        players = Player.objects.all()[:10:-1]
-        serializer = PlayerSerializer(players, many=True)
-        return Response(serializer.data)
+        #players = Player.objects.all()[:10:-1]
+
+        players = Player.objects.all()
+
+        page_num = request.GET.get('page', 1)
+
+        paginator = Paginator(players, 10)  # 6 employees per page
+
+        try:
+            page_obj = paginator.page(page_num)
+        except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            # if the page is out of range, deliver the last page
+            page_obj = paginator.page(paginator.num_pages)
+
+        #serializer = PlayerSerializer(players, many=True)
+        #return Response(serializer.data)
+
+        return render(request, 'index.html', {'page_obj': page_obj})
 
     #create 1
     if request.method == 'POST':
