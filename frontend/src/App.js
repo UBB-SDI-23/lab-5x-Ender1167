@@ -49,6 +49,7 @@ class App extends Component {
       .get("/api/players/")
       .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next }))
       .catch((err) => console.log(err));
+	  console.log(this.previousUrl + " " + this.nextUrl);
   };
   
   toggle = () => {
