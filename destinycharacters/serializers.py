@@ -31,7 +31,6 @@ class WeaponSerializerIds(serializers.ModelSerializer):
 
 class PlayerSerializer(WritableNestedModelSerializer, serializers.ModelSerializer):
     weapons = WeaponSerializer(source='weapon_set', many=True)
-    pagination_class = StandardResultsSetPagination
     class Meta:
         model = Player
         fields = ['id', 'name', 'class1', 'level', 'glimmer', 'shards', 'weapons']
