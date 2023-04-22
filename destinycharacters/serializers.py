@@ -1,9 +1,17 @@
 from rest_framework import serializers
+from rest_framework.pagination import PageNumberPagination
+
 from .models import Player
 from .models import Weapon
 from .models import Location
 from .models import Location_Weapon
 from drf_writable_nested import WritableNestedModelSerializer
+
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 10
 
 
 class WeaponSerializer(serializers.ModelSerializer):
@@ -30,7 +38,7 @@ class WeaponSerializerIds(serializers.ModelSerializer):
 
 class PlayerSerializer(WritableNestedModelSerializer, serializers.ModelSerializer):
     weapons = WeaponSerializer(source='weapon_set', many=True)
-
+    pagination_class = StandardResultsSetPagination
     class Meta:
         model = Player
         fields = ['id', 'name', 'class1', 'level', 'glimmer', 'shards', 'weapons']
