@@ -264,14 +264,14 @@ class App extends Component {
                 {this.renderItems()}
 				<li><button
                   className="btn btn-primary"
-				  onClick={()=>paginationHandler(this.previousUrl)}
+				  onClick={()=>this.paginationHandler(this.previousUrl)}
                 >
 				 Previous
                 </button>
 				
 		        <button
                   className="btn btn-primary"
-				  onClick={()=>paginationHandler(this.nextUrl)}
+				  onClick={()=>this.paginationHandler(this.nextUrl)}
                 >
 				 Next
                 </button></li>
