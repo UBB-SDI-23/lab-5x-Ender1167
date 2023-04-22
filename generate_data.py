@@ -47,7 +47,7 @@ def createWeapons():
 
     # generate fake data for players and create INSERT SQL statements
     for j in range(1000):
-        sql_insert = "INSERT INTO destinycharacters_weapon (weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, weapon_description, player_weapon_id) VALUES"
+        sql_insert = "INSERT INTO destinycharacters_weapon (weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, player_weapon_id, weapon_description) VALUES"
         for i in range(1000):
             weapon_name = fake.word()
 
@@ -67,7 +67,7 @@ def createWeapons():
 
             #sql = "INSERT INTO destinycharacters_player (name, class1, level, glimmer, shards) VALUES ('{}', '{}', {}, {}, {})".format(
             #    name, class1, level, glimmer, shards)
-            sql_insert = sql_insert + " ('{}', '{}', '{}', '{}', {}, '{}', {}), ".format(weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, weapon_description,player_weapon)
+            sql_insert = sql_insert + " ('{}', '{}', '{}', '{}', {}, {}, '{}'), ".format(weapon_name, weapon_slot, weapon_element, weapon_type, weapon_damage, player_weapon, weapon_description)
         insert_size = len(sql_insert)
         sql_insert_modified = sql_insert[:insert_size - 2]
         sql_insert_modified = sql_insert_modified + ";"
