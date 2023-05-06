@@ -121,7 +121,7 @@ export default class CustomModal extends Component {
                 type="text"
                 id="weapon-name"
                 name="weapon_name"
-                defaultValue={this.state.activeWeapon.weapon_name}
+                defaultValue={this.state.activeItem.weapon_name}
 				value={this.state.activeItem.weapon_name}
                 onChange={this.handleChange}
                 placeholder="Enter name"
@@ -133,7 +133,7 @@ export default class CustomModal extends Component {
                 type="text"
                 id="weapon-slot"
                 name="weapon_slot"
-                defaultValue={this.state.activeWeapon.weapon_slot}
+                defaultValue={this.state.activeItem.weapon_slot}
                 onChange={this.handleChange}
                 placeholder="Enter slot"
               />
@@ -144,7 +144,7 @@ export default class CustomModal extends Component {
                 type="text"
                 id="weapon-element"
                 name="weapon_element"
-                defaultValue={this.state.activeWeapon.weapon_element}
+                defaultValue={this.state.activeItem.weapon_element}
                 onChange={this.handleChange}
                 placeholder="0"
               />
@@ -155,7 +155,7 @@ export default class CustomModal extends Component {
                 type="text"
                 id="weapon-type"
                 name="weapon_type"
-                defaultValue={this.state.activeWeapon.weapon_type}
+                defaultValue={this.state.activeItem.weapon_type}
                 onChange={this.handleChange}
                 placeholder="0"
               />
@@ -166,7 +166,7 @@ export default class CustomModal extends Component {
                 type="number"
                 id="weapon-damage"
                 name="weapon_damage"
-                defaultValue={this.state.activeWeapon.weapon_damage}
+                defaultValue={this.state.activeItem.weapon_damage}
                 onChange={this.handleChange}
                 placeholder="0"
               />
@@ -176,7 +176,7 @@ export default class CustomModal extends Component {
         <ModalFooter>
           <Button
             color="success"
-            onClick={() => onSave(this.state.activeWeapon)}
+            onClick={() => onSave(this.state.activeItem)}
           >
             Save
           </Button>
