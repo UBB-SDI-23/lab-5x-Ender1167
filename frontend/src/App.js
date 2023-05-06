@@ -61,7 +61,6 @@ class App extends Component {
   paginate = () => {
 	  
 	 let newPage = this.state.currentPage;
-	 let tempNr = [];
 	 let toDisplay = [];
 	 let maxItems = Math.ceil(this.state.totalItems / this.state.perPage);
 	 
