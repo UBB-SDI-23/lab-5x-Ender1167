@@ -64,16 +64,12 @@ class App extends Component {
 	  
     } 
 	return tempNr.map((number) => (
-      <li
-        key={number}
-        className="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <span
-          title={number}
-        >
-          {number}
-        </span>
-      </li>
+   <button
+                  className="btn btn-primary"
+				  onClick={()=>this.paginationHandler(this.state.previousUrl)}
+                >
+				 number
+                </button>
     )); 
     	
 	  
@@ -295,7 +291,25 @@ class App extends Component {
 			  
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
+				
+				<li>
 				{this.paginate()}
+				</li>
+				/*
+				<li><button
+                  className="btn btn-primary"
+				  onClick={()=>this.paginationHandler(this.state.previousUrl)}
+                >
+				 Previous
+                </button>
+				
+		        <button
+                  className="btn btn-primary"
+				  onClick={()=>this.paginationHandler(this.state.nextUrl)}
+                >
+				 Next
+                </button></li>
+				*/
 
               </ul>
             </div>
