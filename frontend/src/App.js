@@ -258,6 +258,7 @@ class App extends Component {
   
 
   displayCompleted = (status) => {
+	  this.refreshList();
 	return this.setState({ viewCompleted: status });
   };
   
