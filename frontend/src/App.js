@@ -260,7 +260,6 @@ class App extends Component {
                 </button>
 			   
               </div>
-			  /*
               {this.renderTabList()}
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
@@ -279,7 +278,6 @@ class App extends Component {
                 </button></li>
 				
               </ul>
-			  */
             </div>
           </div>
         </div>
