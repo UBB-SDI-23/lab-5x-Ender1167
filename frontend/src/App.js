@@ -112,7 +112,7 @@ class App extends Component {
   
   paginationHandler=(url)=>{ 
   try{
-	  axios.get(url)
+	  axios.get(`/api/players/?page=2`)
 	  .then((res)=>{this.setState({ players: res.data.results })  
 	  });
   }catch(error){
