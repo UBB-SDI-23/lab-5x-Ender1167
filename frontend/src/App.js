@@ -42,14 +42,15 @@ class App extends Component {
   
   componentDidMount() {
     this.refreshList();
+    console.log(this.previousUrl + " " + this.nextUrl);
   }
 
   refreshList = () => {
     axios
       .get("/api/players/")
-      .then((res) => this.setState({ players: res.data.results, previousUrl: 0, nextUrl: 0 }))
+      .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next }))
       .catch((err) => console.log(err));
-	  console.log(this.previousUrl + " " + this.nextUrl);
+
   };
   
   toggle = () => {
