@@ -323,7 +323,7 @@ class App extends Component {
                 {this.renderItems()}
 				
 				<li>
-				{this.state.modal ? this.paginate() : null}
+				{!this.state.modal ? this.paginate() : null}
 				</li>
 				{/*
 				<li><button
