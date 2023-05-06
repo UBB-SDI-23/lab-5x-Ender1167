@@ -279,7 +279,7 @@ class App extends Component {
 		url1 = "/api/report/?page=";
 		break;
 		case 4:
-		url1 = `/api/players/?page=`;
+		url1 = `/api/location/filter/${this.state.filterValue}/?page=`;
 		break;
 		case 5:
 		url1 = `/api/weapons/?page=`;
