@@ -19,7 +19,7 @@ class App extends Component {
 	  reportPlayers: [],
 	  filterPlayers: [],
 	  filterValue: 0,
-	  nextUrl:"",
+	  nextUrl:0,
 	  previousUrl:0,
 	  modal: false,
       activeItem: {
@@ -47,7 +47,7 @@ class App extends Component {
   refreshList = () => {
     axios
       .get("/api/players/")
-      .then((res) => this.setState({ players: res.data.results, previousUrl: 0, nextUrl: res.next }))
+      .then((res) => this.setState({ players: res.data.results, previousUrl: 0, nextUrl: 0 }))
       .catch((err) => console.log(err));
 	  console.log(this.previousUrl + " " + this.nextUrl);
   };
