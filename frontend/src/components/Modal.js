@@ -185,5 +185,81 @@ export default class CustomModal extends Component {
     );
 		
 	}
+	if(this.state.modal_type ===2){
+		return (
+      <Modal isOpen={true} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Location</ModalHeader>
+        <ModalBody>
+          <Form>
+            <FormGroup>
+              <Label for="location-name">Location Name</Label>
+              <Input
+                type="text"
+                id="location-name"
+                name="location_name"
+                defaultValue={this.state.activeItem.location_name}
+				value={this.state.activeItem.location_name}
+                onChange={this.handleChange}
+                placeholder="Enter name"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="enemy-type">Enemy Type</Label>
+              <Input
+                type="text"
+                id="enemy-type"
+                name="enemy_type"
+                defaultValue={this.state.activeItem.enemy_type}
+                onChange={this.handleChange}
+                placeholder="Enter slot"
+              />
+            </FormGroup>
+			<FormGroup>
+              <Label for="min-level">Min Level</Label>
+              <Input
+                type="number"
+                id="min-level"
+                name="min_level"
+                defaultValue={this.state.activeItem.min_level}
+                onChange={this.handleChange}
+                placeholder="0"
+              />
+            </FormGroup>
+		    <FormGroup>
+              <Label for="nr-public-events">Public Events</Label>
+              <Input
+                type="number"
+                id="nr-public-events"
+                name="nr_public_events"
+                defaultValue={this.state.activeItem.nr_public_events}
+                onChange={this.handleChange}
+                placeholder="0"
+              />
+            </FormGroup>
+		    <FormGroup>
+              <Label for="nr-lost-sectors">Lost Sectors</Label>
+              <Input
+                type="number"
+                id="nr-lost-sectors"
+                name="nr_lost_sectors"
+                defaultValue={this.state.activeItem.nr_lost_sectors}
+                onChange={this.handleChange}
+                placeholder="0"
+              />
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="success"
+            onClick={() => onSave(this.state.activeItem)}
+          >
+            Save
+          </Button>
+        </ModalFooter>
+      </Modal>
+    );
+		
+	}
   }
 }

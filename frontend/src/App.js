@@ -32,6 +32,7 @@ class App extends Component {
 	  previousUrl:"",
 	  modal: false,
 	  modal_weapon: false,
+	  modal_location: false,
 	  modal_type:0,
 	  
       activeItem: {
@@ -47,6 +48,13 @@ class App extends Component {
 		weapon_element: "",
 		weapon_type:"",
 		weapon_damage:0,
+      },
+	  activeLocation: {
+        location_name: "",
+        enemy_type: "",
+		min_level: 0,
+		nr_public_events:0,
+		nr_lost_sectors:0,
       },
 	  
     };
@@ -125,6 +133,9 @@ class App extends Component {
   toggleWeapon = () => {
     this.setState({ modal_weapon: !this.state.modal_weapon });
   };
+    toggleLocation = () => {
+    this.setState({ modal_location: !this.state.modal_location });
+  };
 
   handleSubmit = (item) => {
     this.toggle();
@@ -150,6 +161,19 @@ class App extends Component {
     }
     axios
       .post("/api/weapons/", item)
+      .then((res) => this.refreshList());
+  };
+  handleSubmitLocation = (item) => {
+    this.toggle();
+
+    if (item.id) {
+      axios
+        .put(`/api/location/${item.id}`, item)
+        .then((res) => this.refreshList());
+      return;
+    }
+    axios
+      .post("/api/location/", item)
       .then((res) => this.refreshList());
   };
   
@@ -191,6 +215,16 @@ class App extends Component {
       .delete(`/api/players/${item.id}`)
       .then((res) => this.refreshList());
   };
+    handleDeleteWeapon = (item) => {
+    axios
+      .delete(`/api/weapons/${item.id}`)
+      .then((res) => this.refreshList());
+  };
+    handleDeleteLocation = (item) => {
+    axios
+      .delete(`/api/location/${item.id}`)
+      .then((res) => this.refreshList());
+  };
 
   createItem = () => {
     const item = { name: "", class1: "", level: 0, glimmer: 0, shards: 0 };
@@ -203,6 +237,12 @@ class App extends Component {
     
     this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon, modal_type: 1 });
   };
+  
+  createLocation = () => {
+    const item = { location_name: "", enemy_type: "", min_level: 0, nr_public_events: 0, nr_lost_sectors: 0 };
+    
+    this.setState({ activeLocation: item, modal_location: !this.state.modal_location, modal_type: 2 });
+  };
 
   editItem = (item) => {
     this.setState({ activeItem: item, modal: !this.state.modal , modal_type: 0});
@@ -210,6 +250,10 @@ class App extends Component {
   
   editWeapon = (item) => {
     this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon, modal_type: 1 });
+  };
+  
+  editLocation = (item) => {
+    this.setState({ activeLocation: item, modal_location: !this.state.modal_location, modal_type: 2 });
   };
   
 
@@ -413,7 +457,7 @@ class App extends Component {
           </button>
           <button
             className="btn btn-danger"
-			onClick={() => this.handleDelete(item)}
+			onClick={() => this.handleDeleteWeapon(item)}
           >
             Delete
           </button>
@@ -435,6 +479,21 @@ class App extends Component {
           title={item.name}
         >
           {item.location_name}
+        </span>
+		
+		<span>
+          <button
+            className="btn btn-secondary mr-2"
+			onClick={() => this.editLocation(item)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn btn-danger"
+			onClick={() => this.handleDeleteLocation(item)}
+          >
+            Delete
+          </button>
         </span>
       </li>
     ));
@@ -464,14 +523,20 @@ class App extends Component {
                   className="btn btn-primary"
 				  onClick={this.createItem}
                 >
-                  Add player
+                  Add Player
                 </button>
 				
 				<button
                   className="btn btn-primary"
 				  onClick={this.createWeapon}
                 >
-                  Add weapon
+                  Add Weapon
+                </button>
+				<button
+                  className="btn btn-primary"
+				  onClick={this.createLocation}
+                >
+                  Add Location
                 </button>
 			   
               </div>
@@ -519,6 +584,15 @@ class App extends Component {
             onSave={this.handleSubmitWeapon}
           />
         ) : null}
+		{this.state.modal_location ? (
+          <Modal
+		    modal_type={this.state.modal_type}
+            activeItem={this.state.activeLocation}
+            toggle={this.toggleWeapon}
+            onSave={this.handleSubmitWeapon}
+          />
+        ) : null}
+		
       </main>
     );
   }
