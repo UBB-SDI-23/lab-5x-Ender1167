@@ -64,9 +64,7 @@ class App extends Component {
 	 let tempNr = [];
 	 let toDisplay = [];
 	 let maxItems = Math.ceil(this.state.totalItems / this.state.perPage);
-	for (let i = 1; i <= maxItems; i++) {
-      tempNr.push(i);
-    } 
+	 
 	toDisplay.push(1);
 	toDisplay.push(2);
 	
@@ -326,7 +324,7 @@ class App extends Component {
                 {this.renderItems()}
 				
 				<li>
-				
+				{this.paginate()}
 				</li>
 				{/*
 				<li><button
