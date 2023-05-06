@@ -1,7 +1,6 @@
 
 import './App.css';
 import Modal from "./components/Modal";
-import Weapon from "./components/Weapon";
 import React, { Component } from "react";
 import axios from "axios";
 import {
