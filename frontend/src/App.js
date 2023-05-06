@@ -116,7 +116,7 @@ class App extends Component {
   let newStr = str.replace(subStr,"");
   console.log(newStr);
   try{
-	  axios.get(`/api/players/?page=`+newStr)
+	  axios.get(`/api/players/?page`+newStr)
 	  .then((res)=>{this.setState({ players: res.data.results })  
 	  });
   }catch(error){
