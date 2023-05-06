@@ -403,6 +403,21 @@ class App extends Component {
         >
           {item.weapon_name}
         </span>
+		<span>
+          <button
+            className="btn btn-secondary mr-2"
+			onClick={() => this.editItem(item)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn btn-danger"
+			onClick={() => this.handleDelete(item)}
+          >
+            Delete
+          </button>
+        </span>
+		
       </li>
     ));
 	}
