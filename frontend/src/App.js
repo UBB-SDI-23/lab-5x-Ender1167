@@ -198,7 +198,7 @@ class App extends Component {
 	}
   try{
 	  axios.get(url1+pg)
-	  .then((res)=>{this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
+	  .then((res)=>{this.setState({ weapons: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
 	  });
   }catch(error){
 	  console.log(error);
