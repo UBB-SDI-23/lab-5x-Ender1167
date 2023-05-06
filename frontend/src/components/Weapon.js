@@ -15,7 +15,7 @@ export default class CustomModal1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: this.props.activeWeapon,
+      activeWeapon: this.props.activeWeapon,
     };
   }
 
@@ -26,9 +26,9 @@ export default class CustomModal1 extends Component {
       value = e.target.checked;
     }
 
-    const activeItem = { ...this.state.activeItem, [name]: value };
+    const activeWeapon = { ...this.state.activeWeapon, [name]: value };
 
-    this.setState({ activeItem });
+    this.setState({ activeWeapon });
   };
 
   render() {
@@ -45,7 +45,7 @@ export default class CustomModal1 extends Component {
                 type="text"
                 id="weapon-name"
                 name="weapon_name"
-                defaultValue={this.state.activeItem.weapon_name}
+                defaultValue={this.state.activeWeapon.weapon_name}
 				value={this.state.activeItem.weapon_name}
                 onChange={this.handleChange}
                 placeholder="Enter name"
@@ -57,7 +57,7 @@ export default class CustomModal1 extends Component {
                 type="text"
                 id="weapon-slot"
                 name="weapon_slot"
-                defaultValue={this.state.activeItem.weapon_slot}
+                defaultValue={this.state.activeWeapon.weapon_slot}
                 onChange={this.handleChange}
                 placeholder="Enter slot"
               />
@@ -68,7 +68,7 @@ export default class CustomModal1 extends Component {
                 type="text"
                 id="weapon-element"
                 name="weapon_element"
-                defaultValue={this.state.activeItem.weapon_element}
+                defaultValue={this.state.activeWeapon.weapon_element}
                 onChange={this.handleChange}
                 placeholder="0"
               />
@@ -79,7 +79,7 @@ export default class CustomModal1 extends Component {
                 type="text"
                 id="weapon-type"
                 name="weapon_type"
-                defaultValue={this.state.activeItem.weapon_type}
+                defaultValue={this.state.activeWeapon.weapon_type}
                 onChange={this.handleChange}
                 placeholder="0"
               />
@@ -90,7 +90,7 @@ export default class CustomModal1 extends Component {
                 type="number"
                 id="weapon-damage"
                 name="weapon_damage"
-                defaultValue={this.state.activeItem.weapon_damage}
+                defaultValue={this.state.activeWeapon.weapon_damage}
                 onChange={this.handleChange}
                 placeholder="0"
               />
@@ -100,7 +100,7 @@ export default class CustomModal1 extends Component {
         <ModalFooter>
           <Button
             color="success"
-            onClick={() => onSave(this.state.activeItem)}
+            onClick={() => onSave(this.state.activeWeapon)}
           >
             Save
           </Button>
