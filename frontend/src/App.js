@@ -1,7 +1,7 @@
 
 import './App.css';
 import Modal from "./components/Modal";
-import React, { Component } from "react";
+import React, { Component }, {useState, useEffect} from "react";
 import axios from "axios";
 import {
   FormGroup,
@@ -47,7 +47,7 @@ class App extends Component {
   refreshList = () => {
     axios
       .get("/api/players/")
-      .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next }))
+      .then((res) => this.setState({ players: res.data.results, previousUrl: res.previous, nextUrl: res.next }))
       .catch((err) => console.log(err));
 	  console.log(this.previousUrl + " " + this.nextUrl);
   };
@@ -260,6 +260,7 @@ class App extends Component {
                 </button>
 			   
               </div>
+			  /*
               {this.renderTabList()}
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
@@ -278,6 +279,7 @@ class App extends Component {
                 </button></li>
 				
               </ul>
+			  */
             </div>
           </div>
         </div>
