@@ -91,7 +91,9 @@ class App extends Component {
 	toDisplay.push(maxItems - 1);
 	toDisplay.push(maxItems);
 	
-
+	return toDisplay.map((number) => (
+   <button className="btn btn-primary" onClick={()=>this.paginationHandler(number)}>{number}</button>
+    )); 
     	
 	  
   };
