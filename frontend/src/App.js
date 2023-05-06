@@ -111,8 +111,12 @@ class App extends Component {
   };
   
   paginationHandler=(url)=>{ 
+  let str = url;
+  let subStr = str.substring(0, str.indexOf('='));
+  let newStr = str.replace(substr,"");
+  console.log(newStr);
   try{
-	  axios.get(`/api/players/?page=2`)
+	  axios.get(`/api/players/?page=`+newStr)
 	  .then((res)=>{this.setState({ players: res.data.results })  
 	  });
   }catch(error){
