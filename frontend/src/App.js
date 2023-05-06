@@ -46,7 +46,6 @@ class App extends Component {
 		weapon_element: "",
 		weapon_type:"",
 		weapon_damage:0,
-		player_weapon:"",
       },
 	  
     };
@@ -196,7 +195,7 @@ class App extends Component {
   };
   
   createWeapon = () => {
-    const item = { weapon_name: "", weapon_slot: "", weapon_element: "", weapon_type: "", weapon_damage: 0, player_weapon:"" };
+    const item = { weapon_name: "", weapon_slot: "", weapon_element: "", weapon_type: "", weapon_damage: 0 };
 
     this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon });
   };
@@ -496,7 +495,7 @@ class App extends Component {
           <Weapon
             activeItem={this.state.activeWeapon}
             toggle={this.toggle}
-            onSave={this.handleSubmit}
+            onSave={this.handleSubmitWeapon}
           />
         ) : null}
       </main>

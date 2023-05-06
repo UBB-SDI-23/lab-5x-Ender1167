@@ -95,17 +95,6 @@ export default class CustomModal extends Component {
                 placeholder="0"
               />
             </FormGroup>
-		    <FormGroup>
-              <Label for="weapon-player">Owner</Label>
-              <Input
-                type="number"
-                id="weapon-player"
-                name="player_weapon"
-                defaultValue={this.state.activeItem.player_weapon}
-                onChange={this.handleChange}
-                placeholder="0"
-              />
-            </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
