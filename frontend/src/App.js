@@ -18,6 +18,10 @@ class App extends Component {
 	  numDescending: [],
 	  reportPlayers: [],
 	  filterPlayers: [],
+	  pageNumbers: [],
+	  totalItems: 0,
+	  perPage: 10,
+	  
 	  filterValue: 0,
 	  nextUrl:"",
 	  previousUrl:"",
@@ -42,15 +46,24 @@ class App extends Component {
   
   componentDidMount() {
     this.refreshList();
-    console.log(this.state.previousUrl + " " + this.state.nextUrl);
+    
   }
 
   refreshList = () => {
     axios
       .get("/api/players/")
-      .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next }))
+      .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next,totalItems: res.data.count }))
       .catch((err) => console.log(err));
 
+  };
+  
+  paginate = () => {
+	 let tempNr = [];
+	for (let i = 1; i <= Math.ceil(this.state.totalItems / this.state.perPage); i++) {
+      tempNr.push(i);
+	  console.log(i);
+    }  
+	  
   };
   
   toggle = () => {
@@ -266,6 +279,7 @@ class App extends Component {
 			   
               </div>
               {this.renderTabList()}
+			  
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
 				<li><button
@@ -281,7 +295,6 @@ class App extends Component {
                 >
 				 Next
                 </button></li>
-				
               </ul>
             </div>
           </div>
