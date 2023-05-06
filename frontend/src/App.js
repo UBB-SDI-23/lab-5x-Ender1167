@@ -1,6 +1,7 @@
 
 import './App.css';
 import Modal from "./components/Modal";
+import Weapon from "./components/Weapon";
 import React, { Component } from "react";
 import axios from "axios";
 import {
@@ -31,12 +32,21 @@ class App extends Component {
 	  nextUrl:"",
 	  previousUrl:"",
 	  modal: false,
+	  modal_weapon: false,
       activeItem: {
         name: "",
         class1: "",
 		level: 0,
 		glimmer:0,
 		shards:0,
+      },
+	  activeWeapon: {
+        weapon_name: "",
+        weapon_slot: "",
+		weapon_element: "",
+		weapon_type:"",
+		weapon_damage:0,
+		player_weapon:"",
       },
 	  
     };
@@ -57,6 +67,14 @@ class App extends Component {
     axios
       .get("/api/players/")
       .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, totalItems: res.data.count }))
+      .catch((err) => console.log(err));
+	axios
+      .get("/api/weapons/")
+      .then((res) => this.setState({ weapons: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, totalItems: res.data.count }))
+      .catch((err) => console.log(err));
+    axios
+      .get("/api/location/")
+      .then((res) => this.setState({ locations: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, totalItems: res.data.count }))
       .catch((err) => console.log(err));
 
   };
@@ -118,6 +136,19 @@ class App extends Component {
       .post("/api/players/", item)
       .then((res) => this.refreshList());
   };
+  handleSubmitWeapon = (item) => {
+    this.toggle();
+
+    if (item.id) {
+      axios
+        .put(`/api/weapons/${item.id}`, item)
+        .then((res) => this.refreshList());
+      return;
+    }
+    axios
+      .post("/api/weapons/", item)
+      .then((res) => this.refreshList());
+  };
   
    getWeapons = () => {
 	this.setState({viewCompleted: 5});
@@ -163,9 +194,19 @@ class App extends Component {
 
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
+  
+  createWeapon = () => {
+    const item = { weapon_name: "", weapon_slot: "", weapon_element: "", weapon_type: "", weapon_damage: 0, player_weapon:"" };
+
+    this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon });
+  };
 
   editItem = (item) => {
     this.setState({ activeItem: item, modal: !this.state.modal });
+  };
+  
+  editWeapon = (item) => {
+    this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon });
   };
   
 
@@ -407,6 +448,13 @@ class App extends Component {
                 >
                   Add player
                 </button>
+				
+				<button
+                  className="btn btn-primary"
+				  onClick={this.createItem}
+                >
+                  Add weapon
+                </button>
 			   
               </div>
               {this.renderTabList()}
@@ -440,6 +488,13 @@ class App extends Component {
 		{this.state.modal ? (
           <Modal
             activeItem={this.state.activeItem}
+            toggle={this.toggle}
+            onSave={this.handleSubmit}
+          />
+        ) : null}
+		{this.state.modal_weapon ? (
+          <Weapon
+            activeItem={this.state.activeWeapon}
             toggle={this.toggle}
             onSave={this.handleSubmit}
           />
