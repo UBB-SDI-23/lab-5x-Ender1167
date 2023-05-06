@@ -126,6 +126,13 @@ class App extends Component {
       .then((res) => this.setState({ weapons: res.data.results }))
       .catch((err) => console.log(err));
   };
+   getLocations = () => {
+	this.setState({viewCompleted: 6});
+    axios
+      .get("/api/location/")
+      .then((res) => this.setState({ locations: res.data.results }))
+      .catch((err) => console.log(err));
+  };
   
   getReport = () => {
 	//this.state.viewCompleted = 3;
@@ -224,7 +231,7 @@ class App extends Component {
 		
 		<span
           className={this.state.viewCompleted === 6 ? "nav-link active" : "nav-link"}
-          onClick={() => this.displayCompleted(6)}
+          onClick={() => this.getLocations()}
         >
           Locations
         </span>
