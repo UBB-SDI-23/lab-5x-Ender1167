@@ -280,7 +280,7 @@ class App extends Component {
 		break;
 		case 4:
 		let val = this.state.filterValue;
-		url1 = `/api/location/filter/${val}/?page=`;
+		url1 = `/api/location/filter/${val}?page=`;
 		break;
 		case 5:
 		url1 = `/api/weapons/?page=`;
