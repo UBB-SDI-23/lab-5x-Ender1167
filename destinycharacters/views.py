@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from django.db.models import Avg
+from django.db.models import Avg, Count
 
 from .models import Player, Weapon, Location, Location_Weapon
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, WeaponSerializer_Detail
@@ -29,7 +29,7 @@ class Player_Weapons(ListAPIView):
 def player_list(request):
     #read all
     if request.method == 'GET':
-        players = Player.objects.all()
+        players = Player.objects.all().annotate(nr_weapons=Count('weapon__player_weapon'))
 
         paginator = StandardResultsSetPagination()
         paginated_players = paginator.paginate_queryset(players, request)

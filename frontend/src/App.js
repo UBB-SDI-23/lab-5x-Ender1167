@@ -380,7 +380,7 @@ class App extends Component {
         <span
           title={item.name}
         >
-          {item.name + "/" + item.class1}
+          {item.name + "/" + item.class1 + "/" + item.nr_weapons}
         </span>
         <span>
           <button

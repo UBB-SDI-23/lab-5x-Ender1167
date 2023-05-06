@@ -34,7 +34,7 @@ class PlayerSerializer(WritableNestedModelSerializer, serializers.ModelSerialize
     class Meta:
         model = Player
         ordering = ['-id']
-        fields = ['id', 'name', 'class1', 'level', 'glimmer', 'shards', 'weapons']
+        fields = ['id', 'name', 'class1', 'level', 'glimmer', 'shards', 'weapons', 'nr_weapons']
 
 
 class PlayerSerializer_No_Eq(serializers.ModelSerializer):
