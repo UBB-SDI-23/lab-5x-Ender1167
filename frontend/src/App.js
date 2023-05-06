@@ -18,9 +18,11 @@ class App extends Component {
 	  numDescending: [],
 	  reportPlayers: [],
 	  filterPlayers: [],
+	  
 	  pageNumbers: [],
 	  totalItems: 1000000,
 	  perPage: 10,
+	  currentPage:20,
 	  
 	  filterValue: 0,
 	  nextUrl:"",
@@ -57,18 +59,35 @@ class App extends Component {
 
   };
   
-  paginate = () => {
+  paginate = (newPage) => {
 	 let tempNr = [];
-	for (let i = 1; i <= Math.ceil(this.state.totalItems / this.state.perPage); i++) {
+	 let toDisplay = [];
+	 let maxItems = Math.ceil(this.state.totalItems / this.state.perPage);
+	for (let i = 1; i <= maxItems; i++) {
       tempNr.push(i);
-	  
     } 
-	return tempNr.map((number) => (
+	toDisplay.push(1);
+	toDisplay.push(2);
+	
+	toDisplay.push(newPage - 1);
+	toDisplay.push(newPage);
+	toDisplay.push(newPage + 1);
+	
+	toDisplay.push(maxItems - 1);
+	toDisplay.push(maxItems);
+	
+	
+	
+	//to do
+	
+	this.setState({currentPage: newPage});
+	
+	return toDisplay.map((number) => (
    <button
                   className="btn btn-primary"
 				  onClick={()=>this.paginationHandler(this.state.previousUrl)}
                 >
-				 number
+				{number}
                 </button>
     )); 
     	
