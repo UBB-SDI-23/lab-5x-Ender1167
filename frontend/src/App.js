@@ -81,8 +81,8 @@ class App extends Component {
 	}
 	
 	if(newPage === maxItems - 2){ 
-	toDisplay.push(newPage);
 	toDisplay.push(newPage-1);
+	toDisplay.push(newPage);
 	}
 	if(newPage === maxItems - 1){ 
 	toDisplay.push(newPage-1);
