@@ -495,7 +495,7 @@ class App extends Component {
           />
         ) : null}
 		{this.state.modal_weapon ? (
-          <Weapon
+          <Modal
             activeItem={this.state.activeWeapon}
             toggle={this.toggleWeapon}
             onSave={this.handleSubmitWeapon}
