@@ -295,7 +295,7 @@ class App extends Component {
 				<li>
 				{this.paginate()}
 				</li>
-				/*
+				{/*
 				<li><button
                   className="btn btn-primary"
 				  onClick={()=>this.paginationHandler(this.state.previousUrl)}
@@ -309,7 +309,7 @@ class App extends Component {
                 >
 				 Next
                 </button></li>
-				*/
+				*/}
 
               </ul>
             </div>
