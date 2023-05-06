@@ -60,6 +60,7 @@ class App extends Component {
   
   paginate = () => {
 	 let tempNr = [];
+	 console.log(this.state.totalItems);
 	for (let i = 1; i <= Math.ceil(this.state.totalItems / this.state.perPage); i++) {
       tempNr.push(i);
 	  console.log(i);
