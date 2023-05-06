@@ -406,7 +406,7 @@ class App extends Component {
 		<span>
           <button
             className="btn btn-secondary mr-2"
-			onClick={() => this.editItem(item)}
+			onClick={() => this.editWeapon(item)}
           >
             Edit
           </button>
