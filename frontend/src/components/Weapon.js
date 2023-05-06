@@ -15,7 +15,7 @@ export default class CustomModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: this.props.activeItem,
+      activeItem: this.props.activeWeapon,
     };
   }
 

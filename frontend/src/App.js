@@ -451,7 +451,7 @@ class App extends Component {
 				
 				<button
                   className="btn btn-primary"
-				  onClick={this.createItem}
+				  onClick={this.createWeapon}
                 >
                   Add weapon
                 </button>
