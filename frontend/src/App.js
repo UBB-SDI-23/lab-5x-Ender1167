@@ -91,16 +91,7 @@ class App extends Component {
 	toDisplay.push(maxItems - 1);
 	toDisplay.push(maxItems);
 	
-	this.setState({currentPage: newPage});
-	
-	return toDisplay.map((number) => (
-   <button
-                  className="btn btn-primary"
-				  onClick={()=>this.paginationHandler(number)}
-                >
-				{number}
-                </button>
-    )); 
+
     	
 	  
   };
@@ -323,7 +314,7 @@ class App extends Component {
                 {this.renderItems()}
 				
 				<li>
-				{!this.state.modal ? this.paginate() : null}
+				{this.paginate()}
 				</li>
 				{/*
 				<li><button
