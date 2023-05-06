@@ -1,7 +1,6 @@
 
 import './App.css';
 import Modal from "./components/Modal";
-import Weapon from "./components/Weapon";
 import React, { Component } from "react";
 import axios from "axios";
 import {
@@ -33,6 +32,8 @@ class App extends Component {
 	  previousUrl:"",
 	  modal: false,
 	  modal_weapon: false,
+	  modal_type:0,
+	  
       activeItem: {
         name: "",
         class1: "",
@@ -194,21 +195,21 @@ class App extends Component {
   createItem = () => {
     const item = { name: "", class1: "", level: 0, glimmer: 0, shards: 0 };
 
-    this.setState({ activeItem: item, modal: !this.state.modal });
+    this.setState({ activeItem: item, modal: !this.state.modal, modal_type: 0 });
   };
   
   createWeapon = () => {
     const item = { weapon_name: "", weapon_slot: "", weapon_element: "", weapon_type: "", weapon_damage: 0 };
-
-    this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon });
+    
+    this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon, modal_type: 1 });
   };
 
   editItem = (item) => {
-    this.setState({ activeItem: item, modal: !this.state.modal });
+    this.setState({ activeItem: item, modal: !this.state.modal , modal_type: 0});
   };
   
   editWeapon = (item) => {
-    this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon });
+    this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon, modal_type: 1 });
   };
   
 
@@ -504,13 +505,15 @@ class App extends Component {
         </div>
 		{this.state.modal ? (
           <Modal
+		    modal_type={this.state.modal_type}
             activeItem={this.state.activeItem}
             toggle={this.toggle}
             onSave={this.handleSubmit}
           />
         ) : null}
 		{this.state.modal_weapon ? (
-          <Weapon
+          <Modal
+		    modal_type={this.state.modal_type}
             activeItem={this.state.activeWeapon}
             toggle={this.toggleWeapon}
             onSave={this.handleSubmitWeapon}
