@@ -19,7 +19,7 @@ class App extends Component {
 	  reportPlayers: [],
 	  filterPlayers: [],
 	  pageNumbers: [],
-	  totalItems: 0,
+	  totalItems: 1000000,
 	  perPage: 10,
 	  
 	  filterValue: 0,
@@ -53,7 +53,7 @@ class App extends Component {
   refreshList = () => {
     axios
       .get("/api/players/")
-      .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next,totalItems: res.data.count }))
+      .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, totalItems: res.data.count }))
       .catch((err) => console.log(err));
 
   };
