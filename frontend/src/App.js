@@ -46,7 +46,6 @@ class App extends Component {
   
   componentDidMount() {
     this.refreshList();
-	this.paginate();
     
   }
 
@@ -60,11 +59,23 @@ class App extends Component {
   
   paginate = () => {
 	 let tempNr = [];
-	 console.log(this.state.totalItems);
 	for (let i = 1; i <= Math.ceil(this.state.totalItems / this.state.perPage); i++) {
       tempNr.push(i);
-	  console.log(i);
-    }  
+	  
+    } 
+	return tempNr.map((number) => (
+      <li
+        key={number}
+        className="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <span
+          title={number}
+        >
+          {number}
+        </span>
+      </li>
+    )); 
+    	
 	  
   };
   
@@ -284,19 +295,8 @@ class App extends Component {
 			  
               <ul className="list-group list-group-flush border-top-0">
                 {this.renderItems()}
-				<li><button
-                  className="btn btn-primary"
-				  onClick={()=>this.paginationHandler(this.state.previousUrl)}
-                >
-				 Previous
-                </button>
-				
-		        <button
-                  className="btn btn-primary"
-				  onClick={()=>this.paginationHandler(this.state.nextUrl)}
-                >
-				 Next
-                </button></li>
+				{this.paginate()}
+
               </ul>
             </div>
           </div>
