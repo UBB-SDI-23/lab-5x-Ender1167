@@ -19,8 +19,8 @@ class App extends Component {
 	  reportPlayers: [],
 	  filterPlayers: [],
 	  filterValue: 0,
-	  nextUrl:0,
-	  previousUrl:0,
+	  nextUrl:"",
+	  previousUrl:"",
 	  modal: false,
       activeItem: {
         name: "",
@@ -48,7 +48,7 @@ class App extends Component {
   refreshList = () => {
     axios
       .get("/api/players/")
-      .then((res) => this.setState({ players: res.data.results, previousUrl: 0, nextUrl: 0 }))
+      .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next }))
       .catch((err) => console.log(err));
 
   };
@@ -266,14 +266,14 @@ class App extends Component {
                 {this.renderItems()}
 				<li><button
                   className="btn btn-primary"
-				  onClick={()=>this.paginationHandler(this.previousUrl)}
+				  onClick={()=>this.paginationHandler(this.state.previousUrl)}
                 >
 				 Previous
                 </button>
 				
 		        <button
                   className="btn btn-primary"
-				  onClick={()=>this.paginationHandler(this.nextUrl)}
+				  onClick={()=>this.paginationHandler(this.state.nextUrl)}
                 >
 				 Next
                 </button></li>
