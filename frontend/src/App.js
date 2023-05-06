@@ -294,7 +294,7 @@ class App extends Component {
 	}
   try{
 	  axios.get(url1+pg)
-	  .then((res)=>{this.setState({ players: res.data.results, weapons: res.data.results, locations: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
+	  .then((res)=>{this.setState({ players: res.data.results, weapons: res.data.results, locations: res.data.results, reportPlayers: res.data.results, filterPlayers: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
 	  });
   }catch(error){
 	  console.log(error);
