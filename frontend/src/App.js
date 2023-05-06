@@ -59,7 +59,9 @@ class App extends Component {
 
   };
   
-  paginate = (newPage) => {
+  paginate = () => {
+	  
+	 let newPage = this.state.currentPage;
 	 let tempNr = [];
 	 let toDisplay = [];
 	 let maxItems = Math.ceil(this.state.totalItems / this.state.perPage);
@@ -69,23 +71,36 @@ class App extends Component {
 	toDisplay.push(1);
 	toDisplay.push(2);
 	
+	if(newPage > 3 && newPage < maxItems - 2){
 	toDisplay.push(newPage - 1);
 	toDisplay.push(newPage);
 	toDisplay.push(newPage + 1);
+	}
+	if(newPage == 3){ 
+	toDisplay.push(newPage);
+	toDisplay.push(newPage+1);
+	}
+	if(newPage == 2){ 
+	toDisplay.push(newPage+1);
+	}
+	
+	if(newPage == maxItems - 2){ 
+	toDisplay.push(newPage);
+	toDisplay.push(newPage-1);
+	}
+	if(newPage == maxItems - 1){ 
+	toDisplay.push(newPage-1);
+	}
 	
 	toDisplay.push(maxItems - 1);
 	toDisplay.push(maxItems);
-	
-	
-	
-	//to do
 	
 	this.setState({currentPage: newPage});
 	
 	return toDisplay.map((number) => (
    <button
                   className="btn btn-primary"
-				  onClick={()=>this.paginationHandler(this.state.previousUrl)}
+				  onClick={()=>this.paginationHandler(number)}
                 >
 				{number}
                 </button>
@@ -152,13 +167,13 @@ class App extends Component {
   };
   
   paginationHandler=(url)=>{ 
-  let str = url;
-  let subStr = str.substring(0, str.indexOf('='));
-  let newStr = str.replace(subStr,"");
-  console.log(newStr);
+  //let str = url;
+  //let subStr = str.substring(0, str.indexOf('='));
+  //let newStr = str.replace(subStr,"");
+  //console.log(newStr);
   try{
-	  axios.get(`/api/players/?page`+newStr)
-	  .then((res)=>{this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next})  
+	  axios.get(`/api/players/?page=`+url)
+	  .then((res)=>{this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: url})  
 	  });
   }catch(error){
 	  console.log(error);
