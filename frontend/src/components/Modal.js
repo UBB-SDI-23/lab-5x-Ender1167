@@ -34,7 +34,7 @@ export default class CustomModal extends Component {
 
   render() {
     const { toggle, onSave } = this.props;
-    if(modal_type === 0){
+    if(this.state.modal_type === 0){
     return (
       <Modal isOpen={true} toggle={toggle}>
         <ModalHeader toggle={toggle}>Player</ModalHeader>
@@ -109,7 +109,7 @@ export default class CustomModal extends Component {
       </Modal>
     );
 	}
-	if(modal_type ===1){
+	if(this.state.modal_type ===1){
 		return (
       <Modal isOpen={true} toggle={toggle}>
         <ModalHeader toggle={toggle}>Todo Item</ModalHeader>
