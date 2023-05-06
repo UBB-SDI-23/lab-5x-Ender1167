@@ -33,6 +33,7 @@ class PlayerSerializer(WritableNestedModelSerializer, serializers.ModelSerialize
     weapons = WeaponSerializer(source='weapon_set', many=True)
     class Meta:
         model = Player
+        ordering = ['-id']
         fields = ['id', 'name', 'class1', 'level', 'glimmer', 'shards', 'weapons']
 
 

@@ -22,7 +22,7 @@ class App extends Component {
 	  pageNumbers: [],
 	  totalItems: 1000000,
 	  perPage: 10,
-	  currentPage:20,
+	  currentPage:1,
 	  
 	  filterValue: 0,
 	  nextUrl:"",
