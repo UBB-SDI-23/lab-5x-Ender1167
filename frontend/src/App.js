@@ -588,8 +588,8 @@ class App extends Component {
           <Modal
 		    modal_type={this.state.modal_type}
             activeItem={this.state.activeLocation}
-            toggle={this.toggleWeapon}
-            onSave={this.handleSubmitWeapon}
+            toggle={this.toggleLocation}
+            onSave={this.handleSubmitLocation}
           />
         ) : null}
 		
