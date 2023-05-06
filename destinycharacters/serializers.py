@@ -31,6 +31,7 @@ class WeaponSerializerIds(serializers.ModelSerializer):
 
 class PlayerSerializer(WritableNestedModelSerializer, serializers.ModelSerializer):
     weapons = WeaponSerializer(source='weapon_set', many=True)
+    nr_weapons = serializers.IntegerField()
     class Meta:
         model = Player
         ordering = ['-id']
