@@ -253,16 +253,28 @@ def location_weapon_detail(request, pk):
 def location_filter(request, val):
 
     if request.method == 'GET':
-        locations_filtered = Location.objects.all().filter(min_level__gt=val)[:10:-1]
-        serializer = LocationSerializer(locations_filtered, many=True)
-        return Response(serializer.data)
+        locations_filtered = Location.objects.all().filter(min_level__gt=val)
+        #serializer = LocationSerializer(locations_filtered, many=True)
+
+        paginator = StandardResultsSetPagination()
+        paginated_filtered_location = paginator.paginate_queryset(locations_filtered, request)
+        serializer = LocationSerializer(paginated_filtered_location, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
+
+        #return Response(serializer.data)
     
 
 @api_view(['GET'])
 def report1(request):
 
     if request.method == 'GET':
-        queryset = Player.objects.all().annotate(avg_weapon_dmg=Avg('weapon__weapon_damage')).order_by('-avg_weapon_dmg')[:100:-1]
-        serializer = PlayerMaxReport(queryset, many=True)
-        return Response(serializer.data)
+        queryset = Player.objects.all().annotate(avg_weapon_dmg=Avg('weapon__weapon_damage')).order_by('-avg_weapon_dmg')
+        paginator = StandardResultsSetPagination()
+        paginated_report = paginator.paginate_queryset(queryset, request)
+        serializer = PlayerMaxReport(paginated_report, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
+        #serializer = PlayerMaxReport(queryset, many=True)
+        #return Response(serializer.data)
 

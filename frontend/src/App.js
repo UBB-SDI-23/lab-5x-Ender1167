@@ -197,7 +197,7 @@ class App extends Component {
 	this.setState({viewCompleted: 3});
     axios
       .get("/api/report/")
-      .then((res) => this.setState({ reportPlayers: res.data }))
+      .then((res) => this.setState({ reportPlayers: res.data.results }))
       .catch((err) => console.log(err));
   };
   
@@ -206,7 +206,7 @@ class App extends Component {
 	this.setState({viewCompleted: 4});
     axios
       .get(`/api/location/filter/${val}`)
-      .then((res) => this.setState({ filterPlayers: res.data }))
+      .then((res) => this.setState({ filterPlayers: res.data.results }))
       .catch((err) => console.log(err));
   };
 
