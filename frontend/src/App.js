@@ -24,6 +24,9 @@ class App extends Component {
 	  perPage: 10,
 	  currentPage:1,
 	  
+	  locations: [],
+	  weapons: [],
+	  
 	  filterValue: 0,
 	  nextUrl:"",
 	  previousUrl:"",
@@ -116,6 +119,14 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
   
+   getWeapons = () => {
+	this.setState({viewCompleted: 5});
+    axios
+      .get("/api/weapons/")
+      .then((res) => this.setState({ weapons: res.data.results }))
+      .catch((err) => console.log(err));
+  };
+  
   getReport = () => {
 	//this.state.viewCompleted = 3;
 	this.setState({viewCompleted: 3});
@@ -155,14 +166,39 @@ class App extends Component {
 	return this.setState({ viewCompleted: status });
   };
   
-  paginationHandler=(url)=>{ 
+  paginationHandler=(pg)=>{ 
   //let str = url;
   //let subStr = str.substring(0, str.indexOf('='));
   //let newStr = str.replace(subStr,"");
   //console.log(newStr);
+  	let url1 = "";
+	switch(this.state.viewCompleted){
+        case 1:
+		url1 = `/api/players/?page=`;
+		break;
+		case 2:
+		url1 = `/api/players/?page=`;
+		break;
+		case 3:
+		url1 = "/api/report/?page=";
+		break;
+		case 4:
+		url1 = `/api/players/?page=`;
+		break;
+		case 5:
+		url1 = `/api/weapons/?page=`;
+		break;
+		case 6:
+		url1 = `/api/location/?page=`;
+		break;
+	    default:
+		url1 = `/api/players/?page=`;
+		break;
+		
+	}
   try{
-	  axios.get(`/api/players/?page=`+url)
-	  .then((res)=>{this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: url})  
+	  axios.get(url1+pg)
+	  .then((res)=>{this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
 	  });
   }catch(error){
 	  console.log(error);
@@ -178,6 +214,21 @@ class App extends Component {
         >
           Players
         </span>
+		
+		<span
+          className={this.state.viewCompleted === 5 ? "nav-link active" : "nav-link"}
+          onClick={() => this.getWeapons()}
+        >
+          Weapons
+        </span>
+		
+		<span
+          className={this.state.viewCompleted === 6 ? "nav-link active" : "nav-link"}
+          onClick={() => this.displayCompleted(6)}
+        >
+          Locations
+        </span>
+		
         <span
           className={this.state.viewCompleted === 2? "nav-link active" : "nav-link"}
           onClick={() => this.displayCompleted(2)}
@@ -217,8 +268,14 @@ class App extends Component {
 	if(viewCompleted === 4){
 		newItems = this.state.filterPlayers;
 	}
+	if(viewCompleted === 5){
+		newItems = this.state.weapons;
+	}
+	if(viewCompleted === 6){
+		newItems = this.state.locations;
+	}
 	
-	if(viewCompleted !== 3 && viewCompleted !== 4){ 
+	if(viewCompleted !== 3 && viewCompleted !== 4 && viewCompleted !== 5 && viewCompleted !== 6){ 
     return newItems.map((item) => (
       <li
         key={item.id}
@@ -265,6 +322,41 @@ class App extends Component {
     ));
 	}
 	if(viewCompleted === 4){
+				 return newItems.map((item) => (
+      <li
+        key={item.id}
+        className="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <span
+          className={`todo-title mr-2 ${
+            this.state.viewCompleted ? "completed-todo" : ""
+          }`}
+          title={item.name}
+        >
+          {item.location_name}
+        </span>
+      </li>
+    ));
+	}
+	
+	if(viewCompleted === 5){ //weapons
+				 return newItems.map((item) => (
+      <li
+        key={item.id}
+        className="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <span
+          className={`todo-title mr-2 ${
+            this.state.viewCompleted ? "completed-todo" : ""
+          }`}
+          title={item.name}
+        >
+          {item.weapon_name}
+        </span>
+      </li>
+    ));
+	}
+	if(viewCompleted === 6){ //locations
 				 return newItems.map((item) => (
       <li
         key={item.id}

@@ -65,8 +65,14 @@ def location_list(request):
     #read all
     if request.method == 'GET':
         locations = Location.objects.all()
-        serializer = LocationSerializer(locations, many=True)
-        return Response(serializer.data)
+        #serializer = LocationSerializer(locations, many=True)
+
+        paginator = StandardResultsSetPagination()
+        paginated_locations = paginator.paginate_queryset(locations, request)
+        serializer = LocationSerializer(paginated_locations, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
+        #return Response(serializer.data)
 
     #create 1
     if request.method == 'POST':
@@ -80,8 +86,15 @@ def weapon_list(request):
     #read all
     if request.method == 'GET':
         weapons = Weapon.objects.all()
-        serializer = WeaponSerializer(weapons, many=True)
-        return Response(serializer.data)
+
+        paginator = StandardResultsSetPagination()
+        paginated_weapons = paginator.paginate_queryset(weapons, request)
+        serializer = WeaponSerializer(paginated_weapons, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
+
+        #serializer = WeaponSerializer(weapons, many=True)
+        #return Response(serializer.data)
 
     #create 1
     if request.method == 'POST':
