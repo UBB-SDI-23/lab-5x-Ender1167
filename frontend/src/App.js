@@ -1,6 +1,7 @@
 
 import './App.css';
 import Modal from "./components/Modal";
+import Weapon from "./components/Weapon";
 import React, { Component } from "react";
 import axios from "axios";
 import {
@@ -494,7 +495,7 @@ class App extends Component {
           />
         ) : null}
 		{this.state.modal_weapon ? (
-          <Modal
+          <Weapon
             activeItem={this.state.activeWeapon}
             toggle={this.toggleWeapon}
             onSave={this.handleSubmitWeapon}
