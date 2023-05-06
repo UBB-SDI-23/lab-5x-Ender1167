@@ -117,7 +117,7 @@ class App extends Component {
   console.log(newStr);
   try{
 	  axios.get(`/api/players/?page`+newStr)
-	  .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next }))
+	  .then((res)=>{this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next})  
 	  });
   }catch(error){
 	  console.log(error);
