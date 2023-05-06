@@ -121,6 +121,9 @@ class App extends Component {
   toggle = () => {
     this.setState({ modal: !this.state.modal });
   };
+  toggleWeapon = () => {
+    this.setState({ modal_weapon: !this.state.modal_weapon });
+  };
 
   handleSubmit = (item) => {
     this.toggle();
@@ -494,7 +497,7 @@ class App extends Component {
 		{this.state.modal_weapon ? (
           <Weapon
             activeItem={this.state.activeWeapon}
-            toggle={this.toggle}
+            toggle={this.toggleWeapon}
             onSave={this.handleSubmitWeapon}
           />
         ) : null}
