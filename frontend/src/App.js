@@ -1,7 +1,7 @@
 
 import './App.css';
 import Modal from "./components/Modal";
-import React, { Component }, {useState, useEffect} from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import {
   FormGroup,
