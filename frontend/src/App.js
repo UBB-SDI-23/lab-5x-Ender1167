@@ -48,7 +48,6 @@ class App extends Component {
   
   componentDidMount() {
     this.refreshList();
-    
   }
 
   refreshList = () => {
@@ -327,7 +326,7 @@ class App extends Component {
                 {this.renderItems()}
 				
 				<li>
-				{this.paginate()}
+				
 				</li>
 				{/*
 				<li><button
