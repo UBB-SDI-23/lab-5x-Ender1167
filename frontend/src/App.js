@@ -470,7 +470,7 @@ class App extends Component {
           }`}
           title={item.name}
         >
-          {item.weapon_name}
+          {item.weapon_name + "/" item.nr_locations}
         </span>
 		<span>
           <button
