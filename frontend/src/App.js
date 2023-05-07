@@ -160,15 +160,18 @@ class App extends Component {
 	
 	let slotTypes = ["Kinetic", "Energy", "Heavy"];
 	let elements1 = ["Arc", "Solar", "Void", "Stasis", "Strand"];
+	let errorMsg = "";
 	if(!slotTypes.includes(item.weapon_slot)){
-		document.getElementById("error1").innerHTML = "Slot must be Kinetic, Energy or Heavy.";
-		return;
+		errorMsg += "Slot must be Kinetic, Energy or Heavy.";
 	}
 	if(!elements1.includes(item.weapon_element)){
-		document.getElementById("error1").innerHTML = "Element must be Arc,Solar,Void,Stasis,Strand.";
+		errorMsg += "Element must be Arc,Solar,Void,Stasis,Strand.";
+	}
+    
+	if(errorMsg !== ""){
+		document.getElementById("error1").innerHTML = errorMsg;
 		return;
 	}
-
     if (item.id) {
       axios
         .put(`/api/weapons/${item.id}`, item)
