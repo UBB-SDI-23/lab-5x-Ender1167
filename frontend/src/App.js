@@ -2,6 +2,7 @@
 import './App.css';
 import Modal from "./components/Modal";
 import React, { Component } from "react";
+import Toast from 'react-bootstrap/Toast';
 import axios from "axios";
 import {
   FormGroup,
@@ -545,21 +546,14 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-white text-uppercase text-center my-4">Destiny Characters</h1>
-		<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-<div className="position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" className="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-    <div className="toast-header">
-      <strong className="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div className="toast-body">
-      Hello, world! This is a toast message.
-    </div>
-  </div>
-</div>
-
+<Toast>
+      <Toast.Header>
+        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+        <strong className="me-auto">Bootstrap</strong>
+        <small>11 mins ago</small>
+      </Toast.Header>
+      <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+    </Toast>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
