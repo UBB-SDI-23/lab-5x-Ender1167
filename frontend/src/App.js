@@ -2,7 +2,6 @@
 import './App.css';
 import Modal from "./components/Modal";
 import React, { Component } from "react";
-import Toast from 'react-bootstrap/Toast';
 import axios from "axios";
 import {
   FormGroup,
