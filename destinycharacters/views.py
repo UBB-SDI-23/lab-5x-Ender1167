@@ -278,4 +278,3 @@ def report1(request):
         return paginator.get_paginated_response(serializer.data)
         #serializer = PlayerMaxReport(queryset, many=True)
         #return Response(serializer.data)
-

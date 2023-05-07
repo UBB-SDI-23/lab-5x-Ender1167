@@ -24,6 +24,8 @@ from .views import weapon_detail, Player_Weapons, location_weapon_list, report1,
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from rest_framework_simplejwt import views as jwt_views
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Destiny Characters API",
@@ -54,5 +56,7 @@ urlpatterns = [
     path('weapon_location/', location_weapon_list),
     path('weapon_location/<int:pk>', location_weapon_detail),
     path('report/', report1, name='report_player_avg_weapons'),
+    path('api/register', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
 ]

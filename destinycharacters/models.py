@@ -1,7 +1,38 @@
 from django.db import models
 from rest_framework import status
 from rest_framework.response import Response
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
+def validateAge(value):
+    if value < 0:
+        raise ValidationError(
+            _("%(value)s is below 0."),
+            params={"value": value},
+        )
+
+
+class UserProfile(models.Model):
+    not_married = "Not married"
+    male = "Male"
+    MARITAL_CHOICES = [
+        ("Married", "Married"),
+        ("Not married", "Not married")
+    ]
+    GENDER_CHOICES = [
+        ("Male", "Male"),
+        ("Female", "Female")
+    ]
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True, null=True)
+    location = models.CharField(max_length=30, blank=True, null=True)
+    age = models.IntegerField(validators=[validateAge])
+    gender = models.CharField(max_length=30, choices=GENDER_CHOICES, default=male, blank=True, null=True)
+    marital_status = models.CharField(max_length=30, choices=MARITAL_CHOICES, default=not_married, blank=True, null=True)
 
 class Player(models.Model):
 
@@ -19,6 +50,7 @@ class Player(models.Model):
     level = models.IntegerField()
     glimmer = models.IntegerField()
     shards = models.IntegerField()
+    #user_player = models.ForeignKey(UserProfile, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return f"{self.name} {self.class1}"
@@ -89,3 +121,16 @@ class Location_Weapon(models.Model):
     drop_rate = models.IntegerField()
     wep = models.ForeignKey(Weapon, on_delete=models.CASCADE, default=None, null=True)
     loc = models.ForeignKey(Location, on_delete=models.CASCADE, default=None, null=True)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+
+
