@@ -103,13 +103,28 @@ class Weapon(models.Model):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
+def validateLostSectors(value):
+    if value < 3:
+        raise ValidationError(
+            _("%(value)s is below 3."),
+            params={"value": value},
+        )
+
+def validateMinLevel(value):
+    if value < 1:
+        raise ValidationError(
+            _("%(value)s is below 1."),
+            params={"value": value},
+        )
 class Location(models.Model):
+    enemy_default = 'Fallen'
+    ENEMY_CHOICES = ['Fallen', 'Scorn', 'Cabal', 'Vex', 'Taken']
 
     location_name = models.CharField(max_length=200)
-    enemy_type = models.CharField(max_length=200)
-    min_level = models.IntegerField()
+    enemy_type = models.CharField(max_length=200, choices=ENEMY_CHOICES, default=enemy_default)
+    min_level = models.IntegerField(validators=[validateMinLevel])
     nr_public_events = models.IntegerField()
-    nr_lost_sectors = models.IntegerField()
+    nr_lost_sectors = models.IntegerField(validators=[validateLostSectors])
     all_weapons = models.ManyToManyField(Weapon, through='Location_Weapon')
 
     def __str__(self):

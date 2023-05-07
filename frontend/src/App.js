@@ -188,13 +188,30 @@ class App extends Component {
   };
   handleSubmitLocation = (item) => {
     this.toggleLocation();
-
+    let enemies1 = ["Fallen", "Scorn", "Cabal", "Vex", "Taken"];
+	let errorMsg = "";
+	
+	if(!enemies1.includes(item.enemy_type)){
+		errorMsg += "Enemy must be Falle, Scorn, Cabal, Vex, Taken.";
+	}
+	if(item.nr_lost_sectors < 3){
+		errorMsg += "Lost sectors must be at least 3.";
+	}
+	if(item.min_level < 1){
+		errorMsg += "Min level must be at least 1.";
+	}
+	if(errorMsg !== ""){
+		document.getElementById("error1").innerHTML = errorMsg;
+		return;
+	}
     if (item.id) {
+	  document.getElementById("error1").innerHTML = "";
       axios
         .put(`/api/location/${item.id}`, item)
         .then((res) => this.refreshList());
       return;
     }
+	document.getElementById("error1").innerHTML = "";
     axios
       .post("/api/location/", item)
       .then((res) => this.refreshList());
