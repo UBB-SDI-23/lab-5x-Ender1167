@@ -142,7 +142,7 @@ class App extends Component {
     this.toggle();
 	let classes1 = ["Warlock", "Hunter", "Titan"];
 	if(!classes1.includes(item.class1)){
-		console.log("error");
+		document.getElementById("error1").innerHTML = "Class must be Warlock, Hunter or Titan.";
 		return;
 	}
     
@@ -162,11 +162,11 @@ class App extends Component {
 	let slotTypes = ["Kinetic", "Energy", "Heavy"];
 	let elements1 = ["Arc", "Solar", "Void", "Stasis", "Strand"];
 	if(!slotTypes.includes(item.weapon_slot)){
-		console.log("error");
+		document.getElementById("error1").innerHTML = "Slot must be Kinetic, Energy or Heavy.";
 		return;
 	}
 	if(!elements1.includes(item.weapon_element)){
-		console.log("error");
+		document.getElementById("error1").innerHTML = "Element must be Arc,Solar,Void,Stasis,Strand.";
 		return;
 	}
 
@@ -546,14 +546,7 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-white text-uppercase text-center my-4">Destiny Characters</h1>
-<Toast>
-      <Toast.Header>
-        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-        <strong className="me-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
-      </Toast.Header>
-      <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
-    </Toast>
+		<p id="error1"></p>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
