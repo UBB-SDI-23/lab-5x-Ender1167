@@ -157,6 +157,17 @@ class App extends Component {
   };
   handleSubmitWeapon = (item) => {
     this.toggleWeapon();
+	
+	let slotTypes = ["Kinetic", "Energy", "Heavy"];
+	let elements1 ["Arc", "Solar", "Void", "Stasis", "Strand"];
+	if(!slotTypes.includes(item.weapon_slot)){
+		console.log("error");
+		return;
+	}
+	if(!elements1.includes(item.weapon_element)){
+		console.log("error");
+		return;
+	}
 
     if (item.id) {
       axios
@@ -534,6 +545,22 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-white text-uppercase text-center my-4">Destiny Characters</h1>
+		<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded me-2" alt="...">
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+  </div>
+</div>
+
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
