@@ -269,7 +269,7 @@ def location_filter(request, val):
 def report1(request):
 
     if request.method == 'GET':
-        queryset = Player.objects.all().annotate(avg_weapon_dmg=Avg('weapon__weapon_damage')).order_by('-avg_weapon_dmg')
+        queryset = Player.objects.all().annotate(avg_weapon_dmg=Avg('weapon__weapon_damage')).order_by('-avg_weapon_dmg').values()
         print(queryset.query.__format__(''))
         paginator = StandardResultsSetPagination()
         paginated_report = paginator.paginate_queryset(queryset, request)
