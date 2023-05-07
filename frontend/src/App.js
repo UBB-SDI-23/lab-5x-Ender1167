@@ -458,7 +458,7 @@ class App extends Component {
           }`}
           title={item.name}
         >
-          {item.name}
+          {item.name + "/" + item.avg_weapon_dmg}
         </span>
       </li>
     ));
