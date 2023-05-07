@@ -159,7 +159,7 @@ class App extends Component {
     this.toggleWeapon();
 	
 	let slotTypes = ["Kinetic", "Energy", "Heavy"];
-	let elements1 ["Arc", "Solar", "Void", "Stasis", "Strand"];
+	let elements1 = ["Arc", "Solar", "Void", "Stasis", "Strand"];
 	if(!slotTypes.includes(item.weapon_slot)){
 		console.log("error");
 		return;
