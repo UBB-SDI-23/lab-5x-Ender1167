@@ -294,9 +294,31 @@ class App extends Component {
 		
 	}
   try{
+	  if(this.state.viewCompleted === 1 || this.state.viewCompleted === 2){
 	  axios.get(url1+pg)
-	  .then((res)=>{this.setState({ players: res.data.results, weapons: res.data.results, locations: res.data.results, reportPlayers: res.data.results, filterPlayers: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
+	  .then((res)=>{this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
 	  });
+	  }
+	  if(this.state.viewCompleted === 3){
+	  axios.get(url1+pg)
+	  .then((res)=>{this.setState({ reportPlayers: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
+	  });
+	  }
+	  	  if(this.state.viewCompleted === 4){
+	  axios.get(url1+pg)
+	  .then((res)=>{this.setState({ filterPlayers: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
+	  });
+	  }
+	  	  if(this.state.viewCompleted === 5){
+	  axios.get(url1+pg)
+	  .then((res)=>{this.setState({ weapons: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
+	  });
+	  }
+	  	  if(this.state.viewCompleted === 6){
+	  axios.get(url1+pg)
+	  .then((res)=>{this.setState({ locations: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
+	  });
+	  }
   }catch(error){
 	  console.log(error);
   }
