@@ -525,7 +525,7 @@ class App extends Component {
           }`}
           title={item.name}
         >
-          {item.location_name "/" + item.nr_public_events}
+          {item.location_name + "/" + item.nr_public_events}
         </span>
 		
 		<span>
