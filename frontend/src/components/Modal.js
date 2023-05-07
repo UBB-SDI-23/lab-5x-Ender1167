@@ -22,7 +22,6 @@ export default class CustomModal extends Component {
 
   handleChange = (e) => {
     let { name, value } = e.target;
-    console.log(name);
     if (e.target.type === "checkbox") {
       value = e.target.checked;
     }

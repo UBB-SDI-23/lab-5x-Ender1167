@@ -139,7 +139,12 @@ class App extends Component {
 
   handleSubmit = (item) => {
     this.toggle();
-
+	let classes1 = ["Warlock", "Hunter", "Titan"];
+	if(!classes1.includes(item.class1)){
+		console.log("error");
+		return;
+	}
+    
     if (item.id) {
       axios
         .put(`/api/players/${item.id}`, item)
@@ -151,7 +156,7 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
   handleSubmitWeapon = (item) => {
-    this.toggle();
+    this.toggleWeapon();
 
     if (item.id) {
       axios
@@ -164,7 +169,7 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
   handleSubmitLocation = (item) => {
-    this.toggle();
+    this.toggleLocation();
 
     if (item.id) {
       axios
