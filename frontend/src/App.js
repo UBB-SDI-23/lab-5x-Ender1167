@@ -76,7 +76,14 @@ class App extends Component {
       .get("/api/players/")
       .then((res) => this.setState({ players: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, totalItems: res.data.count }))
       .catch((err) => console.log(err));
-
+    axios
+      .get("/api/weapons/")
+      .then((res) => this.setState({ weapons: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, totalItems: res.data.count }))
+      .catch((err) => console.log(err));
+    axios
+      .get("/api/location/")
+      .then((res) => this.setState({ locations: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, totalItems: res.data.count }))
+      .catch((err) => console.log(err));
 
   };
   
