@@ -85,7 +85,7 @@ def location_list(request):
 def weapon_list(request):
     #read all
     if request.method == 'GET':
-        weapons = Weapon.objects.all().annotate(nr_loc=Count('location_weapon__loc'))
+        weapons = Weapon.objects.all()
 
         paginator = StandardResultsSetPagination()
         paginated_weapons = paginator.paginate_queryset(weapons, request)

@@ -8,10 +8,9 @@ from .models import Location_Weapon
 from drf_writable_nested import WritableNestedModelSerializer
 
 class WeaponSerializer(serializers.ModelSerializer):
-    nr_loc = serializers.IntegerField()
     class Meta:
         model = Weapon
-        fields = ['id', 'weapon_name', 'weapon_slot', 'weapon_element', 'weapon_type', 'weapon_damage', 'player_weapon', 'nr_loc']
+        fields = ['id', 'weapon_name', 'weapon_slot', 'weapon_element', 'weapon_type', 'weapon_damage', 'player_weapon']
 
 
 class Location_WeaponSerializer(serializers.ModelSerializer):
