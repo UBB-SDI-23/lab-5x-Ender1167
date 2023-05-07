@@ -547,14 +547,14 @@ class App extends Component {
         <h1 className="text-white text-uppercase text-center my-4">Destiny Characters</h1>
 		<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
 
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <strong class="me-auto">Bootstrap</strong>
+<div className="position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" className="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+    <div className="toast-header">
+      <strong className="me-auto">Bootstrap</strong>
       <small>11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    <div class="toast-body">
+    <div className="toast-body">
       Hello, world! This is a toast message.
     </div>
   </div>
