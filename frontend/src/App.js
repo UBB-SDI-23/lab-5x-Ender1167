@@ -201,6 +201,7 @@ class App extends Component {
   };
   
    getWeapons = () => {
+	   this.setState({currentPage:1});
 	this.setState({viewCompleted: 5});
     axios
       .get("/api/weapons/")
@@ -208,6 +209,7 @@ class App extends Component {
       .catch((err) => console.log(err));
   };
    getLocations = () => {
+	   this.setState({currentPage:1});
 	this.setState({viewCompleted: 6});
     axios
       .get("/api/location/")
@@ -217,6 +219,7 @@ class App extends Component {
   
   getReport = () => {
 	//this.state.viewCompleted = 3;
+	this.setState({currentPage:1});
 	this.setState({viewCompleted: 3});
     axios
       .get("/api/report/")
@@ -226,6 +229,7 @@ class App extends Component {
   
   getFilter = (val) => {
 	//this.state.viewCompleted = 4;
+	this.setState({currentPage:1});
 	this.setState({viewCompleted: 4});
     axios
       .get(`/api/location/filter/${val}`)
@@ -281,6 +285,7 @@ class App extends Component {
   
 
   displayCompleted = (status) => {
+	  this.setState({currentPage:1});
 	  this.refreshList();
 	return this.setState({ viewCompleted: status });
   };
