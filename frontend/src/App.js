@@ -146,11 +146,13 @@ class App extends Component {
 	}
     
     if (item.id) {
+		document.getElementById("error1").innerHTML = "";
       axios
         .put(`/api/players/${item.id}`, item)
         .then((res) => this.refreshList());
       return;
     }
+	document.getElementById("error1").innerHTML = "";
     axios
       .post("/api/players/", item)
       .then((res) => this.refreshList());
@@ -173,11 +175,13 @@ class App extends Component {
 		return;
 	}
     if (item.id) {
+	  document.getElementById("error1").innerHTML = "";
       axios
         .put(`/api/weapons/${item.id}`, item)
         .then((res) => this.refreshList());
       return;
     }
+	document.getElementById("error1").innerHTML = "";
     axios
       .post("/api/weapons/", item)
       .then((res) => this.refreshList());
@@ -489,7 +493,7 @@ class App extends Component {
           }`}
           title={item.name}
         >
-          {item.weapon_name}
+          {item.weapon_name + "/" + item.weapon_damage}
         </span>
 		<span>
           <button
@@ -521,7 +525,7 @@ class App extends Component {
           }`}
           title={item.name}
         >
-          {item.location_name}
+          {item.location_name "/" + item.nr_public_events}
         </span>
 		
 		<span>
