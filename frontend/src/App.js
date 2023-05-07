@@ -547,8 +547,8 @@ class App extends Component {
   render() {
     return (
       <main className="container">
-        <h1 className="text-white text-uppercase text-center my-4">Destiny Characters</h1>
-		<p id="error1"></p>
+        <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
+		<p id="error1" className="text-center"></p>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
