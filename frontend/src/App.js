@@ -231,7 +231,7 @@ class App extends Component {
     this.toggleLogin();
 	
     axios
-      .post("/api/register/", item)
+      .post("/api/api/register/", item)
       .then((res) => this.setState({authToken: res.data}));
 	  
 	document.getElementById("error1").innerHTML = this.state.authToken;
