@@ -430,6 +430,45 @@ class App extends Component {
         </thead>
 	  );
 	  }
+	  if(this.state.viewCompleted === 4){ //location filter
+	  return (
+	    <thead>
+	    <tr>
+		<th>Location Name</th>
+        <th>Enemy type</th>
+		<th>Minimum Level</th>
+		<th>Total Public Events</th>
+		<th>Total Lost Sectors</th>
+        </tr>
+        </thead>
+	  );
+	  }
+	  if(this.state.viewCompleted === 5){ //weapons
+	  return (
+	    <thead>
+	    <tr>
+		<th>Weapon Name</th>
+        <th>Weapon Slot</th>
+		<th>Weapon Element</th>
+		<th>Weapon Type</th>
+		<th>Weapon Damage</th>
+        </tr>
+        </thead>
+	  );
+	  }
+	  if(this.state.viewCompleted === 6){ //locations
+	  return (
+	    <thead>
+	    <tr>
+		<th>Location Name</th>
+        <th>Enemy type</th>
+		<th>Minimum Level</th>
+		<th>Total Public Events</th>
+		<th>Total Lost Sectors</th>
+        </tr>
+        </thead>
+	  );
+	  }
 	  
   };
 
