@@ -57,7 +57,7 @@ urlpatterns = [
     path('weapon_location/', location_weapon_list),
     path('weapon_location/<int:pk>', location_weapon_detail),
     path('report/', report1, name='report_player_avg_weapons'),
-    path('api/register', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('register/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
 ]
