@@ -483,6 +483,24 @@ class App extends Component {
 		  <td>{item.level}</td>
           <td>{item.glimmer}</td>
 		  <td>{item.shards}</td>
+		  <td>{item.nr_weapons}</td>
+		  
+		  <td>
+		  <span>
+          <button
+            className="btn btn-secondary mr-2"
+			onClick={() => this.editItem(item)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn btn-danger"
+			onClick={() => this.handleDelete(item)}
+          >
+            Delete
+          </button>
+          </span>
+		  </td>
     </tr>
 	
     ));
@@ -647,7 +665,8 @@ class App extends Component {
                       <th>Level</th>
 		              <th>Glimmer</th>
 		              <th>Shards</th>
-          
+					  <th>Total weapons</th>
+                      <th>Operations</th>
                       </tr>
                       </thead>
                <tbody>
@@ -656,8 +675,6 @@ class App extends Component {
                </Table>
         
 
-                
-				
 				<li>
 				{this.paginate()}
 				</li>
