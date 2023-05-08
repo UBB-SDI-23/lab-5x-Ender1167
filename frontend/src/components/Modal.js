@@ -260,5 +260,48 @@ export default class CustomModal extends Component {
     );
 		
 	}
+	if(this.state.modal_type ===3){
+		return (
+      <Modal isOpen={true} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Login</ModalHeader>
+        <ModalBody>
+          <Form>
+            <FormGroup>
+              <Label for="username">Username</Label>
+              <Input
+                type="text"
+                id="username"
+                name="username"
+                defaultValue={this.state.activeItem.username}
+				value={this.state.activeItem.username}
+                onChange={this.handleChange}
+                placeholder="Enter username"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="password">Password</Label>
+              <Input
+                type="text"
+                id="password"
+                name="password"
+                defaultValue={this.state.activeItem.password1}
+                onChange={this.handleChange}
+                placeholder="Enter slot"
+              />
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="success"
+            onClick={() => onSave(this.state.activeItem)}
+          >
+            Save
+          </Button>
+        </ModalFooter>
+      </Modal>
+    );
+		
+	}
   }
 }

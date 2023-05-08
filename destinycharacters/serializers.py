@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from rest_framework.pagination import PageNumberPagination
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Player
 from .models import Weapon
@@ -73,5 +75,13 @@ class PlayerMaxReport(serializers.ModelSerializer):
         model = Player
         fields = ['avg_weapon_dmg', 'name']
 
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['username'] = user.username
+        return token
 
 

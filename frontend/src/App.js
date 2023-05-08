@@ -33,6 +33,7 @@ class App extends Component {
 	  modal: false,
 	  modal_weapon: false,
 	  modal_location: false,
+	  modal_login: false,
 	  modal_type:0,
 	  
       activeItem: {
@@ -56,6 +57,10 @@ class App extends Component {
 		nr_public_events:0,
 		nr_lost_sectors:0,
       },
+	  activeLogin:{
+		  username: "",
+		  password1:"",
+	  },
 	  
     };
   }
@@ -135,6 +140,9 @@ class App extends Component {
   };
     toggleLocation = () => {
     this.setState({ modal_location: !this.state.modal_location });
+  };
+    toggleLogin = () => {
+    this.setState({ modal_login: !this.state.modal_login });
   };
 
   handleSubmit = (item) => {
@@ -216,6 +224,15 @@ class App extends Component {
       .post("/api/location/", item)
       .then((res) => this.refreshList());
   };
+  handleLogin = (item) => {
+    this.toggleLocation();
+	let errorMsg = "";
+	
+	document.getElementById("error1").innerHTML = "";
+    axios
+      .post("/api/register", item)
+      .then((res) => this.refreshList());
+  };
   
    getWeapons = () => {
 	   this.setState({currentPage:1});
@@ -286,6 +303,11 @@ class App extends Component {
     const item = { location_name: "", enemy_type: "", min_level: 0, nr_public_events: 0, nr_lost_sectors: 0 };
     
     this.setState({ activeLocation: item, modal_location: !this.state.modal_location, modal_type: 2 });
+  };
+  createLogin = () => {
+    const item = { username: "", password1: ""};
+    
+    this.setState({ activeLogin: item, modal_login: !this.state.modal_login, modal_type: 3 });
   };
 
   editItem = (item) => {
@@ -608,6 +630,12 @@ class App extends Component {
                 >
                   Add Location
                 </button>
+				<button
+                  className="btn btn-primary"
+				  onClick={this.createLogin}
+                >
+                  Login
+                </button>
 			   
               </div>
               {this.renderTabList()}
@@ -660,6 +688,14 @@ class App extends Component {
             activeItem={this.state.activeLocation}
             toggle={this.toggleLocation}
             onSave={this.handleSubmitLocation}
+          />
+        ) : null}
+		{this.state.modal_login ? (
+          <Modal
+		    modal_type={this.state.modal_type}
+            activeItem={this.state.activeLogin}
+            toggle={this.toggleLogin}
+            onSave={this.handleLogin}
           />
         ) : null}
 		

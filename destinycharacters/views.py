@@ -15,6 +15,9 @@ from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
+from .serializers import MyTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 class Player_Weapons(ListAPIView):
     queryset = Weapon.objects.all()
     serializer_class = WeaponSerializer_Detail
@@ -278,3 +281,11 @@ def report1(request):
         return paginator.get_paginated_response(serializer.data)
         #serializer = PlayerMaxReport(queryset, many=True)
         #return Response(serializer.data)
+
+
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+
