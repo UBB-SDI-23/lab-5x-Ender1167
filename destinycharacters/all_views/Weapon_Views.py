@@ -1,5 +1,6 @@
 from django.db.models import Avg
 
+from destinycharacters.paginators import StandardResultsSetPagination
 from destinycharacters_project.destinycharacters.models import Player, Weapon, Location, Location_Weapon
 from destinycharacters_project.destinycharacters.serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, WeaponSerializer_Detail
 from destinycharacters_project.destinycharacters.serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSerializer_No_Eq
@@ -14,8 +15,15 @@ def weapon_list(request):
     #read all
     if request.method == 'GET':
         weapons = Weapon.objects.all()
-        serializer = WeaponSerializer(weapons, many=True)
-        return Response(serializer.data)
+
+        paginator = StandardResultsSetPagination()
+        paginated_weapons = paginator.paginate_queryset(weapons, request)
+        serializer = WeaponSerializer(paginated_weapons, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
+
+        #serializer = WeaponSerializer(weapons, many=True)
+        #return Response(serializer.data)
 
     #create 1
     if request.method == 'POST':

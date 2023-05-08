@@ -146,11 +146,18 @@ def createLocationWeapons():
         f.write(sql + "\n")
     f.close()
 
+def createUser():
+    sqls = []
+
+    # generate fake data for players and create INSERT SQL statements
+    for j in range(10000):
+        sql_insert = "INSERT INTO destinycharacters_user_profile (drop_rate, wep_id, loc_id) VALUES"
 def main():
     #createPlayers()
     createWeapons()
     #createLocations()
     #createLocationWeapons()
+    createUser()
 
 if __name__ == '__main__':
     main()

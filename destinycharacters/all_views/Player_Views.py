@@ -1,6 +1,7 @@
 
-from django.db.models import Avg
+from django.db.models import Avg, Count
 
+from destinycharacters.paginators import StandardResultsSetPagination
 from destinycharacters_project.destinycharacters.models import Player, Weapon, Location, Location_Weapon
 from destinycharacters_project.destinycharacters.serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, WeaponSerializer_Detail
 from destinycharacters_project.destinycharacters.serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSerializer_No_Eq
@@ -24,9 +25,13 @@ class Player_Weapons(ListAPIView):
 def player_list(request):
     #read all
     if request.method == 'GET':
-        players = Player.objects.all()
-        serializer = PlayerSerializer(players, many=True)
-        return Response(serializer.data)
+        players = Player.objects.all().annotate(nr_weapons=Count('weapon__player_weapon'))
+
+        paginator = StandardResultsSetPagination()
+        paginated_players = paginator.paginate_queryset(players, request)
+        serializer = PlayerSerializer(paginated_players, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
 
     #create 1
     if request.method == 'POST':
