@@ -118,7 +118,13 @@ def validateMinLevel(value):
         )
 class Location(models.Model):
     enemy_default = 'Fallen'
-    ENEMY_CHOICES = ['Fallen', 'Scorn', 'Cabal', 'Vex', 'Taken']
+    ENEMY_CHOICES = [
+        ("Fallen", "Fallen"),
+        ("Scorn", "Scorn"),
+        ("Cabal", "Cabal"),
+        ("Vex", "Vex"),
+        ("Taken", "Taken")
+    ]
 
     location_name = models.CharField(max_length=200)
     enemy_type = models.CharField(max_length=200, choices=ENEMY_CHOICES, default=enemy_default)
