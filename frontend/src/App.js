@@ -453,6 +453,7 @@ class App extends Component {
 		<th>Weapon Element</th>
 		<th>Weapon Type</th>
 		<th>Weapon Damage</th>
+		<th>Operations</th>
         </tr>
         </thead>
 	  );
