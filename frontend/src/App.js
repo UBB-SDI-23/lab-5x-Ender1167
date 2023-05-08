@@ -316,6 +316,9 @@ class App extends Component {
   editItem = (item) => {
     this.setState({ activeItem: item, modal: !this.state.modal , modal_type: 0});
   };
+  handleProfile = (item) => {
+    this.setState({ activeLogin: item, modal_login: !this.state.modal_login , modal_type: 3});
+  };
   
   editWeapon = (item) => {
     this.setState({ activeWeapon: item, modal_weapon: !this.state.modal_weapon, modal_type: 1 });
@@ -330,6 +333,11 @@ class App extends Component {
 	  this.setState({currentPage:1});
 	  this.refreshList();
 	return this.setState({ viewCompleted: status });
+  };
+  
+    handleProfilePage = (e) => {
+    e.preventDefault();
+    console.log('The link was clicked.');
   };
   
   paginationHandler=(pg)=>{ 
@@ -463,7 +471,7 @@ class App extends Component {
 	if(viewCompleted === 6){
 		newItems = this.state.locations;
 	}
-	
+	let item_creator = "admin"
 	if(viewCompleted !== 3 && viewCompleted !== 4 && viewCompleted !== 5 && viewCompleted !== 6){ 
     return newItems.map((item) => (
       <li
@@ -473,8 +481,11 @@ class App extends Component {
         <span
           title={item.name}
         >
-          {item.name + "/" + item.class1 + "/" + item.nr_weapons}
+          {item.name + "/" + item.class1 + "/ Number of weapon: " + item.nr_weapons}
         </span>
+		<a href="#" onClick={this.handleProfile(item)}>
+			{item_creator}
+        </a>
         <span>
           <button
             className="btn btn-secondary mr-2"
