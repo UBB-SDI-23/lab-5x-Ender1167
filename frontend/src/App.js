@@ -228,7 +228,7 @@ class App extends Component {
     this.toggleLocation();
 	let errorMsg = "";
 	
-	document.getElementById("error1").innerHTML = "";
+	document.getElementById("error1").innerHTML = errorMsg;
     axios
       .post("/api/register", item)
       .then((res) => this.refreshList());
