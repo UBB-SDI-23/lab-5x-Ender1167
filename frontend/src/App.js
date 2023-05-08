@@ -225,7 +225,7 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
   handleLogin = (item) => {
-    this.toggleLocation();
+    this.toggleLogin();
 	let errorMsg = "";
 	
 	document.getElementById("error1").innerHTML = errorMsg;
