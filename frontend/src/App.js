@@ -476,7 +476,14 @@ class App extends Component {
 	const item_creator_obj = { username: item_creator, password1: item_creator};
 	if(viewCompleted !== 3 && viewCompleted !== 4 && viewCompleted !== 5 && viewCompleted !== 6){ 
     return newItems.map((item) => (
-      <li
+	<tr>
+          <td>{item.name}</td>
+          <td>{item.class1}</td>
+		  <td>{item.level}</td>
+          <td>{item.glimmer}</td>
+		  <td>{item.shards}</td>
+    </tr>
+	{/*<li
         key={item.id}
         className="list-group-item d-flex justify-content-between align-items-center"
       >
@@ -505,7 +512,8 @@ class App extends Component {
             Delete
           </button>
         </span>
-      </li>
+	</li>*/}
+	
     ));
 	}
 	else{ 
@@ -660,7 +668,24 @@ class App extends Component {
               {this.renderTabList()}
 			  
               <ul className="list-group list-group-flush border-top-0">
-                {this.renderItems()}
+			  	<Table striped bordered hover>
+				      <thead>
+					  <tr>
+					  <th>Name</th>
+                      <th>Class</th>
+                      <th>Level</th>
+		              <th>Glimmer</th>
+		              <th>Shards</th>
+          
+                      </tr>
+                      </thead>
+               <tbody>
+	           {this.renderItems()}
+                </tbody>
+               </Table>
+        
+
+                
 				
 				<li>
 				{this.paginate()}
