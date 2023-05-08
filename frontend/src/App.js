@@ -232,7 +232,7 @@ class App extends Component {
 	
     axios
       .post("/api/register/", item)
-      .then((res) => this.setState({authToken: res.data.token}));
+      .then((res) => this.setState({authToken: res.data.JSON()}));
 	  
 	document.getElementById("error1").innerHTML = this.state.authToken;
   };

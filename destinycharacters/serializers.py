@@ -7,6 +7,7 @@ from .models import Player
 from .models import Weapon
 from .models import Location
 from .models import Location_Weapon
+from .models import *
 from drf_writable_nested import WritableNestedModelSerializer
 
 class WeaponSerializer(serializers.ModelSerializer):
@@ -75,6 +76,18 @@ class PlayerMaxReport(serializers.ModelSerializer):
         model = Player
         fields = ['avg_weapon_dmg', 'name']
 
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False, read_only=True)
+    class Meta:
+        model = UserProfile
+        fields = ('user', 'bio', 'location', 'age', 'gender', 'marital_status')
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

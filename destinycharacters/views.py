@@ -1,11 +1,13 @@
 from dataclasses import dataclass
 
 from django.db.models import Avg, Count
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Player, Weapon, Location, Location_Weapon
-from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, WeaponSerializer_Detail
+from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, \
+    WeaponSerializer_Detail, ProfileSerializer
 from .serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSerializer_No_Eq
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 from rest_framework import status
@@ -282,8 +284,13 @@ def report1(request):
         #serializer = PlayerMaxReport(queryset, many=True)
         #return Response(serializer.data)
 
-
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_profile(request):
+    user = request.user
+    profile = user.profile
+    serializer = ProfileSerializer(profile, many=False)
+    return Response(serializer.data)
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
