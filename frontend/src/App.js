@@ -61,6 +61,7 @@ class App extends Component {
 		  username: "",
 		  password1:"",
 	  },
+	  authToken:"",
 	  
     };
   }
@@ -226,13 +227,15 @@ class App extends Component {
   };
   handleLogin = (item) => {
     this.toggleLogin();
-	let errorMsg = "";
 	
-	document.getElementById("error1").innerHTML = errorMsg;
     axios
       .post("/api/register/", item)
-      .then((res) => this.refreshList());
+      .then((res) => this.setState({authToken: res.data}));
+	  
+	document.getElementById("error1").innerHTML = this.state.authToken;
   };
+  
+  
   
    getWeapons = () => {
 	   this.setState({currentPage:1});
