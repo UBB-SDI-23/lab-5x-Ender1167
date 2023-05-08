@@ -27,7 +27,7 @@ class UserProfile(models.Model):
         ("Female", "Female")
     ]
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True, null=True)
     location = models.CharField(max_length=30, blank=True, null=True)
     age = models.IntegerField(validators=[validateAge], null=True)
