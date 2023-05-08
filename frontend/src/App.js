@@ -230,7 +230,7 @@ class App extends Component {
 	
 	document.getElementById("error1").innerHTML = errorMsg;
     axios
-      .post("/api/register", item)
+      .post("/api/register/", item)
       .then((res) => this.refreshList());
   };
   
