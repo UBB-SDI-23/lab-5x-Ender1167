@@ -2,6 +2,7 @@
 import './App.css';
 import Modal from "./components/Modal";
 import React, { Component } from "react";
+import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import {
   FormGroup,
