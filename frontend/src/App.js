@@ -439,6 +439,7 @@ class App extends Component {
 		<th>Minimum Level</th>
 		<th>Total Public Events</th>
 		<th>Total Lost Sectors</th>
+		<th>Operations</th>
         </tr>
         </thead>
 	  );
@@ -465,6 +466,7 @@ class App extends Component {
 		<th>Minimum Level</th>
 		<th>Total Public Events</th>
 		<th>Total Lost Sectors</th>
+		<th>Operations</th>
         </tr>
         </thead>
 	  );
