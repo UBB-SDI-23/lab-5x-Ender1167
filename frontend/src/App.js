@@ -472,6 +472,7 @@ class App extends Component {
 		newItems = this.state.locations;
 	}
 	let item_creator = "admin"
+	const item_creator_obj = { username: item_creator, password1: item_creator};
 	if(viewCompleted !== 3 && viewCompleted !== 4 && viewCompleted !== 5 && viewCompleted !== 6){ 
     return newItems.map((item) => (
       <li
@@ -483,9 +484,12 @@ class App extends Component {
         >
           {item.name + "/" + item.class1 + "/ Number of weapon: " + item.nr_weapons}
         </span>
-		<a href="/#" onClick={this.handleProfile(item)}>
-			{item_creator}
-        </a>
+		<button
+            className="btn btn-secondary mr-2"
+			onClick={() => this.handleProfile(item_creator_obj)}
+          >
+		  {item_creator}
+          </button>
         <span>
           <button
             className="btn btn-secondary mr-2"
