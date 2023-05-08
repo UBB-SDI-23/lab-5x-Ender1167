@@ -483,36 +483,6 @@ class App extends Component {
           <td>{item.glimmer}</td>
 		  <td>{item.shards}</td>
     </tr>
-	{/*<li
-        key={item.id}
-        className="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <span
-          title={item.name}
-        >
-          {item.name + "/" + item.class1 + "/ Number of weapons: " + item.nr_weapons}
-        </span>
-		<button
-            className="btn btn-secondary mr-2"
-			onClick={() => this.handleProfile(item_creator_obj)}
-          >
-		  {item_creator}
-          </button>
-        <span>
-          <button
-            className="btn btn-secondary mr-2"
-			onClick={() => this.editItem(item)}
-          >
-            Edit
-          </button>
-          <button
-            className="btn btn-danger"
-			onClick={() => this.handleDelete(item)}
-          >
-            Delete
-          </button>
-        </span>
-	</li>*/}
 	
     ));
 	}
