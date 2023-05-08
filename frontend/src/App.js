@@ -34,6 +34,7 @@ class App extends Component {
 	  modal_weapon: false,
 	  modal_location: false,
 	  modal_login: false,
+	  modal_view: false,
 	  modal_type:0,
 	  
       activeItem: {
@@ -317,7 +318,7 @@ class App extends Component {
     this.setState({ activeItem: item, modal: !this.state.modal , modal_type: 0});
   };
   handleProfile = (item) => {
-    this.setState({ activeLogin: item, modal_login: !this.state.modal_login , modal_type: 3});
+    this.setState({ activeLogin: item, modal_login: !this.state.modal_login , modal_type: 4});
   };
   
   editWeapon = (item) => {
