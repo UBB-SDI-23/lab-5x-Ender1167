@@ -403,6 +403,25 @@ class App extends Component {
 	  console.log(error);
   }
   }
+  
+  renderTables = () => {
+	  if(this.state.viewCompleted === 1 || this.state.viewCompleted === 2){
+	  return (
+	    <thead>
+	    <tr>
+		<th>Name</th>
+        <th>Class</th>
+        <th>Level</th>
+		<th>Glimmer</th>
+		<th>Shards</th>
+        <th>Total weapons</th>
+        <th>Operations</th>
+        </tr>
+        </thead>
+	  );
+	  }
+	  
+  };
 
   renderTabList = () => {
     return (
@@ -657,18 +676,8 @@ class App extends Component {
               {this.renderTabList()}
 			  
               <ul className="list-group list-group-flush border-top-0">
-			  	<Table striped bordered hover>
-				      <thead>
-					  <tr>
-					  <th>Name</th>
-                      <th>Class</th>
-                      <th>Level</th>
-		              <th>Glimmer</th>
-		              <th>Shards</th>
-					  <th>Total weapons</th>
-                      <th>Operations</th>
-                      </tr>
-                      </thead>
+			  <Table striped bordered hover>
+			  {this.renderTables()}
                <tbody>
 	           {this.renderItems()}
                 </tbody>
