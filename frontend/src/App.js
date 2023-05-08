@@ -483,7 +483,7 @@ class App extends Component {
         <span
           title={item.name}
         >
-          {item.name + "/" + item.class1 + "/ Number of weapon: " + item.nr_weapons}
+          {item.name + "/" + item.class1 + "/ Number of weapons: " + item.nr_weapons}
         </span>
 		<button
             className="btn btn-secondary mr-2"
