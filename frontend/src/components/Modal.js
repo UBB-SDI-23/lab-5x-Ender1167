@@ -306,7 +306,7 @@ export default class CustomModal extends Component {
 		if(this.state.modal_type === 4){
 		return (
       <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Login</ModalHeader>
+        <ModalHeader toggle={toggle}>View</ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
@@ -329,7 +329,7 @@ export default class CustomModal extends Component {
                 name="password"
                 defaultValue={this.state.activeItem.password1}
                 onChange={this.handleChange}
-                placeholder="Enter slot"
+                placeholder="Enter password"
               />
             </FormGroup>
           </Form>
