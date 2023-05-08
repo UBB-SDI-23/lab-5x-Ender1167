@@ -405,7 +405,7 @@ class App extends Component {
   }
   
   renderTables = () => {
-	  if(this.state.viewCompleted === 1 || this.state.viewCompleted === 2){
+	  if(this.state.viewCompleted === 1 || this.state.viewCompleted === 2){ //player
 	  return (
 	    <thead>
 	    <tr>
@@ -416,6 +416,16 @@ class App extends Component {
 		<th>Shards</th>
         <th>Total weapons</th>
         <th>Operations</th>
+        </tr>
+        </thead>
+	  );
+	  }
+	  if(this.state.viewCompleted === 3){ //report
+	  return (
+	    <thead>
+	    <tr>
+		<th>Name</th>
+        <th>Average weapon damage</th>
         </tr>
         </thead>
 	  );
@@ -527,54 +537,39 @@ class App extends Component {
 	else{ 
 	if(viewCompleted === 3){ 
 		 return newItems.map((item) => (
-      <li
-        key={item.id}
-        className="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <span
-          className={`todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
-          }`}
-          title={item.name}
-        >
-          {item.name + "/" + item.avg_weapon_dmg}
-        </span>
-      </li>
+		 
+		 <tr>
+          <td>{item.name}</td>
+          <td>{item.avg_weapon_dmg}</td>
+        </tr>
     ));
 	}
-	if(viewCompleted === 4){
-				 return newItems.map((item) => (
-      <li
-        key={item.id}
-        className="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <span
-          className={`todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
-          }`}
-          title={item.name}
-        >
-          {item.location_name}
-        </span>
-      </li>
+	if(viewCompleted === 4){ //filter location
+	return newItems.map((item) => (
+		  <tr>
+          <td>{item.location_name}</td>
+          <td>{item.enemy_type}</td>
+		  <td>{item.min_level}</td>
+          <td>{item.nr_public_events}</td>
+		  <td>{item.nr_lost_sectors}</td>
+		
+    </tr>
+
     ));
 	}
 	
 	if(viewCompleted === 5){ //weapons
 				 return newItems.map((item) => (
-      <li
-        key={item.id}
-        className="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <span
-          className={`todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
-          }`}
-          title={item.name}
-        >
-          {item.weapon_name + "/" + item.weapon_damage}
-        </span>
-		<span>
+				 
+		  <tr>
+          <td>{item.weapon_name}</td>
+          <td>{item.weapon_slot}</td>
+		  <td>{item.weapon_element}</td>
+          <td>{item.weapon_type}</td>
+		  <td>{item.weapon_damage}</td>
+		  
+		  <td>
+		  <span>
           <button
             className="btn btn-secondary mr-2"
 			onClick={() => this.editWeapon(item)}
@@ -587,27 +582,22 @@ class App extends Component {
           >
             Delete
           </button>
-        </span>
-		
-      </li>
+          </span>
+		  </td>
+    </tr>
     ));
 	}
 	if(viewCompleted === 6){ //locations
 				 return newItems.map((item) => (
-      <li
-        key={item.id}
-        className="list-group-item d-flex justify-content-between align-items-center"
-      >
-        <span
-          className={`todo-title mr-2 ${
-            this.state.viewCompleted ? "completed-todo" : ""
-          }`}
-          title={item.name}
-        >
-          {item.location_name + "/" + item.nr_public_events}
-        </span>
-		
-		<span>
+      		  <tr>
+          <td>{item.location_name}</td>
+          <td>{item.enemy_type}</td>
+		  <td>{item.min_level}</td>
+          <td>{item.nr_public_events}</td>
+		  <td>{item.nr_lost_sectors}</td>
+		  
+		  <td>
+		  <span>
           <button
             className="btn btn-secondary mr-2"
 			onClick={() => this.editLocation(item)}
@@ -620,8 +610,9 @@ class App extends Component {
           >
             Delete
           </button>
-        </span>
-      </li>
+          </span>
+		  </td>
+    </tr>
     ));
 	}
 
