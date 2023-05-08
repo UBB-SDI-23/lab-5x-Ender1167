@@ -474,7 +474,7 @@ class App extends Component {
 		newItems = this.state.locations;
 	}
 	let item_creator = "admin"
-	const item_creator_obj = { username: item_creator, password1: item_creator};
+	//const item_creator_obj = { username: item_creator, password1: item_creator};
 	if(viewCompleted !== 3 && viewCompleted !== 4 && viewCompleted !== 5 && viewCompleted !== 6){ 
     return newItems.map((item) => (
 	<tr>
