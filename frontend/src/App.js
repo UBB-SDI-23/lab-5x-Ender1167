@@ -483,7 +483,7 @@ class App extends Component {
         >
           {item.name + "/" + item.class1 + "/ Number of weapon: " + item.nr_weapons}
         </span>
-		<a href="#" onClick={this.handleProfile(item)}>
+		<a href="/#" onClick={this.handleProfile(item)}>
 			{item_creator}
         </a>
         <span>
