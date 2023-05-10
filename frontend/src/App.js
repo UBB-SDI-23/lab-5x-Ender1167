@@ -662,12 +662,6 @@ class App extends Component {
   render() {
     return (
       <main className="container">
-	  		   <button
-                  className="position-absolute top-50 start-50"
-				  onClick={this.createLogin}
-                >
-                  Login
-                </button>
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
 		<p id="error1" className="text-center"></p>
         <div className="row">
@@ -702,6 +696,12 @@ class App extends Component {
 				  onClick={this.createLocation}
                 >
                   Add Location
+                </button>
+			    <button
+                  className="btn btn-primary"
+				  onClick={this.createLogin}
+                >
+                  Login
                 </button>
 			   
               </div>
