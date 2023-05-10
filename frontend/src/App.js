@@ -581,7 +581,7 @@ class App extends Component {
 		 
 		 <tr>
           <td>{item.name}</td>
-          <td>{item.avg_weapon_dmg}</td>
+          <td>{item.avg_weapon_dmg !== null ? item.avg_weapon_dmg : "No weapons"}</td>
         </tr>
     ));
 	}
