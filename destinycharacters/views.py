@@ -34,7 +34,7 @@ class Player_Weapons(ListAPIView):
 def player_list(request):
     #read all
     if request.method == 'GET':
-        players = Player.objects.all().annotate(nr_weapons=Count('weapon__player_weapon'))
+        players = Player.objects.annotate(nr_weapons=Count('weapon__player_weapon')).order_by('id')
 
         paginator = StandardResultsSetPagination()
         paginated_players = paginator.paginate_queryset(players, request)
