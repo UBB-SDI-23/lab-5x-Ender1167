@@ -37,8 +37,6 @@ def player_list(request):
         players = Player.objects.all().annotate(nr_weapons=Count('weapon__player_weapon'))
 
         paginator = StandardResultsSetPagination()
-        page_number = request.GET.get("page")
-        page_obj = paginator.get_page(page_number)
         paginated_players = paginator.paginate_queryset(players, request)
         serializer = PlayerSerializer(paginated_players, many=True)
 
