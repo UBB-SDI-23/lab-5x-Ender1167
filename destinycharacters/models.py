@@ -85,7 +85,7 @@ class Weapon(models.Model):
     weapon_type = models.CharField(max_length=200)
     weapon_damage = models.IntegerField()
     weapon_description = models.TextField(blank=True, null=True)
-    player_weapon = models.ForeignKey(Player, on_delete=models.CASCADE, default=None)
+    player_weapon = models.ForeignKey(Player, on_delete=models.CASCADE, default=None, related_name='wep1')
 
     def __unicode__(self):
         return self.weapon_name
