@@ -8,6 +8,5 @@ class StandardResultsSetPagination(PageNumberPagination):
 
     @cached_property
     def count(self):
-        # only select 'id' for counting, much cheaper
-        return self.object_list.values('id').count()
+        return 9999999999
 
