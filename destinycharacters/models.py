@@ -150,3 +150,24 @@ class CustomUserManager(BaseUserManager):
 
 
 
+class UserProfile(AbstractUser):
+    not_married = "Not married"
+    MALE = "Male"
+    FEMALE = "Female"
+    MARITAL_CHOICES = [
+        ("Married", "Married"),
+        ("Not married", "Not married")
+    ]
+    GENDER_CHOICES = [
+        (MALE, "Male"),
+        (FEMALE, "Female")
+    ]
+
+    #user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True, null=True)
+    location = models.CharField(max_length=30, blank=True, null=True)
+    age = models.IntegerField(validators=[validateAge], null=True)
+    gender = models.CharField(max_length=30, choices=GENDER_CHOICES, default=MALE, blank=True, null=True)
+    marital_status = models.CharField(max_length=30, choices=MARITAL_CHOICES, default=not_married, blank=True, null=True)
+
+    object = CustomUserManager()
