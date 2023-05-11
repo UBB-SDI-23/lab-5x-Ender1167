@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.pagination import PageNumberPagination
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import Player
@@ -9,6 +10,8 @@ from .models import Location
 from .models import Location_Weapon
 from .models import *
 from drf_writable_nested import WritableNestedModelSerializer
+import datetime
+from datetime import date
 
 class WeaponSerializer(serializers.ModelSerializer):
     class Meta:
@@ -95,6 +98,59 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
         token['username'] = user.username
+        token['password'] = user.password
         return token
+
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(max_length=50, min_length=4)
+    password = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+    def validate(self, args):
+        username = args.get('username', None)
+        if User.objects.filter(username=username).exists():
+            raise serializers.ValidationError('Username already exists!')
+        return super().validate(args)
+
+    def validate_password(self,value):
+        """
+        Validate that a password meets certain complexity requirements:
+        - at least 8 characters long
+        - contains at least one uppercase letter
+        - contains at least one lowercase letter
+        - contains at least one digit
+        - contains at least one special character
+        """
+        if len(value) < 8:
+            raise serializers.ValidationError("The password must be at least 8 characters long.")
+        if not any(char.isupper() for char in value):
+            raise serializers.ValidationError("The password must contain at least one uppercase letter.")
+        if not any(char.islower() for char in value):
+            raise serializers.ValidationError("The password must contain at least one lowercase letter.")
+        if not any(char.isdigit() for char in value):
+            raise serializers.ValidationError("The password must contain at least one digit.")
+        if not any(char in ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', ':', ';', '"', "'", '<', '>', ',', '.', '?', '/'] for char in value):
+            raise serializers.ValidationError("The password must contain at least one special character.")
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data["username"],
+            password=validated_data["password"],
+        )
+        refresh = RefreshToken.for_user(user)
+
+        # Create and store confirmation code for email verification
+        user.confirmation_code = str(refresh.access_token)
+        user.code_expires_at = datetime.datetime.now() + datetime.timedelta(minutes=60)
+
+        user.save()
+
+
+        return user
+        #return User.objects.create_user(**validated_data)
 
 

@@ -1,3 +1,4 @@
+from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from rest_framework import status
 from rest_framework.response import Response
@@ -6,6 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser
 
 def validateAge(value):
     if value < 0:
@@ -14,24 +16,46 @@ def validateAge(value):
             params={"value": value},
         )
 
+class CustomUserManager(BaseUserManager):
+    def create_user(self, username, password, **extra_fields):
+        """
+        Creates and saves a User with the given username and password.
+        """
+        if not username:
+            raise ValueError('The Username field must be set')
 
-class UserProfile(models.Model):
+        user = self.model(username=username, **extra_fields)
+        user.set_password(password)
+        print(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, password=None, **extra_fields):
+        """
+        Creates and saves a superuser with the given username and password.
+        """
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self.create_user(username, password, **extra_fields)
+
+class UserProfile(AbstractUser):
     not_married = "Not married"
-    male = "Male"
+    MALE = "Male"
+    FEMALE = "Female"
     MARITAL_CHOICES = [
         ("Married", "Married"),
         ("Not married", "Not married")
     ]
     GENDER_CHOICES = [
-        ("Male", "Male"),
-        ("Female", "Female")
+        (MALE, "Male"),
+        (FEMALE, "Female")
     ]
 
-    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    #user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True, null=True)
     location = models.CharField(max_length=30, blank=True, null=True)
     age = models.IntegerField(validators=[validateAge], null=True)
-    gender = models.CharField(max_length=30, choices=GENDER_CHOICES, default=male, blank=True, null=True)
+    gender = models.CharField(max_length=30, choices=GENDER_CHOICES, default=MALE, blank=True, null=True)
     marital_status = models.CharField(max_length=30, choices=MARITAL_CHOICES, default=not_married, blank=True, null=True)
 
 class Player(models.Model):

@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
 from django.db.models import Avg, Count
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.views import APIView
 
 from .models import Player, Weapon, Location, Location_Weapon
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, \
@@ -281,8 +282,6 @@ def report1(request):
         serializer = PlayerMaxReport(paginated_report, many=True)
 
         return paginator.get_paginated_response(serializer.data)
-        #serializer = PlayerMaxReport(queryset, many=True)
-        #return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -294,5 +293,4 @@ def get_profile(request):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-
 
