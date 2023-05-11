@@ -5,9 +5,6 @@ import React, { Component } from "react";
 import Table from 'react-bootstrap/Table';
 import axios from "axios";
 
-import { createContext, useState } from 'react'
-const AuthContext = createContext()
-
 import {
   FormGroup,
   Input,
