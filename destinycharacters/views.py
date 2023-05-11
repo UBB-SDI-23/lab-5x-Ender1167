@@ -11,7 +11,7 @@ from .serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSeria
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
-from rest_framework import status, generics
+from rest_framework import status, generics, permissions
 from .paginators import StandardResultsSetPagination
 from django.views.generic import ListView
 
@@ -303,6 +303,18 @@ class RegisterApi(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response({
-            "user": UserSerializer(user,    context=self.get_serializer_context()).data,
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully.  Now perform Login to get your token",
         })
+
+class RegisterFromToken(APIView):
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def post(self, request, format=None):
+        token_user_username = request.user.username
+        token_user_password = request.user.password
+        data1 = {}
+        data1["username"] = token_user_username
+        data1["password"] = token_user_password
+        serializer = RegisterSerializer(data=data1)
+
