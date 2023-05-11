@@ -230,6 +230,7 @@ class App extends Component {
   handleLogin = (item) => {
     this.toggleLogin();
 	
+	console.log(item.username + "," + item.password1);
     axios
       .post("/api/register/", item)
       .then((res) => this.setState({authToken: res.data.access}));
