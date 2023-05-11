@@ -265,7 +265,7 @@ class App extends Component {
 	console.log(item.username + "," + item.password);
     await axios
       .post("/api/token/register/", item)
-      .then((res) => this.setState({authToken: res.data.user.username}));
+      .then((res) => this.setState({authToken: res.data.access}));
 	  
 	console.log(this.state.authToken)
 	document.getElementById("error1").innerHTML = this.state.authToken;
