@@ -351,7 +351,7 @@ class App extends Component {
   createRegister = () => {
     const item = { username: "", password: ""};
     
-    this.setState({ activeRegister: item, modal_login: !this.state.modal_login, modal_type: 3 });
+    this.setState({ activeRegister: item, modal_register: !this.state.modal_register, modal_type: 3 });
   };
 
   editItem = (item) => {
@@ -808,6 +808,14 @@ class App extends Component {
             onSave={this.handleSubmitLocation}
           />
         ) : null}
+	    {this.state.modal_login ? (
+          <Modal
+		    modal_type={this.state.modal_type}
+            activeItem={this.state.activeLogin}
+            toggle={this.toggleLogin}
+            onSave={this.handleLogin}
+          />
+        ) : null}
 		{this.state.modal_register ? (
           <Modal
 		    modal_type={this.state.modal_type}
@@ -816,7 +824,6 @@ class App extends Component {
             onSave={this.handleRegister}
           />
         ) : null}
-		
       </main>
     );
   }
