@@ -233,7 +233,7 @@ class App extends Component {
     axios
       .post("/api/register/", item)
       .then((res) => this.setState({authToken: res.data.access}));
-	console.log(authToken)
+	console.log(this.state.authToken)
 	document.getElementById("error1").innerHTML = this.state.authToken;
   };
   
