@@ -744,7 +744,7 @@ class App extends Component {
                 </button>
 				<button
                   className="btn btn-primary"
-				  onClick={this.createLogin}
+				  onClick={this.createRegister}
                 >
                   Register
                 </button>
