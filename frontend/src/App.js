@@ -262,6 +262,11 @@ class App extends Component {
 	//let [user, setUser] = useState(null)
     //let [authTokens, setAuthTokens] = useState(null)
 	console.log(item.username + "," + item.password);
+	axios.interceptors.response.use(x => { 
+	console.log(x);
+	return x;
+	});
+	
     await axios
       .post("/api/register/", item)
 	  .then((res) => this.setState({authToken: res.data.access}));
