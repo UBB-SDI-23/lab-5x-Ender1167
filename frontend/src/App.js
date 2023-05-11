@@ -311,7 +311,7 @@ class App extends Component {
     this.setState({ activeLocation: item, modal_location: !this.state.modal_location, modal_type: 2 });
   };
   createLogin = () => {
-    const item = { username: "", password1: ""};
+    const item = { username: "", password: ""};
     
     this.setState({ activeLogin: item, modal_login: !this.state.modal_login, modal_type: 3 });
   };

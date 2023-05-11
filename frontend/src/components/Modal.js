@@ -286,7 +286,7 @@ export default class CustomModal extends Component {
                 name="password"
                 defaultValue={this.state.activeItem.password}
                 onChange={this.handleChange}
-                placeholder="Enter slot"
+                placeholder="Enter password"
               />
             </FormGroup>
           </Form>
