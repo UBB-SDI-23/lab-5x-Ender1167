@@ -149,7 +149,7 @@ class CustomUserManager(BaseUserManager):
 
 
 
-class UserProfile(AbstractUser):
+class UserProfile(models.Model):
     not_married = "Not married"
     MALE = "Male"
     FEMALE = "Female"
