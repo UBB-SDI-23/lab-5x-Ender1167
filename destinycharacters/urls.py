@@ -59,6 +59,5 @@ urlpatterns = [
     path('report/', report1, name='report_player_avg_weapons'),
     path('register/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('profile/', get_profile),
-
+    #path('profile/', get_profile),
 ]
