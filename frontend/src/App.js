@@ -812,8 +812,8 @@ class App extends Component {
           <Modal
 		    modal_type={this.state.modal_type}
             activeItem={this.state.activeRegister}
-            toggle={this.toggleLogin}
-            onSave={this.handleLogin}
+            toggle={this.toggleRegister}
+            onSave={this.handleRegister}
           />
         ) : null}
 		
