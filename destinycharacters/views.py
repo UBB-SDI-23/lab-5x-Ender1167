@@ -21,6 +21,7 @@ from django.shortcuts import render
 
 from .serializers import MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class Player_Weapons(ListAPIView):
     queryset = Weapon.objects.all()
@@ -304,9 +305,13 @@ class RegisterApi(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         user.is_active = False
+
+        refresh = RefreshToken.for_user(user)
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully.  Now perform Login to get your token",
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
         })
 
 class RegisterFromToken(APIView):
