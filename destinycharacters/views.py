@@ -15,6 +15,7 @@ from rest_framework import status, generics, permissions
 from .paginators import StandardResultsSetPagination
 from django.views.generic import ListView
 
+from django.contrib.auth import authenticate
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
@@ -302,6 +303,7 @@ class RegisterApi(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        user.is_active = False
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully.  Now perform Login to get your token",
@@ -313,8 +315,23 @@ class RegisterFromToken(APIView):
     def post(self, request, format=None):
         token_user_username = request.user.username
         token_user_password = request.user.password
+        user = authenticate(username=token_user_username, password=token_user_password)
+        if user.is_active == False:
+            user.is_active = True
+            user.save()
+        else:
+            return Response({
+                "message": "Activation for" + token_user_username + " with password " + token_user_password + " failed",
+            })
+
+
+        ''' 
         data1 = {}
         data1["username"] = token_user_username
         data1["password"] = token_user_password
         serializer = RegisterSerializer(data=data1)
+        
+        '''
+
+
 

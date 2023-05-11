@@ -261,12 +261,14 @@ class App extends Component {
     this.toggleRegister();
 	//let [user, setUser] = useState(null)
     //let [authTokens, setAuthTokens] = useState(null)
-
+    let t1 = "";
 	console.log(item.username + "," + item.password);
     await axios
+      .post("/api/register/", item);
+	await axios
       .post("/api/token/register/", item)
       .then((res) => this.setState({authToken: res.data.access}));
-	    await axios
+    await axios
       .post("/api/token/register/", item)
       .then((res) => this.setState({authToken: res.data.access}));
 	  
