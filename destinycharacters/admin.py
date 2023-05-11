@@ -3,10 +3,16 @@ from .models import Player
 from .models import Weapon
 from .models import Location
 from .models import Location_Weapon
-#from .models import UserProfile
+from .models import UserProfile
 
 admin.site.register(Player)
 admin.site.register(Weapon)
 admin.site.register(Location)
 admin.site.register(Location_Weapon)
 #admin.site.register(UserProfile)
+
+# Register your models here.
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'bio', 'location', 'age', 'gender', 'marital_status')
+
+admin.site.register(UserProfile, ProfileAdmin)
