@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from rest_framework import serializers
 from rest_framework.pagination import PageNumberPagination
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -12,6 +13,7 @@ from .models import *
 from drf_writable_nested import WritableNestedModelSerializer
 import datetime
 from datetime import date
+from rest_framework.exceptions import AuthenticationFailed
 
 class WeaponSerializer(serializers.ModelSerializer):
     class Meta:
@@ -78,7 +80,6 @@ class PlayerMaxReport(serializers.ModelSerializer):
     class Meta:
         model = Player
         fields = ['avg_weapon_dmg', 'name']
-
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -153,5 +154,30 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
         return user
         #return User.objects.create_user(**validated_data)
+
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, attrs):
+        username = attrs.get("username")
+        password = attrs.get("password")
+
+        if username and password:
+            user = authenticate(username=username, password=password)
+
+            if not user:
+                raise AuthenticationFailed("Invalid credentials")
+
+            if not user.is_active:
+                raise AuthenticationFailed("User is inactive")
+
+            refresh = RefreshToken.for_user(user)
+            return {
+                "access_token": str(refresh.access_token),
+                "refresh_token": str(refresh),
+            }
+        else:
+            raise AuthenticationFailed("Must include username and password")
 
 
