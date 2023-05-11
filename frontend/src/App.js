@@ -232,8 +232,8 @@ class App extends Component {
   handleLogin = async(item) => {
 
     this.toggleLogin();
-	let [user, setUser] = useState(null)
-    let [authTokens, setAuthTokens] = useState(null)
+	//let [user, setUser] = useState(null)
+    //let [authTokens, setAuthTokens] = useState(null)
 
 	console.log(item.username + "," + item.password);
     const response = await axios
