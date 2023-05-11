@@ -36,6 +36,7 @@ class App extends Component {
 	  modal_weapon: false,
 	  modal_location: false,
 	  modal_login: false,
+	  modal_register: false,
 	  modal_view: false,
 	  modal_type:0,
 	  
@@ -62,6 +63,10 @@ class App extends Component {
 		nr_lost_sectors:0,
       },
 	  activeLogin:{
+		  username: "",
+		  password:"",
+	  },
+	  activeRegister:{
 		  username: "",
 		  password:"",
 	  },
@@ -148,6 +153,9 @@ class App extends Component {
   };
     toggleLogin = () => {
     this.setState({ modal_login: !this.state.modal_login });
+  };
+    toggleRegister = () => {
+    this.setState({ modal_register: !this.state.modal_register });
   };
 
   handleSubmit = (item) => {
@@ -248,6 +256,21 @@ class App extends Component {
 	document.getElementById("error1").innerHTML = this.state.authToken;
   };
   
+  handleRegister = async(item) => {
+
+    this.toggleRegister();
+	//let [user, setUser] = useState(null)
+    //let [authTokens, setAuthTokens] = useState(null)
+
+	console.log(item.username + "," + item.password);
+    await axios
+      .post("/api/register/", item)
+      .then((res) => this.setState({authToken: res.data.user.username}));
+	  
+	console.log(this.state.authToken)
+	document.getElementById("error1").innerHTML = this.state.authToken;
+  };
+  
   
   
    getWeapons = () => {
@@ -324,6 +347,11 @@ class App extends Component {
     const item = { username: "", password: ""};
     
     this.setState({ activeLogin: item, modal_login: !this.state.modal_login, modal_type: 3 });
+  };
+  createRegister = () => {
+    const item = { username: "", password: ""};
+    
+    this.setState({ activeRegister: item, modal_login: !this.state.modal_login, modal_type: 3 });
   };
 
   editItem = (item) => {
@@ -714,6 +742,12 @@ class App extends Component {
                 >
                   Login
                 </button>
+				<button
+                  className="btn btn-primary"
+				  onClick={this.createLogin}
+                >
+                  Register
+                </button>
 			   
               </div>
               {this.renderTabList()}
@@ -774,10 +808,10 @@ class App extends Component {
             onSave={this.handleSubmitLocation}
           />
         ) : null}
-		{this.state.modal_login ? (
+		{this.state.modal_register ? (
           <Modal
 		    modal_type={this.state.modal_type}
-            activeItem={this.state.activeLogin}
+            activeItem={this.state.activeRegister}
             toggle={this.toggleLogin}
             onSave={this.handleLogin}
           />
