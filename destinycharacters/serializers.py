@@ -94,7 +94,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = ('user', 'bio', 'location', 'age', 'gender', 'marital_status')
 '''
-
+from django.contrib.auth.hashers import make_password
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -102,6 +102,17 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         token['password'] = user.password
         return token
+
+
+
+    def validate_password(self, value: str) -> str:
+        """
+        Hash value passed by user.
+
+        :param value: password of a user
+        :return: a hashed version of the password
+        """
+        return make_password(value)
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
