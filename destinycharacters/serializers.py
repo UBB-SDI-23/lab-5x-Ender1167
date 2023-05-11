@@ -86,12 +86,13 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+''' 
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False, read_only=True)
     class Meta:
         model = UserProfile
         fields = ('user', 'bio', 'location', 'age', 'gender', 'marital_status')
-
+'''
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
