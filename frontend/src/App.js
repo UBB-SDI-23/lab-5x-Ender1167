@@ -61,7 +61,7 @@ class App extends Component {
       },
 	  activeLogin:{
 		  username: "",
-		  password1:"",
+		  password:"",
 	  },
 	  authToken:"",
 	  

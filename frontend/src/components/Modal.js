@@ -283,8 +283,8 @@ export default class CustomModal extends Component {
               <Input
                 type="text"
                 id="password"
-                name="password1"
-                defaultValue={this.state.activeItem.password1}
+                name="password"
+                defaultValue={this.state.activeItem.password}
                 onChange={this.handleChange}
                 placeholder="Enter slot"
               />
