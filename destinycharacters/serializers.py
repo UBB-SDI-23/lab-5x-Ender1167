@@ -104,17 +104,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 
-
-    def validate_password(self, value: str) -> str:
-        """
-        Hash value passed by user.
-
-        :param value: password of a user
-        :return: a hashed version of the password
-        """
-        return make_password(value)
-
-
 class UserRegistrationSerializer(serializers.ModelSerializer):
     username = serializers.CharField(max_length=50, min_length=4)
     password = serializers.CharField(write_only=True, required=True)
