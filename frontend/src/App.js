@@ -236,7 +236,7 @@ class App extends Component {
     //let [authTokens, setAuthTokens] = useState(null)
 
 	console.log(item.username + "," + item.password);
-    const response = await axios
+    await axios
       .post("/api/login/", item)
       .then((res) => this.setState({authToken: res.data.access}));
 	  
