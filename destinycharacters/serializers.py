@@ -87,13 +87,13 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-''' 
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False, read_only=True)
     class Meta:
         model = UserProfile
         fields = ('user', 'bio', 'location', 'age', 'gender', 'marital_status')
-'''
+
 from django.contrib.auth.hashers import make_password
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -180,3 +180,14 @@ class UserLoginSerializer(serializers.Serializer):
             raise AuthenticationFailed("Must include username and password")
 
 
+# Register serializer
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'password')
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
+        def create(self, validated_data):
+            user = User.objects.create_user(validated_data['username'], password=validated_data['password'])
+            return user

@@ -4,6 +4,10 @@ import Modal from "./components/Modal";
 import React, { Component } from "react";
 import Table from 'react-bootstrap/Table';
 import axios from "axios";
+
+import { createContext, useState } from 'react'
+const AuthContext = createContext()
+
 import {
   FormGroup,
   Input,
@@ -37,6 +41,7 @@ class App extends Component {
 	  modal_login: false,
 	  modal_view: false,
 	  modal_type:0,
+	  
 	  
       activeItem: {
         name: "",
@@ -227,13 +232,17 @@ class App extends Component {
       .post("/api/location/", item)
       .then((res) => this.refreshList());
   };
-  handleLogin = (item) => {
+  handleLogin = async(item) => {
+
     this.toggleLogin();
-	
+	let [user, setUser] = useState(null)
+    let [authTokens, setAuthTokens] = useState(null)
+
 	console.log(item.username + "," + item.password);
-    axios
-      .post("/api/register/", item)
+    const response = await axios
+      .post("/api/login/", item)
       .then((res) => this.setState({authToken: res.data.access}));
+	  
 	console.log(this.state.authToken)
 	document.getElementById("error1").innerHTML = this.state.authToken;
   };

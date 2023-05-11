@@ -19,7 +19,7 @@ from django.urls import path, re_path
 from rest_framework import permissions
 
 from .views import player_list_no_weapons, player_detail, location_list, player_list, location_detail, location_filter, \
-    weapon_list, MyTokenObtainPairView
+    weapon_list, MyTokenObtainPairView, get_profile, RegisterApi
 from .views import weapon_detail, Player_Weapons, location_weapon_list, report1, location_weapon_detail, player_add_weapons
 #from .views import MyTokenObtainPairView, get_profile
 
@@ -58,7 +58,8 @@ urlpatterns = [
     path('weapon_location/', location_weapon_list),
     path('weapon_location/<int:pk>', location_weapon_detail),
     path('report/', report1, name='report_player_avg_weapons'),
-    path('register/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('register/', RegisterApi.as_view(), name='register_user'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    #path('profile/', get_profile),
+    path('profile/', get_profile),
 ]

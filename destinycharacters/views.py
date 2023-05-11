@@ -6,12 +6,12 @@ from rest_framework.views import APIView
 
 from .models import Player, Weapon, Location, Location_Weapon
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, \
-    WeaponSerializer_Detail, UserLoginSerializer
+    WeaponSerializer_Detail, UserLoginSerializer, ProfileSerializer, UserSerializer, RegisterSerializer
 from .serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSerializer_No_Eq
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
-from rest_framework import status
+from rest_framework import status, generics
 from .paginators import StandardResultsSetPagination
 from django.views.generic import ListView
 
@@ -283,7 +283,6 @@ def report1(request):
 
         return paginator.get_paginated_response(serializer.data)
 
-''' 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_profile(request):
@@ -292,7 +291,18 @@ def get_profile(request):
     serializer = ProfileSerializer(profile, many=False)
     return Response(serializer.data)
 
-
-'''
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+#Register API
+class RegisterApi(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+    def post(self, request, *args,  **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            "user": UserSerializer(user,    context=self.get_serializer_context()).data,
+            "message": "User Created Successfully.  Now perform Login to get your token",
+        })
