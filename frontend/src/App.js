@@ -264,7 +264,7 @@ class App extends Component {
 
 	console.log(item.username + "," + item.password);
     await axios
-      .post("/api/register/", item)
+      .post("/api/token/register/", item)
       .then((res) => this.setState({authToken: res.data.user.username}));
 	  
 	console.log(this.state.authToken)
@@ -326,6 +326,8 @@ class App extends Component {
       .then((res) => this.refreshList());
   };
 
+
+
   createItem = () => {
     const item = { name: "", class1: "", level: 0, glimmer: 0, shards: 0 };
 
@@ -353,6 +355,8 @@ class App extends Component {
     
     this.setState({ activeRegister: item, modal_register: !this.state.modal_register, modal_type: 3 });
   };
+
+
 
   editItem = (item) => {
     this.setState({ activeItem: item, modal: !this.state.modal , modal_type: 0});
