@@ -269,8 +269,8 @@ class App extends Component {
 	
     await axios
       .post("/api/register/", item)
-	  .then((res) => this.setState({authToken: res.data.message}, () => {
-		  console.log(this.state.authToken);
+	  .then((res) => this.setState({authToken: res.data.access}, () => {
+		  document.getElementById("error1").innerHTML = this.state.authToken;
 	  }));
 	 /*
 	await axios
@@ -280,8 +280,6 @@ class App extends Component {
       .post("/api/token/register/", item)
       .then((res) => this.setState({authToken: res.data.access}));
 	  */
-	
-	document.getElementById("error1").innerHTML = this.state.authToken;
   };
   
   
