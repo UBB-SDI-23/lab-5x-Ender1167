@@ -283,9 +283,6 @@ def report1(request):
 
         return paginator.get_paginated_response(serializer.data)
 
-def user_login(request):
-
-    serializer = UserLoginSerializer()
 ''' 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -295,6 +292,7 @@ def get_profile(request):
     serializer = ProfileSerializer(profile, many=False)
     return Response(serializer.data)
 
+
+'''
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-'''
