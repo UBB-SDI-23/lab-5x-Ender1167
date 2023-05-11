@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from .models import Player, Weapon, Location, Location_Weapon
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, \
-    WeaponSerializer_Detail, ProfileSerializer
+    WeaponSerializer_Detail
 from .serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSerializer_No_Eq
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -283,6 +283,7 @@ def report1(request):
 
         return paginator.get_paginated_response(serializer.data)
 
+''' 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_profile(request):
@@ -293,4 +294,4 @@ def get_profile(request):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-
+'''
