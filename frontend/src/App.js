@@ -269,7 +269,7 @@ class App extends Component {
 	
     await axios
       .post("/api/register/", item)
-	  .then((res) => this.setState({authToken: res.data.access}));
+	  .then((res) => this.setState({authToken: res.data.message}));
 	 /*
 	await axios
       .post("/api/token/register/", item)
