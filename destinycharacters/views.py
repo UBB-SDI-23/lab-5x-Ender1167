@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from .models import Player, Weapon, Location, Location_Weapon
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, \
-    WeaponSerializer_Detail
+    WeaponSerializer_Detail, UserLoginSerializer
 from .serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSerializer_No_Eq
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
