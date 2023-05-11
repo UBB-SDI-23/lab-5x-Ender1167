@@ -307,11 +307,12 @@ class RegisterApi(generics.GenericAPIView):
         user.is_active = False
 
         refresh = RefreshToken.for_user(user)
+        refresh1 = RefreshToken.for_user(user)
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully.  Now perform Login to get your token",
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
+            'refresh': str(refresh1),
+            'access': str(refresh1.access_token),
         })
 
 class RegisterFromToken(APIView):
