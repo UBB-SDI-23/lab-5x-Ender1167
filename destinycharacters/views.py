@@ -316,8 +316,6 @@ class RegisterApi(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        user.is_active = False
-
         #refresh1 = RefreshToken.for_user(user)
         refresh1 = get_tokens_for_user(user)
 
@@ -330,23 +328,12 @@ class RegisterApi(generics.GenericAPIView):
 
 class RegisterFromToken(APIView):
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = UserSerializer
 
     def post(self, request, format=None):
         token_user_username = request.user.username
-        user1 = UserSerializer
-        #token_user_password = request.user.password
-        current_user = user1.objects.filter(username=token_user_username)
-        if current_user.exists():
-            current_user.is_active = True
-            return Response({
-                "message": "Activation for" + token_user_username + " is successful",
-            })
-        else:
-            return Response({
-                "message": "Request is not a token.",
-            })
+        token_user_password = request.user.password
 
-        ''' 
         if token_user_username != None:
             user = authenticate(username=token_user_username, password=token_user_password)
             if user.is_active == False:
@@ -364,7 +351,7 @@ class RegisterFromToken(APIView):
                 "message": "Request is not a token.",
             })
 
-        
+        '''
         data1 = {}
         data1["username"] = token_user_username
         data1["password"] = token_user_password

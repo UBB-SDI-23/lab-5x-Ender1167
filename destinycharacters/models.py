@@ -166,13 +166,14 @@ class UserProfile(models.Model):
     age = models.IntegerField(validators=[validateAge], null=True)
     gender = models.CharField(max_length=30, choices=GENDER_CHOICES, default=MALE, blank=True, null=True)
     marital_status = models.CharField(max_length=30, choices=MARITAL_CHOICES, default=not_married, blank=True, null=True)
+    isActive = models.BooleanField(default=True)
 
 
 #this method to generate profile when user is created
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        UserProfile.objects.create(user=instance)
+        UserProfile.objects.create(user=instance, isActive=False)
 
 #this method to update profile when user is updated
 @receiver(post_save, sender=User)

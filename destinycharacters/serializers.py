@@ -118,7 +118,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Username already exists!')
         return super().validate(args)
 
-    def validate_password(self,value):
+    def validate_password(self, value):
         """
         Validate that a password meets certain complexity requirements:
         - at least 8 characters long

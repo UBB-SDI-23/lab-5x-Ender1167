@@ -73,6 +73,7 @@ class App extends Component {
 	  },
 	  profile_username:"",
 	  profile_password:"",
+	  profile_active:true,
 	  authToken:"",
 	  
     };
@@ -252,8 +253,8 @@ class App extends Component {
 	}
 	await axios
       .get("/api/profile/", yourConfig)
-      	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password}, () => {
-		  document.getElementById("error1").innerHTML = this.state.profile_username;
+      	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password ,profile_active = res.data.isActive}, () => {
+		  document.getElementById("error1").innerHTML = this.state.profile_active;
 	  }));
 	  
 	}
