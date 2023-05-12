@@ -5,10 +5,6 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import Player
-from .models import Weapon
-from .models import Location
-from .models import Location_Weapon
 from .models import *
 from drf_writable_nested import WritableNestedModelSerializer
 import datetime
