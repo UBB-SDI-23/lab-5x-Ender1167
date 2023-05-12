@@ -332,8 +332,8 @@ class RegisterFromToken(APIView):
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, format=None):
-        token_user_username = request.user.username
-        token_user_password = request.user.password
+        token_user_username = request.username
+        token_user_password = request.password
         if token_user_password != None and token_user_username != None:
             user = authenticate(username=token_user_username, password=token_user_password)
             if user.is_active == False:
