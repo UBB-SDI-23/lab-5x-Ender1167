@@ -242,8 +242,9 @@ class App extends Component {
   };
   
   
-    getProfile = async() => {
-	  
+  getProfile = async() => {
+	
+	if(this.state.authToken !== null){ 
 	let yourConfig = {
     headers: {
        Authorization: "Bearer " + this.state.authToken
@@ -254,6 +255,11 @@ class App extends Component {
       	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password}, () => {
 		  document.getElementById("error1").innerHTML = this.state.profile_username;
 	  }));
+	  
+	}
+	else{ 
+	console.log("You are not logged in");
+	}
   };
   
   handleLogin = async(item) => {

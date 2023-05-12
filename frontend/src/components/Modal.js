@@ -201,6 +201,7 @@ export default class CustomModal extends Component {
                 onChange={this.handleChange}
                 placeholder="Enter name"
               />
+			  <p>"Error"</p>
             </FormGroup>
             <FormGroup>
               <Label for="enemy-type">Enemy Type</Label>
