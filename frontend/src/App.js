@@ -261,7 +261,7 @@ class App extends Component {
   };
   getProfile = async() => {
 	  
-	yourConfig = {
+	let yourConfig = {
     headers: {
        Authorization: "Bearer " + this.state.authToken
     }
