@@ -4,7 +4,7 @@ from django.db.models import Avg, Count
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 
-from .models import Player, Weapon, Location, Location_Weapon
+from .models import Player, Weapon, Location, Location_Weapon, UserProfile
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, \
     WeaponSerializer_Detail, UserLoginSerializer, ProfileSerializer, UserSerializer, RegisterSerializer
 from .serializers import Location_WeaponSerializer, PlayerMaxReport, PlayerSerializer_No_Eq
@@ -307,6 +307,28 @@ def get_tokens_for_user(user):
     #    'refresh': str(refresh),
     #    'access': str(refresh.access_token),
     #}
+
+@api_view(['GET', 'POST'])
+def user_list(request):
+    #read all
+    if request.method == 'GET':
+        users = UserProfile.objects.all()
+
+        paginator = StandardResultsSetPagination()
+        paginated_users = paginator.paginate_queryset(users, request)
+        serializer = ProfileSerializer(paginated_users, many=True)
+
+        return paginator.get_paginated_response(serializer.data)
+
+    #create 1
+    if request.method == 'POST':
+        serializer = ProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print(serializer.errors)
+
 
 #Register API
 class RegisterApi(generics.GenericAPIView):

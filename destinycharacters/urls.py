@@ -21,6 +21,7 @@ from rest_framework import permissions
 from .views import player_list_no_weapons, player_detail, location_list, player_list, location_detail, location_filter, \
     weapon_list, MyTokenObtainPairView, get_profile, RegisterApi, RegisterFromToken
 from .views import weapon_detail, Player_Weapons, location_weapon_list, report1, location_weapon_detail, player_add_weapons
+from .views import user_list
 #from .views import MyTokenObtainPairView, get_profile
 
 from drf_yasg.views import get_schema_view
@@ -63,5 +64,6 @@ urlpatterns = [
     path('token/register/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/activate/', RegisterFromToken.as_view(), name='activate_user'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('users/', user_list, name='all_users'),
     path('profile/', get_profile),
 ]
