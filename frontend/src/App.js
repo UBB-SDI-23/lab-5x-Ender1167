@@ -39,6 +39,7 @@ class App extends Component {
 	  modal_register: false,
 	  modal_view: false,
 	  modal_type:0,
+	  isAuth: false,
 	  
 	  
       activeItem: {
@@ -69,6 +70,10 @@ class App extends Component {
 	  activeRegister:{
 		  username: "",
 		  password:"",
+	  },
+	  profile: {
+		username:"",
+        password:"",		
 	  },
 	  authToken:"",
 	  
@@ -247,13 +252,35 @@ class App extends Component {
     await axios
       .post("/api/login/", item)
       	  .then((res) => this.setState({authToken: res.data.access}, () => {
+		   if(this.state.authToken !== null){
+			   this.state.setState({isAuth: true});
+		   }
 		  document.getElementById("error1").innerHTML = this.state.authToken;
 	  }));
 	  
 	//console.log(this.state.authToken)
 	//document.getElementById("error1").innerHTML = this.state.authToken;
   };
-  
+  getProfile = async() => {
+	yourConfig = {
+    headers: {
+       Authorization: "Bearer " + this.state.authToken
+    }
+	}
+	await axios
+      .post("/api/profile/", yourConfig)
+      	  .then((res) => this.setState({profile.username: res.data.user.username, profile.password: res.data.user.password}, () => {
+		  document.getElementById("error1").innerHTML = this.state.profile.username;
+	  }));
+   return (
+        <div>
+            <p>You are logged in to the homepage!</p>
+            <p>Name: {this.state.profile.username} {this.state.profile.password}</p>
+        </div>
+    )
+}  
+	  
+  };
   handleRegister = async(item) => {
 
     this.toggleRegister();
@@ -715,6 +742,7 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
+		{this.state.isAuth ? this.getProfile() : null}
 		<p id="error1" className="text-center"></p>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
