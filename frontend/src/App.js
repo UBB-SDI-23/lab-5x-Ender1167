@@ -271,12 +271,6 @@ class App extends Component {
       	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password}, () => {
 		  document.getElementById("error1").innerHTML = this.state.profile_username;
 	  }));
-   return (
-        <div>
-            <p>You are logged in to the homepage!</p>
-            <p>Name: {this.state.profile_username} {this.state.profile_password}</p>
-        </div>
-    );
   };  
   handleRegister = async(item) => {
 
