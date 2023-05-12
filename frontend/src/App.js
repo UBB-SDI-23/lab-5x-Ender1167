@@ -246,14 +246,12 @@ class App extends Component {
 	console.log(item.username + "," + item.password);
     await axios
       .post("/api/login/", item)
-      .then((res) => this.setState({authToken: res.data.access}));
-	 
-	await axios
-      .post("/api/login/", item)
-      .then((res) => this.setState({authToken: res.data.access}));
+      	  .then((res) => this.setState({authToken: res.data.access}, () => {
+		  document.getElementById("error1").innerHTML = this.state.authToken;
+	  }));
 	  
-	console.log(this.state.authToken)
-	document.getElementById("error1").innerHTML = this.state.authToken;
+	//console.log(this.state.authToken)
+	//document.getElementById("error1").innerHTML = this.state.authToken;
   };
   
   handleRegister = async(item) => {
