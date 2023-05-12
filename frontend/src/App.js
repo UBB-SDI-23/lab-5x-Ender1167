@@ -268,11 +268,12 @@ class App extends Component {
       	  .then((res) => this.setState({authToken: res.data.access}, () => {
 		   if(this.state.authToken !== null){
 			   this.setState({isAuth: true});
+			   this.getProfile();
 		   }
 		  document.getElementById("error1").innerHTML = this.state.authToken;
 	  }));
 	  
-	  this.getProfile();
+	  
 	//console.log(this.state.authToken)
 	//document.getElementById("error1").innerHTML = this.state.authToken;
   };
