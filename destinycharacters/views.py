@@ -297,19 +297,29 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    refresh['username'] = user.username
+    refresh['password'] = user.password
+    return refresh
+
+    #return {
+    #    'refresh': str(refresh),
+    #    'access': str(refresh.access_token),
+    #}
+
 #Register API
 class RegisterApi(generics.GenericAPIView):
     serializer_class = RegisterSerializer
-    token_serializer = MyTokenObtainPairSerializer
+
     def post(self, request, *args,  **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         user.is_active = False
 
-
-        refresh1 = RefreshToken.for_user(user)
-
+        #refresh1 = RefreshToken.for_user(user)
+        refresh1 = get_tokens_for_user(user)
 
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
