@@ -240,6 +240,22 @@ class App extends Component {
       .post("/api/location/", item)
       .then((res) => this.refreshList());
   };
+  
+  
+    getProfile = async() => {
+	  
+	let yourConfig = {
+    headers: {
+       Authorization: "Bearer " + this.state.authToken
+    }
+	}
+	await axios
+      .post("/api/profile/", yourConfig)
+      	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password}, () => {
+		  document.getElementById("error1").innerHTML = this.state.profile_username;
+	  }));
+  };
+  
   handleLogin = async(item) => {
 
     this.toggleLogin();
@@ -256,22 +272,11 @@ class App extends Component {
 		  document.getElementById("error1").innerHTML = this.state.authToken;
 	  }));
 	  
+	  this.getProfile();
 	//console.log(this.state.authToken)
 	//document.getElementById("error1").innerHTML = this.state.authToken;
   };
-  getProfile = async() => {
-	  
-	let yourConfig = {
-    headers: {
-       Authorization: "Bearer " + this.state.authToken
-    }
-	}
-	await axios
-      .post("/api/profile/", yourConfig)
-      	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password}, () => {
-		  document.getElementById("error1").innerHTML = this.state.profile_username;
-	  }));
-  };  
+  
   handleRegister = async(item) => {
 
     this.toggleRegister();
@@ -733,7 +738,6 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
-		{this.state.isAuth ? this.getProfile() : null}
 		<p id="error1" className="text-center"></p>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
