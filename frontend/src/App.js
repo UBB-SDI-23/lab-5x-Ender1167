@@ -251,6 +251,11 @@ class App extends Component {
        Authorization: "Bearer " + this.state.authToken
     }
 	}
+		axios.interceptors.response.use(x => { 
+	console.log(x);
+	return x;
+	});
+	
 	await axios
       .get("/api/profile/", yourConfig)
       	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password , profile_active : res.data.isActive}, () => {
