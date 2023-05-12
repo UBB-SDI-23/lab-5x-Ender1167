@@ -398,7 +398,7 @@ class App extends Component {
   createRegister = () => {
     const item = { username: "", password: ""};
     
-    this.setState({ activeRegister: item, modal_register: !this.state.modal_register, modal_type: 3 });
+    this.setState({ activeRegister: item, modal_register: !this.state.modal_register, modal_type: 4 });
   };
 
 
