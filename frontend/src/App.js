@@ -250,7 +250,7 @@ class App extends Component {
     }
 	}
 	await axios
-      .post("/api/profile/", yourConfig)
+      .get("/api/profile/", yourConfig)
       	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password}, () => {
 		  document.getElementById("error1").innerHTML = this.state.profile_username;
 	  }));
