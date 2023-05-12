@@ -251,7 +251,7 @@ class App extends Component {
       .post("/api/login/", item)
       	  .then((res) => this.setState({authToken: res.data.access}, () => {
 		   if(this.state.authToken !== null){
-			   this.state.setState({isAuth: true});
+			   this.setState({isAuth: true});
 		   }
 		  document.getElementById("error1").innerHTML = this.state.authToken;
 	  }));
@@ -276,8 +276,8 @@ class App extends Component {
             <p>You are logged in to the homepage!</p>
             <p>Name: {this.state.profile_username} {this.state.profile_password}</p>
         </div>
-    )
-}  
+    );
+  };  
   handleRegister = async(item) => {
 
     this.toggleRegister();
