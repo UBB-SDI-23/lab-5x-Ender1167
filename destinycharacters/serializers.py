@@ -92,7 +92,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False, read_only=True)
     class Meta:
         model = UserProfile
-        fields = ('user', 'bio', 'location', 'age', 'gender', 'marital_status')
+        fields = ('user', 'bio', 'location', 'age', 'gender', 'marital_status', 'isActive')
 
 from django.contrib.auth.hashers import make_password
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
