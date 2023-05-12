@@ -165,6 +165,12 @@ class App extends Component {
 
   handleSubmit = (item) => {
     this.toggle();
+	if(this.authToken !== null){
+	let yourConfig = {
+    headers: {
+       Authorization: "Bearer " + this.state.authToken
+    }
+	}
 	let classes1 = ["Warlock", "Hunter", "Titan"];
 	if(!classes1.includes(item.class1)){
 		document.getElementById("error1").innerHTML = "Class must be Warlock, Hunter or Titan.";
@@ -174,14 +180,15 @@ class App extends Component {
     if (item.id) {
 		document.getElementById("error1").innerHTML = "";
       axios
-        .put(`/api/players/${item.id}`, item)
+        .put(`/api/players/${item.id}`, item, yourConfig)
         .then((res) => this.refreshList());
       return;
     }
 	document.getElementById("error1").innerHTML = "";
     axios
-      .post("/api/players/", item)
+      .post("/api/players/", item, yourConfig)
       .then((res) => this.refreshList());
+	}
   };
   handleSubmitWeapon = (item) => {
     this.toggleWeapon();
