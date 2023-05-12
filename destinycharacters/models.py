@@ -9,9 +9,6 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
-from destinycharacters.serializers import UserSerializer
-
-
 def validateAge(value):
     if value < 0:
         raise ValidationError(
