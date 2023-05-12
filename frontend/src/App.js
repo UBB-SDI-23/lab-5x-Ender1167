@@ -278,8 +278,6 @@ class App extends Component {
         </div>
     )
 }  
-	  
-  };
   handleRegister = async(item) => {
 
     this.toggleRegister();
@@ -741,7 +739,7 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
-
+		{this.state.isAuth ? this.getProfile() : null}
 		<p id="error1" className="text-center"></p>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
