@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from django.db.models import Avg, Count
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 
 from .models import Player, Weapon, Location, Location_Weapon, UserProfile
@@ -32,7 +32,7 @@ class Player_Weapons(ListAPIView):
             id=self.kwargs['pk']
         )
 
-
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'POST'])
 def player_list(request):
     #read all
@@ -54,6 +54,7 @@ def player_list(request):
         else:
             print(serializer.errors)
 
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'POST'])
 def player_list_no_weapons(request):
     #read all without weapons
@@ -68,6 +69,7 @@ def player_list_no_weapons(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'POST'])
 def location_list(request):
     #read all
@@ -89,6 +91,7 @@ def location_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'POST'])
 def weapon_list(request):
     #read all
@@ -111,7 +114,7 @@ def weapon_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'POST'])
 def location_weapon_list(request):
     #read all
@@ -127,6 +130,7 @@ def location_weapon_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'PUT', 'DELETE'])
 def weapon_detail(request, pk):
 
@@ -158,7 +162,7 @@ def weapon_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'PUT', 'DELETE'])
 def location_detail(request, pk):
 
@@ -185,7 +189,7 @@ def location_detail(request, pk):
         location.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'PUT', 'DELETE'])
 def player_detail(request, pk):
 
@@ -212,6 +216,7 @@ def player_detail(request, pk):
         player.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['POST'])
 def player_add_weapons(request, pk):
 
@@ -229,6 +234,7 @@ def player_add_weapons(request, pk):
             return Response(serializer.data)
 
 
+@permission_classes([IsAuthenticatedOrReadOnly])
 @api_view(['GET', 'PUT', 'DELETE'])
 def location_weapon_detail(request, pk):
 
