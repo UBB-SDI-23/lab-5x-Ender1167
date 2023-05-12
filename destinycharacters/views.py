@@ -320,7 +320,7 @@ class RegisterFromToken(APIView):
     def post(self, request, format=None):
         token_user_username = request.user.username
         token_user_password = request.user.password
-        if token_user_password != None && token_user_username != None:
+        if token_user_password != None and token_user_username != None:
             user = authenticate(username=token_user_username, password=token_user_password)
             if user.is_active == False:
                 user.is_active = True
@@ -342,8 +342,5 @@ class RegisterFromToken(APIView):
         data1["username"] = token_user_username
         data1["password"] = token_user_password
         serializer = RegisterSerializer(data=data1)
-        
+
         '''
-
-
-
