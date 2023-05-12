@@ -333,8 +333,21 @@ class RegisterFromToken(APIView):
 
     def post(self, request, format=None):
         token_user_username = request.user.username
-        token_user_password = request.user.password
-        if token_user_password != None and token_user_username != None:
+        user1 = UserSerializer
+        #token_user_password = request.user.password
+        current_user = user1.objects.filter(username=token_user_username)
+        if current_user.exists():
+            current_user.is_active = True
+            return Response({
+                "message": "Activation for" + token_user_username + " is successful",
+            })
+        else:
+            return Response({
+                "message": "Request is not a token.",
+            })
+
+        ''' 
+        if token_user_username != None:
             user = authenticate(username=token_user_username, password=token_user_password)
             if user.is_active == False:
                 user.is_active = True
@@ -351,7 +364,7 @@ class RegisterFromToken(APIView):
                 "message": "Request is not a token.",
             })
 
-        ''' 
+        
         data1 = {}
         data1["username"] = token_user_username
         data1["password"] = token_user_password
