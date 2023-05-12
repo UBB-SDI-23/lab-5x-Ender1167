@@ -176,10 +176,7 @@ class UserProfile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        userpf = UserProfile.objects.create(user=instance)
-        serializer = UserSerializer(userpf)
-        userpf.isActive = False
-        serializer.save()
+        UserProfile.objects.create(user=instance)
 
 #this method to update profile when user is updated
 @receiver(post_save, sender=User)
