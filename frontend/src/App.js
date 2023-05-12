@@ -73,7 +73,7 @@ class App extends Component {
 	  },
 	  profile_username:"",
 	  profile_password:"",
-	  profile_active:true,
+	  profile_active:false,
 	  authToken:"",
 	  
     };
