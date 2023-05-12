@@ -9,6 +9,9 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
+from destinycharacters.serializers import UserSerializer
+
+
 def validateAge(value):
     if value < 0:
         raise ValidationError(
@@ -174,8 +177,9 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         userpf = UserProfile.objects.create(user=instance)
+        serializer = UserSerializer(userpf)
         userpf.isActive = False
-        userpf.save()
+        serializer.save()
 
 #this method to update profile when user is updated
 @receiver(post_save, sender=User)
