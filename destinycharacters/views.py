@@ -320,15 +320,22 @@ class RegisterFromToken(APIView):
     def post(self, request, format=None):
         token_user_username = request.user.username
         token_user_password = request.user.password
-        user = authenticate(username=token_user_username, password=token_user_password)
-        if user.is_active == False:
-            user.is_active = True
-            user.save()
+        if token_user_password != None && token_user_username != None:
+            user = authenticate(username=token_user_username, password=token_user_password)
+            if user.is_active == False:
+                user.is_active = True
+                user.save()
+                return Response({
+                    "message": "Activation for" + token_user_username + " with password " + token_user_password + " is successful",
+                })
+            else:
+                return Response({
+                    "message": "Activation for" + token_user_username + " with password " + token_user_password + " failed",
+                })
         else:
             return Response({
-                "message": "Activation for" + token_user_username + " with password " + token_user_password + " failed",
+                "message": "Request is not a token.",
             })
-
 
         ''' 
         data1 = {}
