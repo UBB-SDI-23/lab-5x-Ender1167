@@ -306,12 +306,14 @@ class RegisterApi(generics.GenericAPIView):
         user = serializer.save()
         user.is_active = False
 
+
         refresh1 = RefreshToken.for_user(user)
+        newToken = MyTokenObtainPairView(data=user)
+
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully.  Now perform Login to get your token",
-            'refresh': str(refresh1),
-            'access': str(refresh1.access_token),
+            'token': newToken,
         })
 
 class RegisterFromToken(APIView):
