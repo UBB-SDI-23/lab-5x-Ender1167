@@ -71,10 +71,8 @@ class App extends Component {
 		  username: "",
 		  password:"",
 	  },
-	  profile: {
-		username:"",
-        password:"",		
-	  },
+	  profile_username:"",
+	  profile_password:"",
 	  authToken:"",
 	  
     };
@@ -262,6 +260,7 @@ class App extends Component {
 	//document.getElementById("error1").innerHTML = this.state.authToken;
   };
   getProfile = async() => {
+	  
 	yourConfig = {
     headers: {
        Authorization: "Bearer " + this.state.authToken
@@ -269,13 +268,13 @@ class App extends Component {
 	}
 	await axios
       .post("/api/profile/", yourConfig)
-      	  .then((res) => this.setState({profile.username: res.data.user.username, profile.password: res.data.user.password}, () => {
-		  document.getElementById("error1").innerHTML = this.state.profile.username;
+      	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password}, () => {
+		  document.getElementById("error1").innerHTML = this.state.profile_username;
 	  }));
    return (
         <div>
             <p>You are logged in to the homepage!</p>
-            <p>Name: {this.state.profile.username} {this.state.profile.password}</p>
+            <p>Name: {this.state.profile_username} {this.state.profile_password}</p>
         </div>
     )
 }  
