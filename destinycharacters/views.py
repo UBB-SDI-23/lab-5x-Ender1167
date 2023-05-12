@@ -300,6 +300,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 #Register API
 class RegisterApi(generics.GenericAPIView):
     serializer_class = RegisterSerializer
+    token_serializer = MyTokenObtainPairSerializer
     def post(self, request, *args,  **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -308,12 +309,13 @@ class RegisterApi(generics.GenericAPIView):
 
 
         refresh1 = RefreshToken.for_user(user)
-        newToken = MyTokenObtainPairView(data=user)
+
 
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully.  Now perform Login to get your token",
-            'token': newToken,
+            'refresh': str(refresh1),
+            'access': str(refresh1.access_token),
         })
 
 class RegisterFromToken(APIView):
