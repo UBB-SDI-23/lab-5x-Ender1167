@@ -193,6 +193,12 @@ class App extends Component {
   handleSubmitWeapon = (item) => {
     this.toggleWeapon();
 	
+		if(this.authToken !== null){
+	let yourConfig = {
+    headers: {
+       Authorization: "Bearer " + this.state.authToken
+    }
+	}
 	let slotTypes = ["Kinetic", "Energy", "Heavy"];
 	let elements1 = ["Arc", "Solar", "Void", "Stasis", "Strand"];
 	let errorMsg = "";
@@ -210,22 +216,29 @@ class App extends Component {
     if (item.id) {
 	  document.getElementById("error1").innerHTML = "";
       axios
-        .put(`/api/weapons/${item.id}`, item)
+        .put(`/api/weapons/${item.id}`, item, yourConfig)
         .then((res) => this.refreshList());
       return;
     }
 	document.getElementById("error1").innerHTML = "";
     axios
-      .post("/api/weapons/", item)
+      .post("/api/weapons/", item, yourConfig)
       .then((res) => this.refreshList());
+		}
   };
   handleSubmitLocation = (item) => {
     this.toggleLocation();
+			if(this.authToken !== null){
+	let yourConfig = {
+    headers: {
+       Authorization: "Bearer " + this.state.authToken
+    }
+	}
     let enemies1 = ["Fallen", "Scorn", "Cabal", "Vex", "Taken"];
 	let errorMsg = "";
 	
 	if(!enemies1.includes(item.enemy_type)){
-		errorMsg += "Enemy must be Falle, Scorn, Cabal, Vex, Taken.";
+		errorMsg += "Enemy must be Fallen, Scorn, Cabal, Vex, Taken.";
 	}
 	if(item.nr_lost_sectors < 3){
 		errorMsg += "Lost sectors must be at least 3.";
@@ -240,14 +253,16 @@ class App extends Component {
     if (item.id) {
 	  document.getElementById("error1").innerHTML = "";
       axios
-        .put(`/api/location/${item.id}`, item)
+        .put(`/api/location/${item.id}`, item, yourConfig)
         .then((res) => this.refreshList());
       return;
     }
 	document.getElementById("error1").innerHTML = "";
     axios
-      .post("/api/location/", item)
+      .post("/api/location/", item, yourConfig)
+      .post("/api/location/", item, yourConfig)
       .then((res) => this.refreshList());
+			}
   };
   
   
