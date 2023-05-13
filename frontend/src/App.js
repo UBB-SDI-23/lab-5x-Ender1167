@@ -375,7 +375,8 @@ class App extends Component {
       .then((res) => this.setState({ weapons: res.data.results }))
       .catch((err) => console.log(err));
   };
-     getUsers = () => {
+  
+    getUsers = () => {
 	if(this.state.profile_isSuperuser === true){
 	   this.setState({currentPage:1});
 	this.setState({viewCompleted: 7});
@@ -836,7 +837,7 @@ class App extends Component {
 		  <td>{item.age}</td>
           <td>{item.gender}</td>
 		  <td>{item.marital_status}</td>
-		  
+			  {console.log(item.user.username);}
 		  <td>
 		  <span>
           <button
