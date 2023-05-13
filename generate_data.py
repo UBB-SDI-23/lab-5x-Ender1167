@@ -191,7 +191,7 @@ def createUserProfile():
     counter = start
     end = 83
     for j in range(1):
-        sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id, isActive) VALUES"
+        sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id, 'isActive') VALUES"
         for i in range(10):
 
             user_bio = ""
