@@ -388,7 +388,7 @@ class RegisterFromToken(APIView):
                 })
             else:
                 return Response({
-                    "User": user,
+                    "User": user.username,
                     "message": "Activation for" + token_user_username + " with password " + token_user_password + " failed",
                 })
         else:
