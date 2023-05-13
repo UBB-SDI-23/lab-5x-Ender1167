@@ -346,7 +346,6 @@ class RegisterApi(generics.GenericAPIView):
     def post(self, request, *args,  **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user.is_active = False
         user = serializer.save()
         #refresh1 = RefreshToken.for_user(user)
         refresh1 = get_tokens_for_user(user)
