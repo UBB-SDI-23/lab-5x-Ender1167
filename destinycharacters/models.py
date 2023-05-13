@@ -169,7 +169,7 @@ class UserProfile(models.Model):
     age = models.IntegerField(validators=[validateAge], null=True)
     gender = models.CharField(max_length=30, choices=GENDER_CHOICES, default=MALE, blank=True, null=True)
     marital_status = models.CharField(max_length=30, choices=MARITAL_CHOICES, default=not_married, blank=True, null=True)
-    isActive = models.BooleanField(default=True)
+    isActive = models.BooleanField(default=True, null=True)
 
 
 #this method to generate profile when user is created

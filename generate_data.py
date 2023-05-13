@@ -191,7 +191,7 @@ def createUserProfile():
     counter = start
     end = 83
     for j in range(1):
-        sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id, 'isActive') VALUES"
+        sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id) VALUES"
         for i in range(10):
 
             user_bio = ""
@@ -210,7 +210,7 @@ def createUserProfile():
             selected_isActive = True
             counter = counter + 1
 
-            sql_insert = sql_insert + " ('{}', '{}', {}, '{}', '{}', {}, {}), ".format(user_bio, user_location, user_age, selected_gender, selected_status, selected_user_id, selected_isActive)
+            sql_insert = sql_insert + " ('{}', '{}', {}, '{}', '{}', {}), ".format(user_bio, user_location, user_age, selected_gender, selected_status, selected_user_id)
 
         insert_size = len(sql_insert)
         sql_insert_modified = sql_insert[:insert_size - 2]
