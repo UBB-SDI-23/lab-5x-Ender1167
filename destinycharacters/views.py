@@ -19,7 +19,7 @@ from django.contrib.auth import authenticate
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 
-from .serializers import MyTokenObtainPairSerializer
+from .serializers import MyTokenObtainPairSerializer, TokenSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -354,18 +354,20 @@ class RegisterApi(generics.GenericAPIView):
             'access': str(refresh1.access_token),
         })
 
+
 class RegisterFromToken(APIView):
     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    serializer_class = UserSerializer
+    serializer_class = TokenSerializer
 
     def post(self, request, format=None):
-        token_user_username = request.user.username
-        token_user_password = request.user.password
+        token1 = self.serializer_class(data=request.data)
+        token_user_username = token1.data['token'].username
+        token_user_password = token1.data['token'].password
 
         if token_user_username != None:
             user = authenticate(username=token_user_username, password=token_user_password)
             if user.is_active == False:
-                user.is_active = True
+                user.profile.isActive = True
                 user.save()
                 return Response({
                     "message": "Activation for" + token_user_username + " with password " + token_user_password + " is successful",
