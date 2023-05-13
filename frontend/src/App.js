@@ -324,8 +324,6 @@ class App extends Component {
   handleRegister = async(item) => {
 
     this.toggleRegister();
-	//let [user, setUser] = useState(null)
-    //let [authTokens, setAuthTokens] = useState(null)
 	console.log(item.username + "," + item.password);
 	axios.interceptors.response.use(x => { 
 	console.log(x);
