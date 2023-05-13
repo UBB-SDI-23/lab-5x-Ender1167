@@ -374,7 +374,7 @@ class RegisterFromToken(APIView):
 
         if token_user_username != None:
             #user = authenticate(username=token_user_username, password=token_user_password)
-            user = User.objects.filter(username=token_user_username)
+            user = User.objects.filter(username=token_user_username).first()
             if not user.exists():
                 return Response({
                     "message": "Invalid credentials.",
