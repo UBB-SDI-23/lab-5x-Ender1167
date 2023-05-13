@@ -28,6 +28,7 @@ class App extends Component {
 	  
 	  locations: [],
 	  weapons: [],
+	  users: [],
 	  
 	  filterValue: 0,
 	  nextUrl:"",
@@ -80,6 +81,7 @@ class App extends Component {
 	  profile_password:"",
 	  profile_active:false,
 	  profile_isStaff:false,
+	  profile_isSuperuser:true,
 	  profile_role:0,
 	  authToken:"",
 	  
@@ -309,7 +311,7 @@ class App extends Component {
 	console.log(item.username + "," + item.password);
     await axios
       .post("/api/login/", item)
-      	  .then((res) => this.setState({authToken: res.data.access}, () => {
+      	  .then((res) => this.setState({authToken: res.data.access, profile_isSuperuser: res.data.user.is_superuser}, () => {
 		   if(this.state.authToken !== null){
 			   this.setState({isAuth: true});
 			   this.getProfile();
@@ -372,6 +374,19 @@ class App extends Component {
       .get("/api/weapons/")
       .then((res) => this.setState({ weapons: res.data.results }))
       .catch((err) => console.log(err));
+  };
+     getUsers = () => {
+	if(profile_isSuperuser === true){
+	   this.setState({currentPage:1});
+	this.setState({viewCompleted: 7});
+    axios
+      .get("/api/users/")
+      .then((res) => this.setState({ users: res.data.results }))
+      .catch((err) => console.log(err));
+	}
+	else{
+		console.log("You are not an admin");
+	}
   };
    getLocations = () => {
 	   this.setState({currentPage:1});
@@ -606,6 +621,19 @@ class App extends Component {
         </thead>
 	  );
 	  }
+	  if(this.state.viewCompleted === 7){ //users
+	  return (
+	    <thead>
+	    <tr>
+		<th>Username</th>
+        <th>Location</th>
+		<th>Age</th>
+		<th>Gender</th>
+		<th>Marital Status</th>
+        </tr>
+        </thead>
+	  );
+	  }
 	  
   };
 
@@ -651,6 +679,12 @@ class App extends Component {
         >
           Filter
         </span>
+		<span
+          className={this.state.viewCompleted === 7? "nav-link active" : "nav-link"}
+          onClick={() => this.getUsers()}
+        >
+          Users
+        </span>
       </div>
     );
   };
@@ -676,6 +710,9 @@ class App extends Component {
 		newItems = this.state.weapons;
 	}
 	if(viewCompleted === 6){
+		newItems = this.state.locations;
+	}
+	if(viewCompleted === 7){
 		newItems = this.state.locations;
 	}
 	//let item_creator = "admin"
@@ -791,6 +828,34 @@ class App extends Component {
     </tr>
     ));
 	}
+		if(viewCompleted === 7){ //locations
+				 return newItems.map((item) => (
+      		  <tr>
+          <td>{item.user.username}</td>
+          <td>{item.location}</td>
+		  <td>{item.age}</td>
+          <td>{item.gender}</td>
+		  <td>{item.marital_status}</td>
+		  
+		  <td>
+		  <span>
+          <button
+            className="btn btn-secondary mr-2"
+			onClick={() => this.editLocation(item)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn btn-danger"
+			onClick={() => this.handleDeleteLocation(item)}
+          >
+            Delete
+          </button>
+          </span>
+		  </td>
+    </tr>
+    ));
+	}
 
 	}
   };
@@ -847,6 +912,7 @@ class App extends Component {
                 >
                   Register
                 </button>
+
 			   
               </div>
               {this.renderTabList()}
