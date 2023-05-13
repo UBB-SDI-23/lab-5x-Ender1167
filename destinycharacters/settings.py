@@ -112,6 +112,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'destinycharacters.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

@@ -161,7 +161,6 @@ class UserLoginSerializer(serializers.Serializer):
 
         if username and password:
             user = authenticate(username=username, password=password)
-
             if not user:
                 raise AuthenticationFailed("Invalid credentials")
 
