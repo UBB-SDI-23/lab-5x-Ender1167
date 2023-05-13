@@ -361,7 +361,7 @@ class RegisterFromToken(APIView):
 
     def post(self, request, format=None):
         token1 = self.serializer_class(data=request.data)
-        token_user_username = token1.initial_data['token']['username']
+        token_user_username = token1.initial_data['token'][0]
         token_user_password = token1.initial_data['token']
         return Response({
             "message": token_user_username,
