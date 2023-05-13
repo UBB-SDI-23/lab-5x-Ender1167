@@ -1,3 +1,4 @@
+import datetime
 import random
 
 from passlib.hash import sha256_crypt
@@ -152,12 +153,22 @@ def createUser():
     fake = Faker()
     plain_password = "temporarypassword1"
     hashed_password = sha256_crypt.hash(plain_password)
+
+    first_name_generic = "John"
+    last_name_generic = "Doe"
+    email_generic = "johndoe@gmail.com"
+    is_superuser_generic = False
+    is_staff_generic = False
+    is_active_generic = True
+    date_time_generic = datetime.datetime.now()
+    print(date_time_generic)
+
     # generate fake data for players and create INSERT SQL statements
     for j in range(1):
-        sql_insert = "INSERT INTO auth_user (password, username) VALUES"
+        sql_insert = "INSERT INTO auth_user (password, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) VALUES"
         for i in range(10):
             username = fake.user_name()
-            sql_insert = sql_insert + " ('{}', '{}'), ".format(hashed_password, username)
+            sql_insert = sql_insert + " ('{}', {}, '{}', '{}', '{}', '{}', {}, {}, {}), ".format(hashed_password, is_superuser_generic, username, first_name_generic, last_name_generic, email_generic, is_staff_generic, is_active_generic, date_time_generic)
 
         insert_size = len(sql_insert)
         sql_insert_modified = sql_insert[:insert_size - 2]
@@ -167,6 +178,7 @@ def createUser():
 
     f = open('data_users.sql', 'w')
     for i, sql in enumerate(sqls):
+        #print(sql)
         f.write(sql + "\n")
     f.close()
 
