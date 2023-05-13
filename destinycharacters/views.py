@@ -1,3 +1,4 @@
+from base64 import b64decode
 from dataclasses import dataclass
 
 from django.db.models import Avg, Count
@@ -365,7 +366,7 @@ class RegisterFromToken(APIView):
         token1 = self.serializer_class(data=request.data)
         token_user = token1.initial_data['token']
         decoded_data = jwt.decode(jwt=token_user,
-                                  key='secret',
+                                  key=b64decode('your-256-bit-secret'),
                                   algorithms=["HS256"])
         token_user_username = decoded_data['username']
         token_user_password = decoded_data['password']
