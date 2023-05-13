@@ -80,11 +80,12 @@ class App extends Component {
 	  profile_password:"",
 	  profile_active:false,
 	  profile_isStaff:false,
+	  profile_role:0,
 	  authToken:"",
 	  
     };
   }
-  
+  //0 - anonim, 1- user, 2-moderator, 3-admin
    handleChange = (e) => {
     let { name, value } = e.target;
     console.log(name);
@@ -797,7 +798,7 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
-		<p id="error1" className="text-center"></p>
+		<p id="error1" className="text-right"></p>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
