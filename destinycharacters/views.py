@@ -373,7 +373,7 @@ class RegisterFromToken(APIView):
 
         if token_user_username != None:
             user = authenticate(username=token_user_username, password=token_user_password)
-            if user.is_active == False:
+            if user.profile.isActive == True:
                 user.profile.isActive = False
                 user.save()
                 return Response({
