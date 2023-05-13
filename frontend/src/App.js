@@ -713,7 +713,7 @@ class App extends Component {
 		newItems = this.state.locations;
 	}
 	if(viewCompleted === 7){
-		newItems = this.state.locations;
+		newItems = this.state.users;
 	}
 	//let item_creator = "admin"
 	//const item_creator_obj = { username: item_creator, password1: item_creator};
