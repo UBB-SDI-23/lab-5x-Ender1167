@@ -74,7 +74,7 @@ class App extends Component {
 	  },
 	  activeToken:{
 		  token:"",
-	  }
+	  },
 	  msg:"",
 	  profile_username:"",
 	  profile_password:"",
