@@ -327,7 +327,7 @@ export default class CustomModal extends Component {
                 type="text"
                 id="password"
                 name="password"
-                defaultValue={this.state.activeItem.password1}
+                defaultValue={this.state.activeItem.password}
                 onChange={this.handleChange}
                 placeholder="Enter password"
               />
@@ -399,17 +399,6 @@ export default class CustomModal extends Component {
 				value={this.state.activeItem.token}
                 onChange={this.handleChange}
                 placeholder="Your token"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="password">Password</Label>
-              <Input
-                type="text"
-                id="password"
-                name="password"
-                defaultValue={this.state.activeItem.password}
-                onChange={this.handleChange}
-                placeholder="Enter password"
               />
             </FormGroup>
           </Form>
