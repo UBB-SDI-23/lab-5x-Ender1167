@@ -154,7 +154,7 @@ def createUser():
         sql_insert = "INSERT INTO destinycharacters_user_profile (drop_rate, wep_id, loc_id) VALUES"
 def main():
     #createPlayers()
-    createWeapons()
+    #createWeapons()
     #createLocations()
     #createLocationWeapons()
     createUser()

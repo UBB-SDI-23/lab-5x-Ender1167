@@ -33,7 +33,7 @@ class Player(models.Model):
     level = models.IntegerField()
     glimmer = models.IntegerField()
     shards = models.IntegerField()
-    #user_player = models.ForeignKey(UserProfile, on_delete=models.CASCADE, default=None)
+    user_player = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)#help
 
     def __str__(self):
         return f"{self.name} {self.class1}"
@@ -69,6 +69,7 @@ class Weapon(models.Model):
     weapon_damage = models.IntegerField()
     weapon_description = models.TextField(blank=True, null=True)
     player_weapon = models.ForeignKey(Player, on_delete=models.CASCADE, default=None)
+    user_weapon = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)#help
 
     def __unicode__(self):
         return self.weapon_name
@@ -115,6 +116,7 @@ class Location(models.Model):
     nr_public_events = models.IntegerField()
     nr_lost_sectors = models.IntegerField(validators=[validateLostSectors])
     all_weapons = models.ManyToManyField(Weapon, through='Location_Weapon')
+    user_location = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True) #help
 
     def __str__(self):
         return f"{self.location_name} {self.enemy_type}"
