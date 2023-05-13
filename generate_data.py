@@ -179,11 +179,17 @@ def createUser():
     is_staff_generic = False
     is_active_generic = True
 
+    dummy_user = "temp"
+    dummy_id = 0
+
     # generate fake data for players and create INSERT SQL statements
     for j in range(10):
         sql_insert = "INSERT INTO auth_user (password, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) VALUES"
         for i in range(1000):
-            username = fake.user_name()
+            #username = fake.user_name()
+            username = dummy_user + str(dummy_id)
+            dummy_id = dummy_id + 1
+            print(username)
             sql_insert = sql_insert + " ('{}', {}, '{}', '{}', '{}', '{}', {}, {}, TIMESTAMP '2011-05-16 15:36:38'), ".format(hashed_password, is_superuser_generic, username, first_name_generic, last_name_generic, email_generic, is_staff_generic, is_active_generic)
 
         insert_size = len(sql_insert)
@@ -205,6 +211,7 @@ def createUserProfile():
     marital_status = ["Married", "Not married"]
     start = 86
     counter = start
+
     end = 86
     for j in range(10):
         sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id) VALUES"
