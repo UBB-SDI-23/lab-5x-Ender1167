@@ -799,7 +799,7 @@ class App extends Component {
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
 		
-		<div classname "container">
+		<div classname ="container">
 		<p id="error1" className="text-right"></p>
 		</div>
         <div className="row">
