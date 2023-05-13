@@ -380,7 +380,7 @@ class RegisterFromToken(APIView):
                     "message": "Invalid credentials.",
                 })
             user = user.first()
-            if not user.is_active:
+            if user.is_active == False:
                 user.is_active = True
                 user.save()
                 return Response({
@@ -388,7 +388,7 @@ class RegisterFromToken(APIView):
                 })
             else:
                 return Response({
-                    "User": user.username,
+                    "User": user.is_active,
                     "message": "Activation for" + token_user_username + " with password " + token_user_password + " failed",
                 })
         else:
