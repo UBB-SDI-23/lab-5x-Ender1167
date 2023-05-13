@@ -376,7 +376,7 @@ class App extends Component {
       .catch((err) => console.log(err));
   };
      getUsers = () => {
-	if(profile_isSuperuser === true){
+	if(this.state.profile_isSuperuser === true){
 	   this.setState({currentPage:1});
 	this.setState({viewCompleted: 7});
     axios
