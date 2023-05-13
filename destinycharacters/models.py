@@ -1,4 +1,5 @@
 from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.hashers import make_password
 from django.db import models
 from rest_framework import status
 from rest_framework.response import Response
@@ -173,9 +174,10 @@ class UserProfile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        u = UserProfile.objects.create_user(user=instance)
+        u = UserProfile.objects.create(user=instance)
         u.user.is_active = False
         u.isActive = False
+        u.password = make_password(instance.password)
         instance.save()
         instance.profile.save()
 
