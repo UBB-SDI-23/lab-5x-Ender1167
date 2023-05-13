@@ -837,7 +837,7 @@ class App extends Component {
 		  <td>{item.age}</td>
           <td>{item.gender}</td>
 		  <td>{item.marital_status}</td>
-			  {console.log(item.user.username);}
+			  {console.log(item.user.username)}
 		  <td>
 		  <span>
           <button
