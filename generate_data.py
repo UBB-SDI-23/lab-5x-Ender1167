@@ -176,18 +176,66 @@ def createUser():
 
         sqls.append(sql_insert_modified)
 
-    f = open('data_users.sql', 'w')
+    #f = open('data_users.sql', 'w')
+    for i, sql in enumerate(sqls):
+        print(sql)
+        #f.write(sql + "\n")
+    #f.close()
+
+def createUserProfile():
+    sqls = []
+    fake = Faker()
+    genders = ["Male", "Female"]
+    marital_status = ["Married", "Not married"]
+    start = 74
+    counter = start
+    end = 83
+    for j in range(1):
+        sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id, isActive) VALUES"
+        for i in range(10):
+
+            user_bio = ""
+            for k in range(2):
+                user_bio = user_bio + fake.sentence(nb_words=10, variable_nb_words=False)
+            user_location = fake.city()
+            user_age = random.randint(1, 60)
+
+            gender_id = random.randint(0, len(genders) - 1)
+            selected_gender = genders[gender_id]
+
+            marital_status_id = random.randint(0, len(marital_status) - 1)
+            selected_status = marital_status[marital_status_id]
+
+            selected_user_id = counter
+            selected_isActive = True
+            counter = counter + 1
+
+            sql_insert = sql_insert + " ('{}', '{}', {}, '{}', '{}', {}, {}), ".format(user_bio, user_location, user_age, selected_gender, selected_status, selected_user_id, selected_isActive)
+
+        insert_size = len(sql_insert)
+        sql_insert_modified = sql_insert[:insert_size - 2]
+        sql_insert_modified = sql_insert_modified + ";"
+
+        sqls.append(sql_insert_modified)
+
+    f = open('data_profiles.sql', 'w')
     for i, sql in enumerate(sqls):
         #print(sql)
         f.write(sql + "\n")
     f.close()
+
+
+
+
+
 
 def main():
     #createPlayers()
     #createWeapons()
     #createLocations()
     #createLocationWeapons()
-    createUser()
+    #createUser()
+    createUserProfile()
 
 if __name__ == '__main__':
     main()
