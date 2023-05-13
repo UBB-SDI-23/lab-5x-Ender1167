@@ -361,8 +361,8 @@ class RegisterFromToken(APIView):
 
     def post(self, request, format=None):
         token1 = self.serializer_class(data=request.data)
-        token_user_username = token1.data['token'].username
-        token_user_password = token1.data['token'].password
+        token_user_username = token1.initial_data['token'].username
+        token_user_password = token1.initial_data['token'].password
 
         if token_user_username != None:
             user = authenticate(username=token_user_username, password=token_user_password)
