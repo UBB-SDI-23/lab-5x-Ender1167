@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from django.db.models import Avg, Count
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User, Permission
 
 from .models import Player, Weapon, Location, Location_Weapon, UserProfile
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, \

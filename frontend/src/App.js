@@ -798,7 +798,10 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
+		
+		<div classname "container">
 		<p id="error1" className="text-right"></p>
+		</div>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
