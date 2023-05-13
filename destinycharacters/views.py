@@ -384,12 +384,12 @@ class RegisterFromToken(APIView):
                 user.is_active = True
                 user.save()
                 return Response({
-                    "message": "Activation for" + token_user_username + " with password " + token_user_password + " is successful",
+                    "message": "Activation for " + token_user_username + " with password " + token_user_password + " is successful",
                 })
             else:
                 return Response({
                     "User": user.is_active,
-                    "message": "Activation for" + token_user_username + " with password " + token_user_password + " failed",
+                    "message": "Activation for " + token_user_username + " with password " + token_user_password + " failed",
                 })
         else:
             return Response({
