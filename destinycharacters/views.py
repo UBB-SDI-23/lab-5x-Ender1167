@@ -18,6 +18,7 @@ from django.views.generic import ListView
 from django.contrib.auth import authenticate
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+import jwt
 
 from .serializers import MyTokenObtainPairSerializer, TokenSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -360,9 +361,14 @@ class RegisterFromToken(APIView):
     serializer_class = TokenSerializer
 
     def post(self, request, format=None):
+
         token1 = self.serializer_class(data=request.data)
-        token_user_username = token1.initial_data['token'][0]
-        token_user_password = token1.initial_data['token']
+        token_user = token1.initial_data['token']
+        decoded_data = jwt.decode(jwt=token_user,
+                                  key='secret',
+                                  algorithms=["HS256"])
+        token_user_username = decoded_data['username']
+        token_user_password = decoded_data['password']
         return Response({
             "message": token_user_username,
         })
