@@ -177,7 +177,7 @@ def create_user_profile(sender, instance, created, **kwargs):
         u = UserProfile.objects.create(user=instance)
         u.user.is_active = False
         u.isActive = False
-        u.password = make_password(instance.password)
+        u.password = make_password(u.password)
         instance.save()
         instance.profile.save()
 
