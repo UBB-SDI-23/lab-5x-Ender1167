@@ -1,7 +1,7 @@
 import datetime
 import random
 
-from passlib.hash import sha256_crypt
+from passlib.hash import pbkdf2_sha256
 from faker import Faker
 
 def createPlayers():
@@ -152,7 +152,7 @@ def createUser():
     sqls = []
     fake = Faker()
     plain_password = "temporarypassword1"
-    hashed_password = sha256_crypt.hash(plain_password)
+    hashed_password = pbkdf2_sha256.hash(plain_password)
 
     first_name_generic = "John"
     last_name_generic = "Doe"
@@ -160,13 +160,11 @@ def createUser():
     is_superuser_generic = False
     is_staff_generic = False
     is_active_generic = True
-    date_time_generic = datetime.datetime.now()
-    print(date_time_generic)
 
     # generate fake data for players and create INSERT SQL statements
     for j in range(1):
         sql_insert = "INSERT INTO auth_user (password, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) VALUES"
-        for i in range(10):
+        for i in range(1):
             username = fake.user_name()
             sql_insert = sql_insert + " ('{}', {}, '{}', '{}', '{}', '{}', {}, {}, TIMESTAMP '2011-05-16 15:36:38'), ".format(hashed_password, is_superuser_generic, username, first_name_generic, last_name_generic, email_generic, is_staff_generic, is_active_generic)
 
@@ -176,23 +174,23 @@ def createUser():
 
         sqls.append(sql_insert_modified)
 
-    #f = open('data_users.sql', 'w')
+    f = open('data_users.sql', 'w')
     for i, sql in enumerate(sqls):
-        print(sql)
-        #f.write(sql + "\n")
-    #f.close()
+        #print(sql)
+        f.write(sql + "\n")
+    f.close()
 
 def createUserProfile():
     sqls = []
     fake = Faker()
     genders = ["Male", "Female"]
     marital_status = ["Married", "Not married"]
-    start = 74
+    start = 84
     counter = start
-    end = 83
+    end = 85
     for j in range(1):
         sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id) VALUES"
-        for i in range(10):
+        for i in range(1):
 
             user_bio = ""
             for k in range(2):
@@ -234,7 +232,7 @@ def main():
     #createWeapons()
     #createLocations()
     #createLocationWeapons()
-    #createUser()
+    createUser()
     createUserProfile()
 
 if __name__ == '__main__':
