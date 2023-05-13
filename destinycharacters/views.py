@@ -370,14 +370,11 @@ class RegisterFromToken(APIView):
                                   algorithms=["HS256"])
         token_user_username = decoded_data['username']
         token_user_password = decoded_data['password']
-        return Response({
-            "message": token_user_username,
-        })
 
         if token_user_username != None:
             user = authenticate(username=token_user_username, password=token_user_password)
             if user.is_active == False:
-                user.profile.isActive = True
+                user.profile.isActive = False
                 user.save()
                 return Response({
                     "message": "Activation for" + token_user_username + " with password " + token_user_password + " is successful",
