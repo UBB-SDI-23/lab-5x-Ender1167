@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from django.db.models import Avg, Count
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
+from django.contrib.auth.models import User
 
 from .models import Player, Weapon, Location, Location_Weapon, UserProfile
 from .serializers import PlayerSerializer, WeaponSerializer, LocationSerializer, PlayerSerializer_No_Wep, \
@@ -372,8 +373,9 @@ class RegisterFromToken(APIView):
         token_user_password = decoded_data['password']
 
         if token_user_username != None:
-            user = authenticate(username=token_user_username, password=token_user_password)
-            if not user:
+            #user = authenticate(username=token_user_username, password=token_user_password)
+            user = User.objects.filter(username=token_user_username)
+            if not user.exists():
                 return Response({
                     "message": "Invalid credentials.",
                 })
