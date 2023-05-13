@@ -366,7 +366,7 @@ class RegisterFromToken(APIView):
         token1 = self.serializer_class(data=request.data)
         token_user = token1.initial_data['token']
         decoded_data = jwt.decode(jwt=token_user,
-                                  key=b64decode('your-256-bit-secret'),
+                                  key='django-insecure-zbuqt#d23hg7s406q_b2eu((to6l082br8t#h6yis5*xx@($vd',
                                   algorithms=["HS256"])
         token_user_username = decoded_data['username']
         token_user_password = decoded_data['password']
