@@ -168,7 +168,7 @@ def createUser():
         sql_insert = "INSERT INTO auth_user (password, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) VALUES"
         for i in range(10):
             username = fake.user_name()
-            sql_insert = sql_insert + " ('{}', {}, '{}', '{}', '{}', '{}', {}, {}, {}), ".format(hashed_password, is_superuser_generic, username, first_name_generic, last_name_generic, email_generic, is_staff_generic, is_active_generic, date_time_generic)
+            sql_insert = sql_insert + " ('{}', {}, '{}', '{}', '{}', '{}', {}, {}, TIMESTAMP '2011-05-16 15:36:38'), ".format(hashed_password, is_superuser_generic, username, first_name_generic, last_name_generic, email_generic, is_staff_generic, is_active_generic)
 
         insert_size = len(sql_insert)
         sql_insert_modified = sql_insert[:insert_size - 2]
