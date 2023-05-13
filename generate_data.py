@@ -1,5 +1,6 @@
 import random
 
+from passlib.hash import sha256_crypt
 from faker import Faker
 
 def createPlayers():
@@ -148,10 +149,27 @@ def createLocationWeapons():
 
 def createUser():
     sqls = []
-
+    fake = Faker()
+    plain_password = "temporarypassword1"
+    hashed_password = sha256_crypt.hash(plain_password)
     # generate fake data for players and create INSERT SQL statements
-    for j in range(10000):
-        sql_insert = "INSERT INTO destinycharacters_user_profile (drop_rate, wep_id, loc_id) VALUES"
+    for j in range(1):
+        sql_insert = "INSERT INTO auth_user (password, username) VALUES"
+        for i in range(10):
+            username = fake.user_name()
+            sql_insert = sql_insert + " ('{}', '{}'), ".format(hashed_password, username)
+
+        insert_size = len(sql_insert)
+        sql_insert_modified = sql_insert[:insert_size - 2]
+        sql_insert_modified = sql_insert_modified + ";"
+
+        sqls.append(sql_insert_modified)
+
+    f = open('data_users.sql', 'w')
+    for i, sql in enumerate(sqls):
+        f.write(sql + "\n")
+    f.close()
+
 def main():
     #createPlayers()
     #createWeapons()
