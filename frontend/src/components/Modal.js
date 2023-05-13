@@ -383,5 +383,48 @@ export default class CustomModal extends Component {
     );
 		
 	}
+	if(this.state.modal_type === 6){ //activation token view
+		return (
+      <Modal isOpen={true} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Activate</ModalHeader>
+        <ModalBody>
+          <Form>
+            <FormGroup>
+              <Label for="token">Token</Label>
+              <Input
+                type="text"
+                id="token"
+                name="token"
+                defaultValue={this.state.activeItem.token}
+				value={this.state.activeItem.token}
+                onChange={this.handleChange}
+                placeholder="Your token"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="password">Password</Label>
+              <Input
+                type="text"
+                id="password"
+                name="password"
+                defaultValue={this.state.activeItem.password}
+                onChange={this.handleChange}
+                placeholder="Enter password"
+              />
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color="success"
+            onClick={() => onSave(this.state.activeItem)}
+          >
+            Save
+          </Button>
+        </ModalFooter>
+      </Modal>
+    );
+		
+	}
   }
 }

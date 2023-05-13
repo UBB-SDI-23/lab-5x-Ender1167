@@ -38,6 +38,7 @@ class App extends Component {
 	  modal_login: false,
 	  modal_register: false,
 	  modal_view: false,
+	  modal_token: false,
 	  modal_type:0,
 	  isAuth: false,
 	  
@@ -71,6 +72,10 @@ class App extends Component {
 		  username: "",
 		  password:"",
 	  },
+	  activeToken:{
+		  token:"",
+	  }
+	  msg:"",
 	  profile_username:"",
 	  profile_password:"",
 	  profile_active:false,
@@ -161,6 +166,9 @@ class App extends Component {
   };
     toggleRegister = () => {
     this.setState({ modal_register: !this.state.modal_register });
+  };
+      toggleToken = () => {
+    this.setState({ modal_token: !this.state.modal_token });
   };
 
   handleSubmit = (item) => {
@@ -329,14 +337,30 @@ class App extends Component {
 	  .then((res) => this.setState({authToken: res.data.access}, () => {
 		  document.getElementById("error1").innerHTML = this.state.authToken;
 	  }));
-	 /*
-	await axios
-      .post("/api/token/register/", item)
-      .then((res) => this.setState({authToken: res.data.access}));
+	  
+	const newToken = { token: this.state.authToken };
+	this.setState({activeToken: newToken});
+	this.setState({modal_type : 6});
+	this.toggleToken();
+  };
+  
+   handleActivation = async(item) => {
+
+    this.toggleToken();
+	//let [user, setUser] = useState(null)
+    //let [authTokens, setAuthTokens] = useState(null)
+	axios.interceptors.response.use(x => { 
+	console.log(x);
+	return x;
+	});
+	
     await axios
-      .post("/api/token/register/", item)
-      .then((res) => this.setState({authToken: res.data.access}));
-	  */
+      .post("/api/token/activate/", item)
+	  .then((res) => this.setState({msg: res.data.message}, () => {
+		  console.log("User activated. You can log in now.");
+		  //document.getElementById("error1").innerHTML = this.state.authToken;
+	  }));
+	  
   };
   
   
@@ -896,6 +920,15 @@ class App extends Component {
             onSave={this.handleRegister}
           />
         ) : null}
+		{this.state.modal_token ? (
+          <Modal
+		    modal_type={this.state.modal_type}
+            activeItem={this.state.activeToken}
+            toggle={this.toggleToken}
+            onSave={this.handleActivation}
+          />
+        ) : null}
+		
       </main>
     );
   }
