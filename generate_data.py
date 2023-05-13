@@ -4,6 +4,24 @@ import random
 from passlib.hash import pbkdf2_sha256
 from faker import Faker
 
+import base64
+import hashlib
+import secrets
+
+ALGORITHM = "pbkdf2_sha256"
+
+
+def hash_password(password, salt=None, iterations=260000):
+    if salt is None:
+        salt = secrets.token_hex(16)
+    assert salt and isinstance(salt, str) and "$" not in salt
+    assert isinstance(password, str)
+    pw_hash = hashlib.pbkdf2_hmac(
+        "sha256", password.encode("utf-8"), salt.encode("utf-8"), iterations
+    )
+    b64_hash = base64.b64encode(pw_hash).decode("ascii").strip()
+    return "{}${}${}${}".format(ALGORITHM, iterations, salt, b64_hash)
+
 def createPlayers():
     fake = Faker()
     sqls = []
@@ -152,7 +170,7 @@ def createUser():
     sqls = []
     fake = Faker()
     plain_password = "temporarypassword1"
-    hashed_password = pbkdf2_sha256.hash(plain_password)
+    hashed_password = hash_password(plain_password)
 
     first_name_generic = "John"
     last_name_generic = "Doe"
@@ -185,9 +203,9 @@ def createUserProfile():
     fake = Faker()
     genders = ["Male", "Female"]
     marital_status = ["Married", "Not married"]
-    start = 84
+    start = 85
     counter = start
-    end = 85
+    end = 86
     for j in range(1):
         sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id) VALUES"
         for i in range(1):
@@ -221,9 +239,6 @@ def createUserProfile():
         #print(sql)
         f.write(sql + "\n")
     f.close()
-
-
-
 
 
 
