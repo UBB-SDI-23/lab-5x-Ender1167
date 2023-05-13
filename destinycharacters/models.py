@@ -175,6 +175,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         u = UserProfile.objects.create(user=instance)
         u.user.is_active = False
+        u.isActive = False
         u.save()
 
 #this method to update profile when user is updated
