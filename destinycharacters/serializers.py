@@ -104,7 +104,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         refresh = self.get_token(self.user)
 
         # Add extra responses here
-        data['user'] = self.user
+        data['user'] = UserSerializer(self.user).data
         return data
 
 
