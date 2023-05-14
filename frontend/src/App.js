@@ -698,7 +698,7 @@ class App extends Component {
 		<span
           className={this.state.viewCompleted === 7? "nav-link active" : "nav-link"}
           onClick={() => this.getUsers()}
-		  disabled={this.state.profile_isSuperuser == false}
+		  disabled={this.state.profile_isSuperuser === false}
         >
           Users
         </span>
