@@ -768,15 +768,18 @@ class App extends Component {
           <button
             className="btn btn-secondary mr-2"
 			onClick={() => this.editItem(item)}
+			disabled={this.state.isAuth === false ? true : false}
           >
             Edit
           </button>
           <button
             className="btn btn-danger"
 			onClick={() => this.handleDelete(item)}
+			disabled={this.state.isAuth === false ? true : false}
           >
             Delete
           </button>
+		  
           </span>
 		  </td>
     </tr>
@@ -822,12 +825,14 @@ class App extends Component {
           <button
             className="btn btn-secondary mr-2"
 			onClick={() => this.editWeapon(item)}
+			disabled={this.state.isAuth === false ? true : false}
           >
             Edit
           </button>
           <button
             className="btn btn-danger"
 			onClick={() => this.handleDeleteWeapon(item)}
+			disabled={this.state.isAuth === false ? true : false}
           >
             Delete
           </button>
@@ -850,12 +855,14 @@ class App extends Component {
           <button
             className="btn btn-secondary mr-2"
 			onClick={() => this.editLocation(item)}
+			disabled={this.state.isAuth === false ? true : false}
           >
             Edit
           </button>
           <button
             className="btn btn-danger"
 			onClick={() => this.handleDeleteLocation(item)}
+			disabled={this.state.isAuth === false ? true : false}
           >
             Delete
           </button>
@@ -878,12 +885,14 @@ class App extends Component {
           <button
             className="btn btn-secondary mr-2"
 			onClick={() => this.editLocation(item)}
+			disabled={this.state.isAuth === false ? true : false}
           >
             Edit
           </button>
           <button
             className="btn btn-danger"
 			onClick={() => this.handleDeleteLocation(item)}
+			disabled={this.state.isAuth === false ? true : false}
           >
             Delete
           </button>
