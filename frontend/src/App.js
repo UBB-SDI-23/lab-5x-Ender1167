@@ -722,15 +722,10 @@ class App extends Component {
 	}
 	if(viewCompleted === 7){
 		newItems = this.state.users;
-		for(let i = 0; i < this.state.users.length; i++){
-			console.log(this.state.users[i].user.username);
-		}
-		
-		
 	}
 	//let item_creator = "admin"
 	//const item_creator_obj = { username: item_creator, password1: item_creator};
-	if(viewCompleted !== 3 && viewCompleted !== 4 && viewCompleted !== 5 && viewCompleted !== 6){ 
+	if(viewCompleted !== 3 && viewCompleted !== 4 && viewCompleted !== 5 && viewCompleted !== 6 && viewCompleted !== 7){ 
     return newItems.map((item) => (
 	<tr>
           <td>{item.name}</td>
