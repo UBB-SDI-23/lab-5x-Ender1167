@@ -882,8 +882,8 @@ class App extends Component {
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
 		
-		<div classname ="container">
-		<p id="error1" className="text-right"></p>
+		<div classname ="mb-4">
+		<p id="error1" className="text-right">Anonymous user</p>
 		</div>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
