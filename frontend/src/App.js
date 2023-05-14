@@ -900,7 +900,9 @@ class App extends Component {
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
 		<p id="error1" className="text-left"></p>
-		{this.state.isAuth ? (
+		
+        <div className="row">
+				{this.state.isAuth ? (
         <div class="card" style={{ width: '18rem',display: "flex", flexDirection: "column" }}>
 		<p id="username" className="text-right">Anonymous user</p>
 		<p id="bio" className="text-right"></p>
@@ -911,9 +913,6 @@ class App extends Component {
 		<p id="role" className="text-right"></p>
 		</div>
         ) : null}
-
-		
-        <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="mb-4">
