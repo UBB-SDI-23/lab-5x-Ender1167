@@ -929,7 +929,7 @@ class App extends Component {
                 <button
                   className="btn btn-primary"
 				  onClick={this.createItem}
-				  disabled={this.state.isAuth === true ? true : false}
+				  disabled={this.state.isAuth === false ? true : false}
                 >
                   Add Player
                 </button>
@@ -937,12 +937,14 @@ class App extends Component {
 				<button
                   className="btn btn-primary"
 				  onClick={this.createWeapon}
+				  disabled={this.state.isAuth === false ? true : false}
                 >
                   Add Weapon
                 </button>
 				<button
                   className="btn btn-primary"
 				  onClick={this.createLocation}
+				  disabled={this.state.isAuth === false ? true : false}
                 >
                   Add Location
                 </button>
