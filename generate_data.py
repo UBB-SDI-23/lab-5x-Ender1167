@@ -209,7 +209,7 @@ def createUserProfile():
     fake = Faker()
     genders = ["Male", "Female"]
     marital_status = ["Married", "Not married"]
-    start = 6305
+    start = 13780
     counter = start
 
     end = 10305
@@ -232,7 +232,7 @@ def createUserProfile():
 
             selected_user_id = counter
             selected_isActive = True
-            counter = counter + 1
+            counter = counter - 1
 
             sql_insert = sql_insert + " ('{}', '{}', {}, '{}', '{}', {}), ".format(user_bio, user_location, user_age, selected_gender, selected_status, selected_user_id)
 
