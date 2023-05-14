@@ -300,12 +300,18 @@ class App extends Component {
       .get("/api/profile/", yourConfig)
       	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password , profile_active : res.data.isActive, 
 		  profile_bio: res.data.bio, profile_age: res.data.age, profile_gender: res.data.gender, profile_marital: res.data.marital_status}, () => {
-		  document.getElementById("username").innerHTML = this.state.profile_username;
-		  document.getElementById("bio").innerHTML = this.state.profile_bio;
-		  document.getElementById("age").innerHTML = this.state.profile_age;
-		  document.getElementById("location").innerHTML = this.state.profile_location;
-		  document.getElementById("gender").innerHTML = this.state.profile_gender;
-		  document.getElementById("marital_status").innerHTML = this.state.profile_marital;
+		  document.getElementById("username").innerHTML = "Username: " + this.state.profile_username;
+		  document.getElementById("bio").innerHTML = "Bio: " + this.state.profile_bio;
+		  document.getElementById("age").innerHTML = "Age: " +this.state.profile_age;
+		  document.getElementById("location").innerHTML = "Location: " +this.state.profile_location;
+		  document.getElementById("gender").innerHTML = "Gender: " +this.state.profile_gender;
+		  document.getElementById("marital_status").innerHTML = "Status: " +this.state.profile_marital;
+		  if(this.state.profile_isSuperuser === true){
+			  document.getElementById("role").innerHTML = "Role: admin";
+		  }
+		  else{ 
+		      document.getElementById("role").innerHTML = "Role: user";
+		  }
 	  }));
 	  
 	}
@@ -328,7 +334,6 @@ class App extends Component {
 			   this.setState({isAuth: true});
 			   this.getProfile();
 		   }
-		  document.getElementById("error1").innerHTML = this.state.authToken;
 	  }))
 	  .catch((err) => console.log(err));
 	  
