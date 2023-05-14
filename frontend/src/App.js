@@ -380,10 +380,11 @@ class App extends Component {
 	if(this.state.profile_isSuperuser === true){
 	this.setState({currentPage:1});
 	this.setState({viewCompleted: 7}, () => {
-	    axios
+	axios
       .get("/api/users/")
       .then((res) => this.setState({ users: res.data.results }))
       .catch((err) => console.log(err));
+	console.log("done");
 	}
 	);
 
