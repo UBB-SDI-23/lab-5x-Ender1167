@@ -209,11 +209,11 @@ def createUserProfile():
     fake = Faker()
     genders = ["Male", "Female"]
     marital_status = ["Married", "Not married"]
-    start = 13780
+    start = 10084
     counter = start
 
     end = 10305
-    for j in range(4):
+    for j in range(1):
         sql_insert = "INSERT INTO destinycharacters_userprofile (bio, location, age, gender, marital_status, user_id) VALUES"
         for i in range(1000):
 
