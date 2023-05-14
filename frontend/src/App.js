@@ -78,6 +78,12 @@ class App extends Component {
 	  },
 	  msg:"",
 	  profile_username:"",
+	  profile_location:"",
+	  profile_marital:"",
+	  profile_bio:"",
+	  profile_age:0,
+	  profile_gender:"",
+	  
 	  profile_password:"",
 	  profile_active:false,
 	  profile_isStaff:false,
@@ -292,8 +298,14 @@ class App extends Component {
 	
 	await axios
       .get("/api/profile/", yourConfig)
-      	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password , profile_active : res.data.isActive}, () => {
-		  document.getElementById("error1").innerHTML = this.state.profile_active;
+      	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password , profile_active : res.data.isActive, 
+		  profile_bio: res.data.bio, profile_age: res.data.age, profile_gender: res.data.gender, profile_marital: res.data.marital_status}, () => {
+		  document.getElementById("username").innerHTML = this.state.profile_username;
+		  document.getElementById("bio").innerHTML = this.state.profile_bio;
+		  document.getElementById("age").innerHTML = this.state.profile_age;
+		  document.getElementById("location").innerHTML = this.state.profile_location;
+		  document.getElementById("gender").innerHTML = this.state.profile_gender;
+		  document.getElementById("marital_status").innerHTML = this.state.profile_marital;
 	  }));
 	  
 	}
@@ -881,14 +893,14 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
-		
+		<p id="error1" className="text-right">Anonymous user</p>
 		<div class="card" style={{ width: '18rem' }}>
-		<p id="error1" className="text-right">Anonymous user</p>
-		<p id="error1" className="text-right">Anonymous user</p>
-		<p id="error1" className="text-right">Anonymous user</p>
-		<p id="error1" className="text-right">Anonymous user</p>
-		<p id="error1" className="text-right">Anonymous user</p>
-		<p id="error1" className="text-right">Anonymous user</p>
+		<p id="username" className="text-right">Anonymous user</p>
+		<p id="bio" className="text-right">Anonymous user</p>
+		<p id="location" className="text-right">Anonymous user</p>
+		<p id="marital_status" className="text-right">Anonymous user</p>
+		<p id="age" className="text-right">Anonymous user</p>
+		<p id="gender" className="text-right">Anonymous user</p>
 		</div>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
