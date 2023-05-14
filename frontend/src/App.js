@@ -884,6 +884,11 @@ class App extends Component {
 		
 		<div class="card" style={{ width: '18rem' }}>
 		<p id="error1" className="text-right">Anonymous user</p>
+		<p id="error1" className="text-right">Anonymous user</p>
+		<p id="error1" className="text-right">Anonymous user</p>
+		<p id="error1" className="text-right">Anonymous user</p>
+		<p id="error1" className="text-right">Anonymous user</p>
+		<p id="error1" className="text-right">Anonymous user</p>
 		</div>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
