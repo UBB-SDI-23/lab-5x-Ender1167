@@ -526,6 +526,9 @@ class App extends Component {
 		case 6:
 		url1 = `/api/location/?page=`;
 		break;
+		case 7:
+		url1 = `/api/users/?page=`;
+		break;
 	    default:
 		url1 = `/api/players/?page=`;
 		break;
@@ -555,6 +558,11 @@ class App extends Component {
 	  	  if(this.state.viewCompleted === 6){
 	  axios.get(url1+pg)
 	  .then((res)=>{this.setState({ locations: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
+	  });
+	  }
+	  	  	  if(this.state.viewCompleted === 7){
+	  axios.get(url1+pg)
+	  .then((res)=>{this.setState({ users: res.data.results, previousUrl: res.data.previous, nextUrl: res.data.next, currentPage: pg})  
 	  });
 	  }
   }catch(error){
