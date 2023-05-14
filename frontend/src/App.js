@@ -317,7 +317,8 @@ class App extends Component {
 			   this.getProfile();
 		   }
 		  document.getElementById("error1").innerHTML = this.state.authToken;
-	  }));
+	  }))
+	  .catch((err) => console.log(err));
 	  
 	  
 	//console.log(this.state.authToken)
