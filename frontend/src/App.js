@@ -377,6 +377,7 @@ class App extends Component {
   };
   
     getUsers = () => {
+		console.log(this.state.viewCompleted);
 	if(this.state.profile_isSuperuser === true){
 	   this.setState({currentPage:1});
 	this.setState({viewCompleted: 7});
