@@ -377,14 +377,16 @@ class App extends Component {
   };
   
     getUsers = () => {
-		this.setState({viewCompleted: 7});
 	if(this.state.profile_isSuperuser === true){
 	this.setState({currentPage:1});
-	
-    axios
+	this.setState({viewCompleted: 7}, () => {
+	    axios
       .get("/api/users/")
       .then((res) => this.setState({ users: res.data.results }))
       .catch((err) => console.log(err));
+	}
+	);
+
 	}
 	else{
 		console.log("You are not an admin");
