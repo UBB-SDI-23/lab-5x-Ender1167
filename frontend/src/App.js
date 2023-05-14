@@ -387,7 +387,7 @@ class App extends Component {
 	  
 	this.setState({viewCompleted: 7}, () => {
 
-	console.log(this.state.viewCompleted);
+	console.log("Ma-ta");
 	}
 	);
 
@@ -723,7 +723,7 @@ class App extends Component {
 	if(viewCompleted === 7){
 		newItems = this.state.users;
 		for(let i = 0; i < this.state.users.length; i++){
-			console.log(this.state.users[i]);
+			console.log(this.state.users[i].user.username);
 		}
 		
 		
