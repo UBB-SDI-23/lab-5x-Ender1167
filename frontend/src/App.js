@@ -367,8 +367,8 @@ class App extends Component {
   
   
   
-   getWeapons = async() => {
-	   this.setState({currentPage:1});
+   getWeapons = () => {
+	this.setState({currentPage:1});
 	this.setState({viewCompleted: 5});
     axios
       .get("/api/weapons/")
@@ -376,7 +376,8 @@ class App extends Component {
       .catch((err) => console.log(err));
   };
   
-    getUsers = () => {
+  
+    getUsers = async() => {
 	if(this.state.profile_isSuperuser === true){
 	this.setState({currentPage:1});
 	await axios
