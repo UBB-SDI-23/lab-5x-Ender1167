@@ -882,7 +882,7 @@ class App extends Component {
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
 		
-		<div className="col-md-6 col-sm-10 mx-auto p-0">
+		<div className="card p-3">
 		<p id="error1" className="text-right">Anonymous user</p>
 		</div>
         <div className="row">
