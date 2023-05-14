@@ -299,11 +299,12 @@ class App extends Component {
 	await axios
       .get("/api/profile/", yourConfig)
       	  .then((res) => this.setState({profile_username: res.data.user.username, profile_password: res.data.user.password , profile_active : res.data.isActive, 
-		  profile_bio: res.data.bio, profile_age: res.data.age, profile_gender: res.data.gender, profile_marital: res.data.marital_status}, () => {
+		  profile_bio: res.data.bio, profile_age: res.data.age, profile_gender: res.data.gender, profile_marital: res.data.marital_status ,
+		  profile_location: res.data.location}, () => {
 		  document.getElementById("username").innerHTML = "Username: " + this.state.profile_username;
 		  document.getElementById("bio").innerHTML = "Bio: " + this.state.profile_bio;
 		  document.getElementById("age").innerHTML = "Age: " +this.state.profile_age;
-		  document.getElementById("location").innerHTML = "Location: " +this.state.profile_location;
+		  document.getElementById("location1").innerHTML = "Location: " +this.state.profile_location;
 		  document.getElementById("gender").innerHTML = "Gender: " +this.state.profile_gender;
 		  document.getElementById("marital_status").innerHTML = "Status: " +this.state.profile_marital;
 		  if(this.state.profile_isSuperuser === true){
@@ -899,15 +900,19 @@ class App extends Component {
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
 		<p id="error1" className="text-left"></p>
-		<div class="card" style={{ width: '18rem' }}>
+		{this.state.isAuth ? (
+        <div class="card" style={{ width: '18rem' }}>
 		<p id="username" className="text-right">Anonymous user</p>
 		<p id="bio" className="text-right"></p>
-		<p id="location" className="text-right"></p>
+		<p id="location1" className="text-right"></p>
 		<p id="marital_status" className="text-right"></p>
 		<p id="age" className="text-right"></p>
 		<p id="gender" className="text-right"></p>
 		<p id="role" className="text-right"></p>
 		</div>
+        ) : null}
+
+		
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
