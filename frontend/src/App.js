@@ -722,7 +722,11 @@ class App extends Component {
 	}
 	if(viewCompleted === 7){
 		newItems = this.state.users;
-		console.log(this.state.users.length);
+		for(int i = 0; i < this.state.users.length; i++){
+			console.log(this.state.users[i]);
+		}
+		
+		
 	}
 	//let item_creator = "admin"
 	//const item_creator_obj = { username: item_creator, password1: item_creator};
