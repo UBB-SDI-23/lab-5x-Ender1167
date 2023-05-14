@@ -367,7 +367,7 @@ class App extends Component {
   
   
   
-   getWeapons = () => {
+   getWeapons = async() => {
 	   this.setState({currentPage:1});
 	this.setState({viewCompleted: 5});
     axios
@@ -379,11 +379,13 @@ class App extends Component {
     getUsers = () => {
 	if(this.state.profile_isSuperuser === true){
 	this.setState({currentPage:1});
-	this.setState({viewCompleted: 7}, () => {
-	axios
+	await axios
       .get("/api/users/")
       .then((res) => this.setState({ users: res.data.results }))
       .catch((err) => console.log(err));
+	  
+	this.setState({viewCompleted: 7}, () => {
+
 	console.log(this.state.viewCompleted);
 	}
 	);
