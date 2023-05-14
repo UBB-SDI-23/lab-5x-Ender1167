@@ -881,15 +881,7 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
-		<Container fluid>
-  <Row style>
-    <Col style={{disply:'flex', justifyContent:'left'}}>
-      <Image src="https://github.com/gautam-in/shopping-cart-assignment/blob/master/static/images/logo.png?raw=true"/>
-    </Col>
-    <Col>Second</Col>
-    <Col>Third</Col>
-  </Row>
-</Container>
+		
 		<div classname ="container">
 		<p id="error1" className="text-right"></p>
 		</div>
