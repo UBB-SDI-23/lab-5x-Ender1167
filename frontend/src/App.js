@@ -355,7 +355,6 @@ class App extends Component {
     await axios
       .post("/api/register/", item)
 	  .then((res) => this.setState({authToken: res.data.access}, () => {
-		    document.getElementById("error1").innerHTML = this.state.authToken;
 		  	const newToken = { token: this.state.authToken };
 	        this.setState({activeToken: newToken});
 	        this.setState({modal_type : 6});
