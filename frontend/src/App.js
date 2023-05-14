@@ -372,7 +372,7 @@ class App extends Component {
 	this.setState({viewCompleted: 5});
     axios
       .get("/api/weapons/")
-      .then((res) => this.setState({ weapons: res.data.results }))
+      .then((res) => this.setState({ weapons: res.data.results}))
       .catch((err) => console.log(err));
   };
   
@@ -382,12 +382,12 @@ class App extends Component {
 	this.setState({currentPage:1});
 	await axios
       .get("/api/users/")
-      .then((res) => this.setState({ users: res.data.results }))
+      .then((res) => this.setState({ users: res.data.results , totalItems: res.data.count}))
       .catch((err) => console.log(err));
 	  
 	this.setState({viewCompleted: 7}, () => {
 
-	console.log("Ma-ta");
+	console.log(this.state.totalItems);
 	}
 	);
 
