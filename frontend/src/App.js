@@ -722,7 +722,7 @@ class App extends Component {
 	}
 	if(viewCompleted === 7){
 		newItems = this.state.users;
-		for(int i = 0; i < this.state.users.length; i++){
+		for(let i = 0; i < this.state.users.length; i++){
 			console.log(this.state.users[i]);
 		}
 		
