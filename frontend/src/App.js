@@ -898,14 +898,15 @@ class App extends Component {
     return (
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
-		<p id="error1" className="text-right">Anonymous user</p>
+		<p id="error1" className="text-left"></p>
 		<div class="card" style={{ width: '18rem' }}>
 		<p id="username" className="text-right">Anonymous user</p>
-		<p id="bio" className="text-right">Anonymous user</p>
-		<p id="location" className="text-right">Anonymous user</p>
-		<p id="marital_status" className="text-right">Anonymous user</p>
-		<p id="age" className="text-right">Anonymous user</p>
-		<p id="gender" className="text-right">Anonymous user</p>
+		<p id="bio" className="text-right"></p>
+		<p id="location" className="text-right"></p>
+		<p id="marital_status" className="text-right"></p>
+		<p id="age" className="text-right"></p>
+		<p id="gender" className="text-right"></p>
+		<p id="role" className="text-right"></p>
 		</div>
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
