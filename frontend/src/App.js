@@ -841,7 +841,8 @@ class App extends Component {
     </tr>
     ));
 	}
-		if(this.state.viewCompleted === 7){ //locations
+	console.log(viewCompleted);
+		if(viewCompleted === 7){ //locations
 				 return newItems.map((item) => (
       		  <tr>
           <td>{item.user.username}</td>
