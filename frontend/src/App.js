@@ -882,7 +882,7 @@ class App extends Component {
       <main className="container">
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
 		
-		<div class="card" style={{color:'blue'}}>
+		<div class="card" style={{ width: '18rem' }>
 		<p id="error1" className="text-right">Anonymous user</p>
 		</div>
         <div className="row">
