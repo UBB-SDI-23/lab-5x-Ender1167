@@ -384,7 +384,7 @@ class App extends Component {
       .get("/api/users/")
       .then((res) => this.setState({ users: res.data.results }))
       .catch((err) => console.log(err));
-	console.log("done");
+	console.log(this.state.viewCompleted);
 	}
 	);
 
