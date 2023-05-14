@@ -929,6 +929,7 @@ class App extends Component {
                 <button
                   className="btn btn-primary"
 				  onClick={this.createItem}
+				  disabled={this.state.isAuth === true ? true : false}
                 >
                   Add Player
                 </button>
