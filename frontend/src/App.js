@@ -81,7 +81,7 @@ class App extends Component {
 	  profile_password:"",
 	  profile_active:false,
 	  profile_isStaff:false,
-	  profile_isSuperuser:true,
+	  profile_isSuperuser:false,
 	  profile_role:0,
 	  authToken:"",
 	  
@@ -698,6 +698,7 @@ class App extends Component {
 		<span
           className={this.state.viewCompleted === 7? "nav-link active" : "nav-link"}
           onClick={() => this.getUsers()}
+		  disabled={this.state.profile_isSuperuser == false}
         >
           Users
         </span>
