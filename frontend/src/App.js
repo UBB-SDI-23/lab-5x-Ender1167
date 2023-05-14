@@ -901,6 +901,8 @@ class App extends Component {
         <h1 className="text-black text-uppercase text-center my-4">Destiny Characters</h1>
 		<p id="error1" className="text-left"></p>
 		{this.state.isAuth ? (
+		<Form inline>
+        <FormGroup>
         <div class="card" style={{ width: '18rem' }}>
 		<p id="username" className="text-right">Anonymous user</p>
 		<p id="bio" className="text-right"></p>
@@ -910,6 +912,8 @@ class App extends Component {
 		<p id="gender" className="text-right"></p>
 		<p id="role" className="text-right"></p>
 		</div>
+		</FormGroup>
+		</Form>
         ) : null}
 
 		
