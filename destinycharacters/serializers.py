@@ -99,6 +99,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['password'] = user.password
         return token
 
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        refresh = self.get_token(self.user)
+
+        # Add extra responses here
+        data['user'] = self.user
+        return data
+
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     username = serializers.CharField(max_length=50, min_length=4)

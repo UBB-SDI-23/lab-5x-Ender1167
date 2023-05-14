@@ -305,19 +305,6 @@ def get_profile(request):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-    def post(self, request, *args,  **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        refresh1 = get_tokens_for_user(user)
-
-        return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "message": "User Created Successfully.  Now perform Login to get your token",
-            'refresh': str(refresh1),
-            'access': str(refresh1.access_token),
-        })
-
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
