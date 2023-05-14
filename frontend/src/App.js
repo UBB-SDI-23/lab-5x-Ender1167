@@ -842,6 +842,7 @@ class App extends Component {
     ));
 	}
 		if(viewCompleted === 7){ //locations
+		console.log("Printing users");
 				 return newItems.map((item) => (
       		  <tr>
           <td>{item.user.username}</td>
