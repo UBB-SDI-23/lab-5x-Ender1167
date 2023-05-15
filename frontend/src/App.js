@@ -888,24 +888,6 @@ class App extends Component {
 		  <td>{item.age}</td>
           <td>{item.gender}</td>
 		  <td>{item.marital_status}</td>
-		  <td>
-		  <span>
-          {/*<button
-            className="btn btn-secondary mr-2"
-			onClick={() => this.editLocation(item)}
-			disabled={this.state.isAuth === false ? true : false}
-          >
-            Edit
-          </button>
-          <button
-            className="btn btn-danger"
-			onClick={() => this.handleDeleteLocation(item)}
-			disabled={this.state.isAuth === false ? true : false}
-          >
-            Delete
-          </button>
-          </span>
-		  </td>*/}
     </tr>
     ));
 	}
