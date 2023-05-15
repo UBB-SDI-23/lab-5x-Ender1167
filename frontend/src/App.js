@@ -352,6 +352,12 @@ class App extends Component {
 	return x;
 	});
 	
+	
+	var matches = item.password.match(/\d+/g);
+    if (matches != null) {
+       alert('number');
+    }
+	if(item.password.length >= 8 && matches != null){
     await axios
       .post("/api/register/", item)
 	  .then((res) => this.setState({authToken: res.data.access}, () => {
@@ -360,6 +366,10 @@ class App extends Component {
 	        this.setState({modal_type : 6});
 	        this.toggleToken();
 	  }));
+	}
+	else{
+		document.getElementById("error1").innerHTML = "Password must have at least 8 characters and 1 digit.";
+	}
 	  
 
   };
