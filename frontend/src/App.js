@@ -890,7 +890,7 @@ class App extends Component {
 		  <td>{item.marital_status}</td>
 		  <td>
 		  <span>
-          <button
+          {/*<button
             className="btn btn-secondary mr-2"
 			onClick={() => this.editLocation(item)}
 			disabled={this.state.isAuth === false ? true : false}
@@ -905,7 +905,7 @@ class App extends Component {
             Delete
           </button>
           </span>
-		  </td>
+		  </td>*/}
     </tr>
     ));
 	}
