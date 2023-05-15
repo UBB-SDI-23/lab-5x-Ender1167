@@ -347,6 +347,16 @@ class RegisterApi(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        password1 = user.password
+
+        if len(password1) < 8:
+            return Response({
+                "message": "Password not long enough",
+            })
+        if not any(char.isdigit() for char in password1):
+            return Response({
+                "message": "Password requires at least 1 digit",
+            })
         #refresh1 = RefreshToken.for_user(user)
         refresh1 = get_tokens_for_user(user)
 

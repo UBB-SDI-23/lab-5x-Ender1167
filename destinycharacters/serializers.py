@@ -195,14 +195,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         def validate(self, args):
             username = args.get('username', None)
-            password = args.get('password', None)
             if User.objects.filter(username=username).exists():
                 raise serializers.ValidationError('Username already exists!')
-
-            if len(password) < 8:
-                raise serializers.ValidationError("The password must be at least 8 characters long.")
-            if not any(char.isdigit() for char in password):
-                raise serializers.ValidationError("The password must contain at least one digit.")
 
             return super().validate(args)
 
